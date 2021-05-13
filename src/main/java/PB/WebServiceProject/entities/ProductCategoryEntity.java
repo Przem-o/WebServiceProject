@@ -12,21 +12,17 @@ import java.util.Set;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "client")
-public class ClientEntity {
+@Table(name = "productsCategory")
+public class ProductCategoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column (name = "name")
-    private String name;
+    @Column(name = "type")
+    private String type;
 
     @OneToOne
-    @PrimaryKeyJoinColumn
-    private AddressEntity addressEntity;
-
-    @OneToMany(mappedBy = "clientEntitySet")
-    private Set<OrdersEntity> ordersEntitySet;
-
-
+    @MapsId
+    @JoinColumn(name = "id")
+    private Set<ProductsEntity> productsEntitySet;
 }

@@ -1,10 +1,19 @@
 package PB.WebServiceProject.entities;
 
+import lombok.*;
+
 import javax.persistence.*;
+import java.util.Set;
+
+@Data
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @Table(name = "products")
-public class Products {
+public class ProductsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,4 +25,10 @@ public class Products {
     @Column(name = "type")
     private String type;
 
+    @OneToMany(mappedBy = "productsEntitySet")
+    private OrderDetailsEntity orderDetailsEntity;
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Set<ProductCategoryEntity> productCategoryEntitySet;
 }
