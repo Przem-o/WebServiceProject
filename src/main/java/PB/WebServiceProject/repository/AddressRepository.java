@@ -1,4 +1,4 @@
-package PB.WebServiceProject.rest;
+package PB.WebServiceProject.repository;
 
 import PB.WebServiceProject.entities.ClientEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

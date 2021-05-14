@@ -24,6 +24,7 @@ public class ProductsEntity {
     @Column(name = "price")
     private Double price;
     @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private Type type;
 
     @OneToMany(mappedBy = "productsEntitySet")

@@ -1,4 +1,4 @@
-package PB.WebServiceProject.rest;
+package PB.WebServiceProject.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

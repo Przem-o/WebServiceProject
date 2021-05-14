@@ -11,6 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 
+
 @Entity
 @Table(name = "client")
 public class ClientEntity {

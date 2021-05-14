@@ -20,6 +20,7 @@ public class ProductCategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private Type type;
 
     @OneToOne
