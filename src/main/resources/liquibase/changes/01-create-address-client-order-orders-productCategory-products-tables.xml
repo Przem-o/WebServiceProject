@@ -1,0 +1,62 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="pb" id="create-address-client-order-orders-productCategory-products-tables">
+
+        <createTable tableName="client">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="address">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="city" type="varchar(255)"/>
+            <column name="country" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="orders">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="orderDate" type="timestamp"/>
+            <column name="price" type="decimal(10,2)"/>
+            <column name="status" type="varchar(255)"/>
+            <column name="client_id" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="orderDetails">
+            <column name="product_id" type="bigint"/>
+            <column name="orders_id" type="bigint"/>
+            <column name="quantityOrdered" type="bigint"/>
+        </createTable>
+
+        <createTable tableName="products">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="price" type="decimal(10,2)"/>
+            <column name="status" type="varchar(255)"/>
+            <column name="type" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="productCategory">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="type" type="varchar(255)"/>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <include file="changes/01-create-smartphone-order-client-address-tables.xml" relativeToChangelogFile="true"/>
-    <include file="changes/02-add-foreign-keys-to-smartphone-order-client-address-tables.xml" relativeToChangelogFile="true"/>
+    <include file="changes/01-create-address-client-order-orders-productCategory-products-tables.xml" relativeToChangelogFile="true"/>
+    <include file="changes/02-add-foreign-keys-to-create-address-client-order-orders-productCategory-products-tables.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

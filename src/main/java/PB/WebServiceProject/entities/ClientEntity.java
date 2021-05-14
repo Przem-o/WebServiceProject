@@ -21,7 +21,7 @@ public class ClientEntity {
     @Column (name = "name")
     private String name;
 
-    @OneToOne
+    @OneToOne(mappedBy = "clientEntity", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private AddressEntity addressEntity;
 

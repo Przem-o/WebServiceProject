@@ -1,5 +1,6 @@
 package PB.WebServiceProject.entities;
 
+import PB.WebServiceProject.Type;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,7 +20,7 @@ public class ProductCategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "type")
-    private String type;
+    private Type type;
 
     @OneToOne
     @MapsId

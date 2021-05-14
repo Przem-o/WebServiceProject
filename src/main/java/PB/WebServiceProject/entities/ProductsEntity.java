@@ -1,5 +1,6 @@
 package PB.WebServiceProject.entities;
 
+import PB.WebServiceProject.Type;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,7 +24,7 @@ public class ProductsEntity {
     @Column(name = "price")
     private Double price;
     @Column(name = "type")
-    private String type;
+    private Type type;
 
     @OneToMany(mappedBy = "productsEntitySet")
     private OrderDetailsEntity orderDetailsEntity;
