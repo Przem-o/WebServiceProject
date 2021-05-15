@@ -27,10 +27,11 @@ public class ProductsEntity {
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    @OneToMany(mappedBy = "productsEntitySet")
-    private OrderDetailsEntity orderDetailsEntity;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Set<ProductCategoryEntity> productCategoryEntitySet;
+//    @OneToMany(mappedBy = "productsEntitySet")
+//    private OrderDetailsEntity orderDetailsEntity;
+
+   @ManyToOne
+   @JoinColumn(name = "category_id")
+    private ProductCategoryEntity productCategoryEntity;
 }

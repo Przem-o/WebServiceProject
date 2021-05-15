@@ -23,8 +23,8 @@ public class ProductCategoryEntity {
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "id")
+
+    @OneToMany
+
     private Set<ProductsEntity> productsEntitySet;
 }

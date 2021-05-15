@@ -30,7 +30,7 @@ public class OrdersEntity {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
-    private Set<ClientEntity> clientEntitySet;
+    private ClientEntity clientEntity;
 
     @OneToMany(mappedBy = "orderDetailsEntitySet")
     private OrderDetailsEntity orderDetailsEntity;

@@ -24,12 +24,12 @@ public class OrderDetailsEntity {
     @Column(name = "quantityOrdered")
     private Long quantityOrdered;
 
-    @ManyToOne// powinna być adnotacja OneToMany?
+    @ManyToOne
     @JoinColumn(name = "orders_id")
-    private Set<OrderDetailsEntity> orderDetailsEntitySet;
+    private OrdersEntity ordersEntity;
 
-    @ManyToOne // powinna być adnotacja OneToMany?
+    @ManyToOne
     @JoinColumn(name = "product_id")
-    private Set<ProductsEntity> productsEntitySet;
+    private ProductsEntity productsEntitySet;
 
 }
