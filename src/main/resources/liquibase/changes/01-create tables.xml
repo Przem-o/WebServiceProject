@@ -7,7 +7,7 @@
    http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet author="pb" id="create-address-client-order-orders-productCategory-products-tables">
+    <changeSet author="przem" id="create-address-client-order-orders-productCategory-products-tables">
 
         <createTable tableName="client">
             <column name="id" type="bigint" autoIncrement="true">

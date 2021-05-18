@@ -1,7 +1,5 @@
 package PB.WebServiceProject.entities;
-
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,7 +8,6 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-
 
 @Entity
 @Table(name = "client")
@@ -26,6 +23,7 @@ public class ClientEntity {
     @PrimaryKeyJoinColumn
     private AddressEntity addressEntity;
 
+    //ordersEntity
     @OneToMany(mappedBy = "clientEntitySet")
     private Set<OrdersEntity> ordersEntitySet;
 

@@ -24,7 +24,6 @@ public class ProductCategoryEntity {
     private Type type;
 
 
-    @OneToMany
-
+    @OneToMany(mappedBy = "productCategoryEntity")
     private Set<ProductsEntity> productsEntitySet;
 }

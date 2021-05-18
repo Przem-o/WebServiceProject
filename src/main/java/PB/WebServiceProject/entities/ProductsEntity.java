@@ -28,10 +28,7 @@ public class ProductsEntity {
     private Type type;
 
 
-//    @OneToMany(mappedBy = "productsEntitySet")
-//    private OrderDetailsEntity orderDetailsEntity;
-
    @ManyToOne
-   @JoinColumn(name = "category_id")
+   @JoinColumn(name = "category_id", nullable = false) // dołączenie kolumny category_id do tworzenia relacji z productCategoryEntity
     private ProductCategoryEntity productCategoryEntity;
 }

@@ -22,7 +22,7 @@ public class AddressEntity {
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "id") // ta adnotacje dajemy tylko po 1 stronie
+    @JoinColumn(name = "id")
     private ClientEntity clientEntity;
 
 }
