@@ -19,13 +19,13 @@ public class OrderDetailsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    private Long productId;
-//    private Long ordersId;
+//    private Long productId; ??
+//    private Long ordersId; ??
     @Column(name = "quantityOrdered")
     private Long quantityOrdered;
 
 
-    //ordersEntity
+
     @ManyToOne
     @JoinColumn(name = "orders_id")
     private OrdersEntity ordersEntity;

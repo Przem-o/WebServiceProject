@@ -28,7 +28,7 @@ public class OrdersEntity {
     @Column(name = "client_id")
     private Long clientId;
 
-    //clientEntiity
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private ClientEntity clientEntity;

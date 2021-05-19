@@ -19,9 +19,9 @@ public class ProductCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "type")
-    @Enumerated(EnumType.STRING)
-    private Type type;
+    @Column(name = "category")
+//    @Enumerated(EnumType.STRING)
+    private String category;
 
 
     @OneToMany(mappedBy = "productCategoryEntity")

@@ -19,7 +19,7 @@ public class ProductsEntity {
     private String name;
     @Column(name = "price")
     private Double price;
-    @Column(name = "type")
+    @Column(name = "productCategory_id")
    // @Enumerated(EnumType.STRING)
     private Long productCategoryId;
 
