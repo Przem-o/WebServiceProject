@@ -35,6 +35,9 @@
         </createTable>
 
         <createTable tableName="orderDetails">
+            <column name="id" type="bigint">
+            <constraints primaryKey="true"/>
+        </column>
             <column name="product_id" type="bigint"/>
             <column name="orders_id" type="bigint"/>
             <column name="quantityOrdered" type="bigint"/>
@@ -46,8 +49,7 @@
             </column>
             <column name="name" type="varchar(255)"/>
             <column name="price" type="decimal(10,2)"/>
-            <column name="status" type="varchar(255)"/>
-            <column name="type" type="varchar(255)"/>
+            <column name="productCategory_id" type="bigint"/>
         </createTable>
 
         <createTable tableName="productCategory">

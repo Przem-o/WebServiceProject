@@ -1,10 +1,6 @@
 package PB.WebServiceProject.entities;
-
-import PB.WebServiceProject.Type;
 import lombok.*;
-
 import javax.persistence.*;
-import java.util.Set;
 
 @Data
 @Builder
@@ -24,11 +20,11 @@ public class ProductsEntity {
     @Column(name = "price")
     private Double price;
     @Column(name = "type")
-    @Enumerated(EnumType.STRING)
-    private Type type;
+   // @Enumerated(EnumType.STRING)
+    private Long productCategoryId;
 
 
    @ManyToOne
-   @JoinColumn(name = "category_id", nullable = false) // dołączenie kolumny category_id do tworzenia relacji z productCategoryEntity
+   @JoinColumn(name = "productCategory_id")
     private ProductCategoryEntity productCategoryEntity;
 }

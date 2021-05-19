@@ -31,7 +31,7 @@ public class OrderDetailsEntity {
     private OrdersEntity ordersEntity;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "products_id")
     private ProductsEntity productsEntity;
 
 }
