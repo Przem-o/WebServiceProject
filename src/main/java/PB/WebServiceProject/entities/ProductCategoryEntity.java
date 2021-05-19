@@ -1,6 +1,5 @@
 package PB.WebServiceProject.entities;
 
-import PB.WebServiceProject.Type;
 import lombok.*;
 
 import javax.persistence.*;

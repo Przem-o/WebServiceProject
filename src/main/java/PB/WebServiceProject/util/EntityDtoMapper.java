@@ -2,8 +2,11 @@ package PB.WebServiceProject.util;
 
 import PB.WebServiceProject.entities.AddressEntity;
 import PB.WebServiceProject.entities.ClientEntity;
+import PB.WebServiceProject.entities.ProductsEntity;
 import PB.WebServiceProject.rest.dto.AddressDTO;
 import PB.WebServiceProject.rest.dto.ClientDTO;
+import PB.WebServiceProject.rest.dto.OrdersDTO;
+import PB.WebServiceProject.rest.dto.ProductsDTO;
 import org.springframework.beans.BeanUtils;
 
 public class EntityDtoMapper {
@@ -12,7 +15,7 @@ public class EntityDtoMapper {
         ClientDTO clientDTO = new ClientDTO();
 //        ClientDTO clientDTO = ClientDTO.builder().build();
         BeanUtils.copyProperties(clientEntity, clientDTO);
-        if(clientEntity.getAddressEntity()!=null) {  // if dlatego że nie każdy klient ma adres i powstaje błąd
+        if(clientEntity.getAddressEntity()!=null) {
             clientDTO.setAddress(EntityDtoMapper.mapToDto(clientEntity.getAddressEntity()));
         }
         return clientDTO;
@@ -40,6 +43,23 @@ public class EntityDtoMapper {
         return addressEntity;
     }
 
+
+    public static ProductsDTO mapToDto(ProductsEntity productsEntity){
+        ProductsDTO productsDTO = new ProductsDTO();
+        BeanUtils.copyProperties(productsEntity, productsDTO);
+        return productsDTO;
+
+    }
+
+    public static ProductsEntity mapToEntity(ProductsDTO productsDTO){
+        ProductsEntity productsEntity = new ProductsEntity();
+        BeanUtils.copyProperties(productsDTO, productsDTO);
+        return productsEntity;
+    }
+
+    public static OrdersDTO mapToDto(
+
+    )
 //    public static SmartphoneDTO mapToDto(SmartphoneEntity smartphoneEntity) {
 //        // SmartphoneDTO smartphoneDTO = new SmartphoneDTO();
 //        SmartphoneDTO smartphoneDTO = SmartphoneDTO.builder().build();

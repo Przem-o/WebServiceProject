@@ -23,7 +23,6 @@ public class ClientEntity {
     @PrimaryKeyJoinColumn
     private AddressEntity addressEntity;
 
-    //ordersEntity
     @OneToMany(mappedBy = "clientEntitySet")
     private Set<OrdersEntity> ordersEntitySet;
 

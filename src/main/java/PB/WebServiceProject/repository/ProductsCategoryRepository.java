@@ -1,6 +1,6 @@
 package PB.WebServiceProject.repository;
 
-import PB.WebServiceProject.Type;
+import PB.WebServiceProject.rest.dto.Status;
 import PB.WebServiceProject.entities.ProductCategoryEntity;
 import PB.WebServiceProject.entities.ProductsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface ProductsCategoryRepository extends JpaRepository<ProductCategoryEntity, Long> {
 
-    List<ProductsEntity> findAllByType(Type type);
+    List<ProductsEntity> findAllByType(Status type);
 }

@@ -24,8 +24,6 @@ public class OrderDetailsEntity {
     @Column(name = "quantityOrdered")
     private Long quantityOrdered;
 
-
-
     @ManyToOne
     @JoinColumn(name = "orders_id")
     private OrdersEntity ordersEntity;

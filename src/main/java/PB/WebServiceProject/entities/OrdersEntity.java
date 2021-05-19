@@ -1,10 +1,10 @@
 package PB.WebServiceProject.entities;
 
+import PB.WebServiceProject.rest.dto.Status;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
-import java.util.Set;
 
 @Data
 @Builder
@@ -24,7 +24,8 @@ public class OrdersEntity {
     @Column(name = "price")
     private Double price;
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
     @Column(name = "client_id")
     private Long clientId;
 

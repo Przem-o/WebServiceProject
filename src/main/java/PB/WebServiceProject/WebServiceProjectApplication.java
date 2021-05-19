@@ -10,4 +10,4 @@ public class WebServiceProjectApplication {
 		SpringApplication.run(WebServiceProjectApplication.class, args);
 	}
 
-}// zrobic relacje do tabel
+}

@@ -27,7 +27,7 @@
                                  referencedColumnNames="id"/>
 
         <addForeignKeyConstraint baseTableName="orderDetails"
-                                 baseColumnNames="product_id"
+                                 baseColumnNames="products_id"
                                  constraintName="fk_orderDetails_products_id"
                                  referencedTableName="products"
                                  referencedColumnNames="id"/>

@@ -38,7 +38,7 @@
             <column name="id" type="bigint">
             <constraints primaryKey="true"/>
         </column>
-            <column name="product_id" type="bigint"/>
+            <column name="products_id" type="bigint"/>
             <column name="orders_id" type="bigint"/>
             <column name="quantityOrdered" type="bigint"/>
         </createTable>

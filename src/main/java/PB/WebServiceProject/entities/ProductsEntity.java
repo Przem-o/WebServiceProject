@@ -20,9 +20,7 @@ public class ProductsEntity {
     @Column(name = "price")
     private Double price;
     @Column(name = "productCategory_id")
-   // @Enumerated(EnumType.STRING)
     private Long productCategoryId;
-
 
    @ManyToOne
    @JoinColumn(name = "productCategory_id")
