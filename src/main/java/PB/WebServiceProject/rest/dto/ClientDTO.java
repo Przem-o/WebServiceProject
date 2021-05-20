@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Data
 @Builder
@@ -22,7 +23,12 @@ public class ClientDTO {
     @NotNull(message = "name can't be null")
     private String name;
     @Schema(description = "client address", required = true)
+    @NotNull(message = "client address can't be null")
+    @NotBlank(message = "client address can't be blank")
     private AddressDTO address;
+    @Schema(description = "client orders", example = "Jaro", required = true)
+    @NotNull(message = "client orders can't be null")
+    private Set<OrdersDTO> ordersDTOSet;
 
 }
 

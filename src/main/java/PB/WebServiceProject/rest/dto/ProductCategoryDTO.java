@@ -15,6 +15,7 @@ public class ProductCategoryDTO {
 
     private Long id;
     private String category;
+    private Set<ProductsDTO> productsDTOSet;
 
     //swagger
 }

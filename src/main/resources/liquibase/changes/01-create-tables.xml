@@ -49,6 +49,7 @@
             </column>
             <column name="name" type="varchar(255)"/>
             <column name="price" type="decimal(10,2)"/>
+<!--                <constraints nullable="false"/>-->
             <column name="productCategory_id" type="bigint"/>
         </createTable>
 

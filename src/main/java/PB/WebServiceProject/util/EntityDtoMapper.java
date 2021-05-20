@@ -77,7 +77,7 @@ public class EntityDtoMapper {
 
     public static ProductCategoryDTO mapToDto(ProductCategoryEntity productCategoryEntity) {
         ProductCategoryDTO productCategoryDTO = new ProductCategoryDTO();
-        BeanUtils.copyProperties(productCategoryEntity, productCategoryEntity);
+        BeanUtils.copyProperties(productCategoryEntity, productCategoryDTO);
         return productCategoryDTO;
     }
     public static ProductCategoryEntity mapToEntity(ProductCategoryDTO productCategoryDTO) {
