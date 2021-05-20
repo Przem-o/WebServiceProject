@@ -18,7 +18,7 @@ public class OrderDetailsDTO {
     @Schema(description = "required products id", example = "1", required = true)
     @NotBlank(message = "product id can't be blank")
     @NotNull(message = "product id can't be null")
-    private Long productsId;
+    private Long productsId; //product DTO
     @Schema(description = "required orders id", example = "1", required = true)
     @NotBlank(message = "orders id can't be blank")
     @NotNull(message = "orders id can't be null")

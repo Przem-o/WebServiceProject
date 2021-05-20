@@ -1,12 +1,7 @@
 package PB.WebServiceProject.util;
 
-import PB.WebServiceProject.entities.AddressEntity;
-import PB.WebServiceProject.entities.ClientEntity;
-import PB.WebServiceProject.entities.ProductsEntity;
-import PB.WebServiceProject.rest.dto.AddressDTO;
-import PB.WebServiceProject.rest.dto.ClientDTO;
-import PB.WebServiceProject.rest.dto.OrdersDTO;
-import PB.WebServiceProject.rest.dto.ProductsDTO;
+import PB.WebServiceProject.entities.*;
+import PB.WebServiceProject.rest.dto.*;
 import org.springframework.beans.BeanUtils;
 
 public class EntityDtoMapper {
@@ -15,7 +10,7 @@ public class EntityDtoMapper {
         ClientDTO clientDTO = new ClientDTO();
 //        ClientDTO clientDTO = ClientDTO.builder().build();
         BeanUtils.copyProperties(clientEntity, clientDTO);
-        if(clientEntity.getAddressEntity()!=null) {
+        if (clientEntity.getAddressEntity() != null) {
             clientDTO.setAddress(EntityDtoMapper.mapToDto(clientEntity.getAddressEntity()));
         }
         return clientDTO;
@@ -43,35 +38,56 @@ public class EntityDtoMapper {
         return addressEntity;
     }
 
-
-    public static ProductsDTO mapToDto(ProductsEntity productsEntity){
+    public static ProductsDTO mapToDto(ProductsEntity productsEntity) {
         ProductsDTO productsDTO = new ProductsDTO();
         BeanUtils.copyProperties(productsEntity, productsDTO);
         return productsDTO;
 
     }
 
-    public static ProductsEntity mapToEntity(ProductsDTO productsDTO){
+    public static ProductsEntity mapToEntity(ProductsDTO productsDTO) {
         ProductsEntity productsEntity = new ProductsEntity();
-        BeanUtils.copyProperties(productsDTO, productsDTO);
+        BeanUtils.copyProperties(productsDTO, productsEntity);
         return productsEntity;
     }
 
-    public static OrdersDTO mapToDto(
+    public static OrdersDTO mapToDto(OrdersEntity ordersEntity) {
+        OrdersDTO ordersDTO = new OrdersDTO();
+        BeanUtils.copyProperties(ordersEntity, ordersDTO);
+        return ordersDTO;
+    }
 
-    )
-//    public static SmartphoneDTO mapToDto(SmartphoneEntity smartphoneEntity) {
-//        // SmartphoneDTO smartphoneDTO = new SmartphoneDTO();
-//        SmartphoneDTO smartphoneDTO = SmartphoneDTO.builder().build();
-//        BeanUtils.copyProperties(smartphoneEntity, smartphoneDTO);
-//        return smartphoneDTO;
-//    }
-//
-//    public static SmartphoneEntity mapToEntity(SmartphoneDTO smartphoneDTO) {
-//        //SmartphoneEntity smartphoneEntity = new SmartphoneEntity();
-//        SmartphoneEntity smartphoneEntity = SmartphoneEntity.builder().build();
-//        BeanUtils.copyProperties(smartphoneDTO, smartphoneEntity);
-//        return smartphoneEntity;
-//    }
+    public static OrdersEntity mapToEntity(OrdersDTO ordersDTO) {
+        OrdersEntity ordersEntity = new OrdersEntity();
+        BeanUtils.copyProperties(ordersDTO, ordersEntity);
+        return ordersEntity;
+    }
+
+    public static OrderDetailsDTO mapToDto(OrderDetailsEntity orderDetailsEntity) {
+        OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
+        BeanUtils.copyProperties(orderDetailsEntity, orderDetailsDTO);
+        return orderDetailsDTO;
+    }
+
+    public static OrderDetailsEntity mapToEntity(OrderDetailsDTO orderDetailsDTO) {
+        OrderDetailsEntity orderDetailsEntity = new OrderDetailsEntity();
+        BeanUtils.copyProperties(orderDetailsDTO, orderDetailsEntity);
+        return orderDetailsEntity;
+    }
+
+    public static ProductCategoryDTO mapToDto(ProductCategoryEntity productCategoryEntity) {
+        ProductCategoryDTO productCategoryDTO = new ProductCategoryDTO();
+        BeanUtils.copyProperties(productCategoryEntity, productCategoryEntity);
+        return productCategoryDTO;
+    }
+    public static ProductCategoryEntity mapToEntity(ProductCategoryDTO productCategoryDTO) {
+        ProductCategoryEntity productCategoryEntity = new ProductCategoryEntity();
+        BeanUtils.copyProperties(productCategoryDTO, productCategoryEntity);
+        return productCategoryEntity;
+    }
 
 }
+
+
+
+
