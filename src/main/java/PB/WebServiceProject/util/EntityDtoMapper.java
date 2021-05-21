@@ -6,32 +6,32 @@ import org.springframework.beans.BeanUtils;
 
 public class EntityDtoMapper {
 
-    public static ClientDTO mapToDto(ClientEntity clientEntity) {
+    public static ClientDTO mapClientToDto(ClientEntity clientEntity) {
         ClientDTO clientDTO = new ClientDTO();
 //        ClientDTO clientDTO = ClientDTO.builder().build();
         BeanUtils.copyProperties(clientEntity, clientDTO);
         if (clientEntity.getAddressEntity() != null) {
-            clientDTO.setAddress(EntityDtoMapper.mapToDto(clientEntity.getAddressEntity()));
+            clientDTO.setAddress(EntityDtoMapper.mapAddressToDto(clientEntity.getAddressEntity()));
         }
         return clientDTO;
     }
 
-    public static ClientEntity mapToEntity(ClientDTO clientDTO) {
+    public static ClientEntity mapClientToEntity(ClientDTO clientDTO) {
         ClientEntity clientEntity = new ClientEntity();
 //        ClientEntity clientEntity = ClientEntity.builder().build();
         BeanUtils.copyProperties(clientDTO, clientEntity);
-        clientEntity.setAddressEntity(EntityDtoMapper.mapToEntity(clientDTO.getAddress()));
+        clientEntity.setAddressEntity(EntityDtoMapper.mapAddressToEntity(clientDTO.getAddress()));
         return clientEntity;
     }
 
-    public static AddressDTO mapToDto(AddressEntity addressEntity) {
+    public static AddressDTO mapAddressToDto(AddressEntity addressEntity) {
         AddressDTO addressDTO = new AddressDTO();
 //        AddressDTO addressDTO = AddressDTO.builder().build();
         BeanUtils.copyProperties(addressEntity, addressDTO);
         return addressDTO;
     }
 
-    public static AddressEntity mapToEntity(AddressDTO addressDTO) {
+    public static AddressEntity mapAddressToEntity(AddressDTO addressDTO) {
         AddressEntity addressEntity = new AddressEntity();
 //        AddressEntity addressEntity = AddressEntity.builder().build();
         BeanUtils.copyProperties(addressDTO, addressEntity);
