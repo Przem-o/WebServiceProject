@@ -22,9 +22,9 @@ public class ClientEntity {
     @OneToOne(mappedBy = "clientEntity", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private AddressEntity addressEntity;
-
-    @OneToMany(mappedBy = "clientEntitySet")
-    private Set<OrdersEntity> ordersEntitySet;
-
+//
+//    @OneToMany(mappedBy = "clientEntity")
+//    private Set<OrdersEntity> ordersEntitySet;
+//
 
 }

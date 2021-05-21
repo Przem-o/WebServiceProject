@@ -14,7 +14,7 @@ public class ClientCache {
 
 
     @CachePut(key = "#clientDTO.id", cacheManager = CacheConfig.CLIENT_RESPONSE_CACHE_MANAGER, cacheNames = CacheConfig.CLIENT_RESPONSE_CACHE_NAME)
-    public ClientDTO saveResponseInCache(ClientDTO clientDTO) {
+    public ClientDTO saveClientResponseInCache(ClientDTO clientDTO) {
         return clientDTO;
     }
 

@@ -26,9 +26,11 @@ public class ClientDTO {
     @NotNull(message = "client address can't be null")
     @NotBlank(message = "client address can't be blank")
     private AddressDTO address;
-    @Schema(description = "client orders", example = "Jaro", required = true)
-    @NotNull(message = "client orders can't be null")
-    private Set<OrdersDTO> ordersDTOSet;
+
+
+//    @Schema(description = "client orders", example = "Jaro", required = true)
+//    @NotNull(message = "client orders can't be null")
+//    private Set<OrdersDTO> ordersDTOSet;
 
 }
 
