@@ -22,8 +22,7 @@
 //    private Set<ProductsDTO> productsDTOS;
 //
 //    @Schema(description = "required orders id", example = "1", required = true)
-//    @NotBlank(message = "orders id can't be blank")
-//    @NotNull(message = "orders id can't be null")
+
 //    private OrdersDTO ordersDTO;
 //
 //    @Schema(description = "quantity of product ordered", example = "1", required = true)

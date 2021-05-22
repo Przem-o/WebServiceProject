@@ -2,7 +2,7 @@ package PB.WebServiceProject.services;
 
 import PB.WebServiceProject.entities.AddressEntity;
 import PB.WebServiceProject.entities.ClientEntity;
-import PB.WebServiceProject.repository.ClientCache;
+//import PB.WebServiceProject.repository.ClientCache;
 import PB.WebServiceProject.repository.ClientRepository;
 import PB.WebServiceProject.rest.dto.ClientDTO;
 import PB.WebServiceProject.util.EntityDtoMapper;
@@ -19,20 +19,20 @@ import java.util.stream.Collectors;
 public class ClientService {
 
     private final ClientRepository clientRepository;
-    private final ClientCache clientCache;
+   // private final ClientCache clientCache;
 
     public Optional<ClientDTO> getClientById(Long id) {
-        Optional<ClientDTO> client = clientCache.getClientResponse(id);
-        if (client.isPresent()) {
-            return Optional.of(client.get());
-        }
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException interruptedException) {
-        }
+//        Optional<ClientDTO> client = clientCache.getClientResponse(id);
+//        if (client.isPresent()) {
+//            return Optional.of(client.get());
+//        }
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException interruptedException) {
+//        }
         ClientEntity clientEntity = clientRepository.findById(id).get();
         ClientDTO clientDTO = EntityDtoMapper.mapClientToDto(clientEntity);
-        clientCache.saveClientResponseInCache(clientDTO);
+       // clientCache.saveClientResponseInCache(clientDTO);
         return Optional.of(clientDTO);
     }
 
@@ -65,7 +65,7 @@ public class ClientService {
 
     public void deleteClient(Long id) {
         clientRepository.deleteById(id);
-        clientCache.deleteClientResponseFromCache(id);
+       // clientCache.deleteClientResponseFromCache(id);
     }
 
     public ClientDTO editClient(Long id, ClientDTO clientDTO) {
@@ -76,7 +76,7 @@ public class ClientService {
             clientEntity.setAddressEntity(EntityDtoMapper.mapAddressToEntity(clientDTO.getAddress()));
             ClientEntity saveClient = clientRepository.save(clientEntity);
             //  AddressEntity save = addressRepository.save(clientEntity.getAddressEntity());
-            clientCache.saveClientResponseInCache(EntityDtoMapper.mapClientToDto(saveClient));
+           // clientCache.saveClientResponseInCache(EntityDtoMapper.mapClientToDto(saveClient));
             return EntityDtoMapper.mapClientToDto(saveClient);
         } else {
             ClientEntity clientEntity1 = EntityDtoMapper.mapClientToEntity(clientDTO);

@@ -23,8 +23,8 @@ public class ClientDTO {
     @NotNull(message = "name can't be null")
     private String name;
     @Schema(description = "client address", required = true)
-    @NotNull(message = "client address can't be null")
-    @NotBlank(message = "client address can't be blank")
+//    @NotNull(message = "client address can't be null")
+//    @NotBlank(message = "client address can't be blank") nie może być tych adnotacji przy polach dot.obiektów
     private AddressDTO address;
 
 

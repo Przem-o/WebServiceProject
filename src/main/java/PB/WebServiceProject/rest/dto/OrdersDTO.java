@@ -26,15 +26,12 @@
 //    @Min(0)
 //    private Double price;
 //    @Schema(description = "status enum", required = true)
-//    @NotNull
-//    @NotBlank
 //    @Enumerated(EnumType.STRING)
 //    private Status status;
 //    @Schema(description = "client order", required = true)
-//    @NotNull
 //    private ClientDTO clientDTO;
+
 //    @Schema(description = " client order details", required = true)
-//    @NotNull
 //    private Set<OrderDetailsDTO> orderDetailsDTOSet;
 //
 //}

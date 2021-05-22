@@ -23,10 +23,8 @@
 //    @Schema(description = "product category", required = true)
 //    private String category;
 ////    @Schema(description = "details of products ordered", required = true)
-////    @NotNull
 ////    private Set<OrderDetailsDTO> orderDetailsDTOSet;
 //    @Schema(description = "category of products", required = true)
-//    @NotNull
 //    private ProductCategoryDTO productCategoryDTO;
 //
 //}
