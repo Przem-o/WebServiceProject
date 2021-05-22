@@ -52,8 +52,17 @@ public class ClientController {
 
         }
         return ResponseEntity.noContent().build();// http no content 204 // noContent().build() co to oznacza?
-
     }
+
+    @Operation(description = "edit client")
+    @PutMapping("/client/{id}")
+    public ClientDTO editClient(@Parameter(description = "edit client by id")
+                                @PathVariable(name = "id") Long id,
+                                @Valid @RequestBody ClientDTO clientDTO) {
+        return clientService.editClient(id, clientDTO);
+    }
+
+
 //    @Operation(description = "find client by name")
 //    @GetMapping("/client/{name}")
 //    public ResponseEntity findClientsByName(@PathVariable(name = "name") String name) {

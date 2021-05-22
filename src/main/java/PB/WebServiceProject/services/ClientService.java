@@ -21,7 +21,7 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
     private final AddressRepository addressRepository;
-   // private final ClientCache clientCache;
+    // private final ClientCache clientCache;
 
     public Optional<ClientDTO> getClientById(Long id) {
 //        Optional<ClientDTO> client = clientCache.getClientResponse(id);
@@ -34,7 +34,7 @@ public class ClientService {
 //        }
         ClientEntity clientEntity = clientRepository.findById(id).get();
         ClientDTO clientDTO = EntityDtoMapper.mapClientToDto(clientEntity);
-       // clientCache.saveClientResponseInCache(clientDTO);
+        // clientCache.saveClientResponseInCache(clientDTO);
         return Optional.of(clientDTO);
     }
 
@@ -60,14 +60,14 @@ public class ClientService {
         clientEntity.setAddressEntity(addressEntity);// ustawia dla clientaEntity adresEntity
         addressEntity.setClientEntity(clientEntity);// ustawia dla adresuEntity clientaEntity
         ClientEntity saveClient = clientRepository.save(clientEntity);// zapisanie w/w clientaEntity z adresem do bazy danych i przypisanie do zmiennej
-       // ClientDTO clientDTO1 = EntityDtoMapper.mapClientToDto(saveClient);//zamiana mapowanie clientEntity na clientDto w celu zapisu w cachu i przypisanie do zmiennej
-       // clientCache.saveClientResponseInCache(clientDTO1);// zapisanie w/w clientaDto do cacha, w cachu zapisujemy to co trafiło do bazy danych
+        // ClientDTO clientDTO1 = EntityDtoMapper.mapClientToDto(saveClient);//zamiana mapowanie clientEntity na clientDto w celu zapisu w cachu i przypisanie do zmiennej
+        // clientCache.saveClientResponseInCache(clientDTO1);// zapisanie w/w clientaDto do cacha, w cachu zapisujemy to co trafiło do bazy danych
         return EntityDtoMapper.mapClientToDto(saveClient);// zwraca ClientDTO i leci do -> ClientController
     }
 
     public void deleteClient(Long id) {
         clientRepository.deleteById(id);
-       // clientCache.deleteClientResponseFromCache(id);
+        // clientCache.deleteClientResponseFromCache(id);
     }
 
     public ClientDTO editClient(Long id, ClientDTO clientDTO) {
@@ -78,13 +78,15 @@ public class ClientService {
             clientEntity.setAddressEntity(EntityDtoMapper.mapAddressToEntity(clientDTO.getAddress()));
             ClientEntity saveClient = clientRepository.save(clientEntity);
             AddressEntity saveAddress = addressRepository.save(clientEntity.getAddressEntity());
-           // clientCache.saveClientResponseInCache(EntityDtoMapper.mapClientToDto(saveClient));
+//            clientCache.saveClientResponseInCache(EntityDtoMapper.mapClientToDto(saveClient));
+//            clientCache.saveAddressResponseInCache(EntityDtoMapper.mapAddressToDto(saveAddress));
             return EntityDtoMapper.mapClientToDto(saveClient);
         } else {
             ClientEntity clientEntity1 = EntityDtoMapper.mapClientToEntity(clientDTO);
             clientEntity1.setAddressEntity(EntityDtoMapper.mapAddressToEntity(clientDTO.getAddress()));
+            return EntityDtoMapper.mapClientToDto(clientEntity1);
         }
-        return clientDTO;
+
     }
 }
 
