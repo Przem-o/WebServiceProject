@@ -1,30 +1,30 @@
-//package PB.WebServiceProject.rest.dto;
-//import io.swagger.v3.oas.annotations.media.Schema;
-//import lombok.*;
-//
-//import javax.validation.constraints.NotBlank;
-//import javax.validation.constraints.NotNull;
-//import java.util.Set;
-//
-//@Data
-//@Builder
-//@ToString
-//@NoArgsConstructor
-//@AllArgsConstructor
-//
-//public class ProductsDTO {
-//
-//    private Long id;
-//    @Schema(description = "product name", required = true)
-//    @NotBlank(message = " name can't be blank")
-//    private String name;
-//    @Schema(description = "product price", required = true)
-//    private Double price;
-//    @Schema(description = "product category", required = true)
-//    private String category;
-////    @Schema(description = "details of products ordered", required = true)
-////    private Set<OrderDetailsDTO> orderDetailsDTOSet;
-//    @Schema(description = "category of products", required = true)
-//    private ProductCategoryDTO productCategoryDTO;
-//
-//}
+package PB.WebServiceProject.rest.dto;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+@Data
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+
+public class ProductsDTO {
+    @Schema(description = "id of existing product", example = "1")
+    private Long id;
+    @Schema(description = "product brand", example = "Nokia", required = true)
+    @NotBlank(message = "product brand can't be blank")
+    @NotNull(message = "product brand can't be null")
+    private String name;
+    @Schema(description = "product price", example = "999.99", required = true)
+    @NotBlank(message = "product price can't be blank")
+    @Min(value = 0, message = "min 0")
+    private Double price;
+    @Schema(description = "category of products", example = "Smartphone", required = true)
+    private ProductCategoryDTO productCategoryDTO;
+
+}

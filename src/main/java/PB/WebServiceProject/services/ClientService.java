@@ -3,6 +3,7 @@ package PB.WebServiceProject.services;
 import PB.WebServiceProject.entities.AddressEntity;
 import PB.WebServiceProject.entities.ClientEntity;
 //import PB.WebServiceProject.repository.ClientCache;
+import PB.WebServiceProject.repository.AddressRepository;
 import PB.WebServiceProject.repository.ClientRepository;
 import PB.WebServiceProject.rest.dto.ClientDTO;
 import PB.WebServiceProject.util.EntityDtoMapper;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class ClientService {
 
     private final ClientRepository clientRepository;
+    private final AddressRepository addressRepository;
    // private final ClientCache clientCache;
 
     public Optional<ClientDTO> getClientById(Long id) {
@@ -69,13 +71,13 @@ public class ClientService {
     }
 
     public ClientDTO editClient(Long id, ClientDTO clientDTO) {
-        Optional<ClientEntity> findClientByID = clientRepository.findById(id);
-        if (findClientByID.isPresent()) {
-            ClientEntity clientEntity = findClientByID.get();
+        Optional<ClientEntity> findClientById = clientRepository.findById(id);
+        if (findClientById.isPresent()) {
+            ClientEntity clientEntity = findClientById.get();
             clientEntity.setName(clientDTO.getName());
             clientEntity.setAddressEntity(EntityDtoMapper.mapAddressToEntity(clientDTO.getAddress()));
             ClientEntity saveClient = clientRepository.save(clientEntity);
-            //  AddressEntity save = addressRepository.save(clientEntity.getAddressEntity());
+            AddressEntity saveAddress = addressRepository.save(clientEntity.getAddressEntity());
            // clientCache.saveClientResponseInCache(EntityDtoMapper.mapClientToDto(saveClient));
             return EntityDtoMapper.mapClientToDto(saveClient);
         } else {

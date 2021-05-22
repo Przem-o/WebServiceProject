@@ -20,7 +20,7 @@ public class ClientEntity {
     private String name;
 
     @OneToOne(mappedBy = "clientEntity", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @PrimaryKeyJoinColumn // adnotacja tylko przy OneToOne
     private AddressEntity addressEntity;
 //
 //    @OneToMany(mappedBy = "clientEntity")
