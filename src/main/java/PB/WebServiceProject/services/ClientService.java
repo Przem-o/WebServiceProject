@@ -2,8 +2,9 @@ package PB.WebServiceProject.services;
 
 import PB.WebServiceProject.entities.AddressEntity;
 import PB.WebServiceProject.entities.ClientEntity;
-//import PB.WebServiceProject.repository.ClientCache;
+
 import PB.WebServiceProject.repository.AddressRepository;
+import PB.WebServiceProject.repository.cache.ClientCache;
 import PB.WebServiceProject.repository.ClientRepository;
 import PB.WebServiceProject.rest.dto.ClientDTO;
 import PB.WebServiceProject.util.EntityDtoMapper;
@@ -21,7 +22,8 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
     private final AddressRepository addressRepository;
-    // private final ClientCache clientCache;
+     private final ClientCache clientCache;
+
 
     public Optional<ClientDTO> getClientById(Long id) {
 //        Optional<ClientDTO> client = clientCache.getClientResponse(id);

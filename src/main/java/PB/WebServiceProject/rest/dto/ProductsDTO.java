@@ -20,7 +20,7 @@ public class ProductsDTO {
     @NotBlank(message = "product brand can't be blank")
     @NotNull(message = "product brand can't be null")
     private String name;
-    @Schema(description = "product price", example = "999.99", required = true)
+    @Schema(description = "product price, value cant be negative", example = "999.99", required = true)
     @NotBlank(message = "product price can't be blank")
     @Min(value = 0, message = "min 0")
     private Double price;

@@ -38,18 +38,29 @@ public class EntityDtoMapper {
         return addressEntity;
     }
 
-//    public static ProductsDTO mapToDto(ProductsEntity productsEntity) {
-//        ProductsDTO productsDTO = new ProductsDTO();
-//        BeanUtils.copyProperties(productsEntity, productsDTO);
-//        return productsDTO;
-//
-//    }
-//
-//    public static ProductsEntity mapToEntity(ProductsDTO productsDTO) {
-//        ProductsEntity productsEntity = new ProductsEntity();
-//        BeanUtils.copyProperties(productsDTO, productsEntity);
-//        return productsEntity;
-//    }
+    public static ProductsDTO mapProductsToDto(ProductsEntity productsEntity) {
+        ProductsDTO productsDTO = new ProductsDTO();
+        BeanUtils.copyProperties(productsEntity, productsDTO);
+        return productsDTO;
+
+    }
+
+    public static ProductsEntity mapProductsToEntity(ProductsDTO productsDTO) {
+        ProductsEntity productsEntity = new ProductsEntity();
+        BeanUtils.copyProperties(productsDTO, productsEntity);
+        return productsEntity;
+    }
+        public static ProductCategoryDTO mapProdCatToDto(ProductCategoryEntity productCategoryEntity) {
+        ProductCategoryDTO productCategoryDTO = new ProductCategoryDTO();
+        BeanUtils.copyProperties(productCategoryEntity, productCategoryDTO);
+        return productCategoryDTO;
+    }
+    public static ProductCategoryEntity mapProdCatToEntity(ProductCategoryDTO productCategoryDTO) {
+        ProductCategoryEntity productCategoryEntity = new ProductCategoryEntity();
+        BeanUtils.copyProperties(productCategoryDTO, productCategoryEntity);
+        return productCategoryEntity;
+    }
+
 //
 //    public static OrdersDTO mapToDto(OrdersEntity ordersEntity) {
 //        OrdersDTO ordersDTO = new OrdersDTO();
