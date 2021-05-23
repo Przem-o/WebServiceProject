@@ -20,7 +20,7 @@ public class ProductCategoryDTO {
     @NotBlank(message = "product category can't be blank")
     @NotNull(message = "product category can't be null")
     private String category;
-    @Schema(description = "products", example = "Nokia", required = true)
+    @Schema(description = "products", example = "Nokia3310", required = true)
     private Set<ProductsDTO> productsDTOSet;
 
 }

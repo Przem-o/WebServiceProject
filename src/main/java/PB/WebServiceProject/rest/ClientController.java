@@ -4,6 +4,7 @@ import PB.WebServiceProject.rest.dto.ClientDTO;
 import PB.WebServiceProject.services.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,13 +13,10 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 public class ClientController {
 
     private final ClientService clientService;
-
-    public ClientController(ClientService clientService) {
-        this.clientService = clientService;
-    }
 
     @Operation(description = "Get all clients")
     @GetMapping("/clients")
@@ -61,13 +59,4 @@ public class ClientController {
                                 @Valid @RequestBody ClientDTO clientDTO) {
         return clientService.editClient(id, clientDTO);
     }
-
-
-//    @Operation(description = "find client by name")
-//    @GetMapping("/client/{name}")
-//    public ResponseEntity findClientsByName(@PathVariable(name = "name") String name) {
-//           //     List<ClientDTO> findClientsByName = clientService.findClients(name);
-//        return ResponseEntity.ok(clientService.findClients(name));
-//
-//    }
 }

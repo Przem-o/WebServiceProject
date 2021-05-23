@@ -16,9 +16,9 @@ import javax.validation.constraints.NotNull;
 public class ProductsDTO {
     @Schema(description = "id of existing product", example = "1")
     private Long id;
-    @Schema(description = "product brand", example = "Nokia", required = true)
-    @NotBlank(message = "product brand can't be blank")
-    @NotNull(message = "product brand can't be null")
+    @Schema(description = "product name", example = "Nokia3310", required = true)
+    @NotBlank(message = "product name can't be blank")
+    @NotNull(message = "product name can't be null")
     private String name;
     @Schema(description = "product price, value cant be negative", example = "999.99", required = true)
     @NotBlank(message = "product price can't be blank")

@@ -1,12 +1,12 @@
 package PB.WebServiceProject.services;
 
-import PB.WebServiceProject.entities.ClientEntity;
+
 import PB.WebServiceProject.entities.ProductCategoryEntity;
 import PB.WebServiceProject.entities.ProductsEntity;
 import PB.WebServiceProject.repository.ProductCategoryRepository;
 import PB.WebServiceProject.repository.ProductsRepository;
 import PB.WebServiceProject.repository.cache.ProductCache;
-import PB.WebServiceProject.rest.dto.ClientDTO;
+
 import PB.WebServiceProject.rest.dto.ProductsDTO;
 import PB.WebServiceProject.util.EntityDtoMapper;
 import org.apache.commons.lang3.StringUtils;
@@ -25,7 +25,7 @@ public class ProductsService {
     private final ProductCache productCache;
 
 
-    public Optional<ProductsDTO> getProductsById(Long id) {
+    public Optional<ProductsDTO> findProductsById(Long id) {
 //        Optional<ProductsDTO> client = clientCache.getClientResponse(id);
 //        if (client.isPresent()) {
 //            return Optional.of(client.get());
@@ -80,38 +80,61 @@ public class ProductsService {
 
     public ProductsDTO editProducts(Long id, ProductsDTO productsDTO) {
         Optional<ProductsEntity> productsById = productsRepository.findById(id);
-        if (productsById.isPresent()){
+        if (productsById.isPresent()) {
             ProductsEntity productsEntity = productsById.get();
             productsEntity.setName(productsDTO.getName());
             productsEntity.setPrice(productsDTO.getPrice());
             ProductsEntity save = productsRepository.save(productsEntity);
             ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(save);
-        //    productCache.saveProductsResponseInCache(productsDTO1);
+            //    productCache.saveProductsResponseInCache(productsDTO1);
+            return productsDTO1;
+        } else {
+            ProductsEntity productsEntity = EntityDtoMapper.mapProductsToEntity(productsDTO);
+            ProductsEntity save = productsRepository.save(productsEntity);
+            ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(save);
             return productsDTO1;
         }
+    }
+    public List<ProductsDTO> getProducts(String name, Integer minPrice, Integer maxPrice) {
+        return productsRepository.findAll().stream()
 
+                .filter(productsEntity -> name == null || productsEntity.getName().equals(name))
+                .filter(productsEntity -> minPrice == null || productsEntity.getPrice() >= minPrice)
+                .filter(productsEntity -> maxPrice == null || productsEntity.getPrice() <= maxPrice)
+                .map(EntityDtoMapper::mapProductsToDto)
+                .collect(Collectors.toList());
+    }
 
-    public ProductsDTO addProductsAndCategory(ProductsDTO productsDTO) {
+    public ProductsDTO addProductsWithCategory(ProductsDTO productsDTO) {
         ProductsEntity productsEntity = EntityDtoMapper.mapProductsToEntity(productsDTO);
         ProductCategoryEntity newProductCategoryEntity = EntityDtoMapper.mapProdCatToEntity(productsDTO.getProductCategoryDTO()); //tworzenie nowej kategorii newProductCategoryEntity
         Optional<ProductCategoryEntity> productById = productCategoryRepository.findById(productsDTO.getProductCategoryDTO().getId());// szukanie czy już taki productCategoryEntity istnieje
         if (productById.isPresent()) {
             newProductCategoryEntity = productById.get(); //jeśli istnieje to nadpisujemy nowy newProductCategoryEntity znalezionym
-
-        }
-        productsEntity.setProductCategoryEntity(newProductCategoryEntity);
-        newProductCategoryEntity.getProductsEntitySet().add(productsEntity);
+            productsEntity.setProductCategoryEntity(newProductCategoryEntity);
+            newProductCategoryEntity.getProductsEntitySet().add(productsEntity);
 //        Set<ProductsEntity> productsEntitySet = new HashSet<>();
 //        productsEntitySet.add(productsEntity);
 //        newProductCategoryEntity.setProductsEntitySet(productsEntitySet);
-        ProductsEntity saveProduct = productsRepository.save(productsEntity);
+            ProductsEntity saveProduct = productsRepository.save(productsEntity);
 //        ProductCategoryEntity saveCategory = productCategoryRepository.save(newProductCategoryEntity);
 //        ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(saveProduct);
 //        productsDTO1.setProductCategoryDTO(productsDTO.getProductCategoryDTO());
 //        productCache.saveProductsInCache(productsDTO1);
-        return EntityDtoMapper.mapProductsToDto(saveProduct);
+            ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(saveProduct);
+            return productsDTO1;
+        } else {
+            ProductsEntity productsEntity1 = EntityDtoMapper.mapProductsToEntity(productsDTO);
+            productsEntity1.setProductCategoryEntity(EntityDtoMapper.mapProdCatToEntity(productsDTO.getProductCategoryDTO()));
+            ProductsEntity save = productsRepository.save(productsEntity1);
+            ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(save);
+            //    productCache.saveProductsResponseInCache(productsDTO1);
+            return productsDTO1;
+        }
     }
-
 }
+
+
+
 
 
