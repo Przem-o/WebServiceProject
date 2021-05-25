@@ -20,26 +20,33 @@ public class ProductsController {
 
 
     @Operation(description = "Get all products")
-    @GetMapping("/products")
-    public List<ProductsDTO> getProducts(@Parameter(description = "get products by name")
+    @GetMapping("/productsFilters")
+    public List<ProductsDTO> getProducts(@Parameter(description = "get products by name", example = "Nokia 3210")
                                          @RequestParam(name = "name", required = false) String name,
-                                         @Parameter(description = "get products by minPrice")
+                                         @Parameter(description = "get products by minPrice", example = "1")
                                          @RequestParam(name = "minPrice", required = false) Integer minPrice,
-                                         @Parameter(description = "get products by maxPrice")
+                                         @Parameter(description = "get products by maxPrice", example = "10000")
                                          @RequestParam(name = "maxPrice", required = false) Integer maxPrice) {
         return productsService.getProducts(name, minPrice, maxPrice);
     }
 
+    @Operation(description = "Get all products")
+    @GetMapping("/products")
+    public List<ProductsDTO> findProductsByName(@Parameter(description = "find products by name", example = "Nokia 3210")
+                                                @RequestParam(name = "name", required = false) String name) {
+        return productsService.findProductsByName(name);
+    }
+
     @Operation(description = "Add new product")
     @PostMapping("/product")
-    public ProductsDTO addProduct(@Parameter(description = "add new product")
+    public ProductsDTO addProduct(@Parameter(description = "add new product", example = "Nokia 3210")
                                   @Valid @RequestBody ProductsDTO productsDTO) {
         return productsService.addProducts(productsDTO);
     }
 
     @Operation(description = "Delete product by id")
     @DeleteMapping("/product/{id}")
-    public ResponseEntity deleteProduct(@Parameter(description = "delete product by id")
+    public ResponseEntity deleteProduct(@Parameter(description = "delete product by id", example = "1")
                                         @PathVariable(name = "id") Long id) {
         productsService.deleteProducts(id);
         return ResponseEntity.ok().build();
@@ -47,7 +54,7 @@ public class ProductsController {
 
     @Operation(description = "find product by id")
     @GetMapping("/product/{id}")
-    public ResponseEntity findProductsById(@Parameter(description = "find product by id")
+    public ResponseEntity findProductsById(@Parameter(description = "find product by id", example = "1")
                                            @PathVariable(name = "id") Long id) {
         Optional<ProductsDTO> productsById = productsService.findProductsById(id);
         if (productsById.isPresent()) {
@@ -59,7 +66,7 @@ public class ProductsController {
 
     @Operation(description = "edit product")
     @PutMapping("/product/{id}")
-    public ProductsDTO editProduct(@Parameter(description = "edit product by id")
+    public ProductsDTO editProduct(@Parameter(description = "edit product by id", example = "1")
                                    @PathVariable(name = "id") Long id,
                                    @Valid @RequestBody ProductsDTO productsDTO) {
         return productsService.editProducts(id, productsDTO);
@@ -67,16 +74,16 @@ public class ProductsController {
 
     @Operation(description = "set product to category of products")
     @PostMapping("/product/{productId}/category/{categoryId}")
-    public ProductsDTO addProductsToCategory(@Parameter(description = "product id")
+    public ProductsDTO addProductsToCategory(@Parameter(description = "product id", example = "1")
                                              @PathVariable(name = "productId") Long productId,
-                                             @Parameter(description = "category id")
+                                             @Parameter(description = "category id", example = "2")
                                              @PathVariable(name = "categoryId") Long categoryId) {
         return productsService.addProductsToCategory(productId, categoryId);
     }
 
     @Operation(description = "Add new product with category")
     @PostMapping("/addProductsWithCategory")
-    public ProductsDTO addProductsWithCategory(@Parameter(description = "add new products with category")
+    public ProductsDTO addProductsWithCategory(@Parameter(description = "add new products with category", example = "Nokia 3310, Smartphone")
                                                @Valid @RequestBody ProductsDTO productsDTO) {
         return productsService.addProductsWithCategory(productsDTO);
     }

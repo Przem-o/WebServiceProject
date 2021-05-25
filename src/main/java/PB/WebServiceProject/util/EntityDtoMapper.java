@@ -4,6 +4,8 @@ import PB.WebServiceProject.entities.*;
 import PB.WebServiceProject.rest.dto.*;
 import org.springframework.beans.BeanUtils;
 
+import java.util.stream.Collectors;
+
 public class EntityDtoMapper {
 
     public static ClientDTO mapClientToDto(ClientEntity clientEntity) {
@@ -41,6 +43,9 @@ public class EntityDtoMapper {
     public static ProductsDTO mapProductsToDto(ProductsEntity productsEntity) {
         ProductsDTO productsDTO = new ProductsDTO();
         BeanUtils.copyProperties(productsEntity, productsDTO);
+        if(productsEntity.getProductCategoryEntity()!=null){
+            productsDTO.setProductCategoryDTO(EntityDtoMapper.mapProdCatToDto(productsEntity.getProductCategoryEntity()));
+        }
         return productsDTO;
 
     }
@@ -53,6 +58,11 @@ public class EntityDtoMapper {
         public static ProductCategoryDTO mapProdCatToDto(ProductCategoryEntity productCategoryEntity) {
         ProductCategoryDTO productCategoryDTO = new ProductCategoryDTO();
         BeanUtils.copyProperties(productCategoryEntity, productCategoryDTO);
+//        if(productCategoryEntity.getProductsEntitySet() !=null){
+//            productCategoryDTO.setProductsDTOSet(productCategoryEntity.getProductsEntitySet().stream()
+//                    .map(EntityDtoMapper::mapProductsToDto)
+//                    .collect(Collectors.toSet()));
+//        }
         return productCategoryDTO;
     }
     public static ProductCategoryEntity mapProdCatToEntity(ProductCategoryDTO productCategoryDTO) {

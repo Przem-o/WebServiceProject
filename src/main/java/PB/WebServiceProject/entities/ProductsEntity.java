@@ -24,9 +24,19 @@ public class ProductsEntity {
     //    @Column(name = "productCategory_id")
 //    private Long productCategoryId;
     @ManyToOne
-    @JoinColumn(name = "productCategory_id")
+    @JoinColumn(name = "productcategory_id")
     private ProductCategoryEntity productCategoryEntity;
 
+
+
+
+
+
+
+
+
+
+
 //    @OneToMany(mappedBy = "productsEntity")
-//    private Set<OrderDetailsEntity> orderDetailsEntitySet;An nie miał
+//    private Set<OrderDetailsEntity> orderDetailsEntitySet;An niemiał
 }

@@ -76,10 +76,15 @@ public class ClientService {
         Optional<ClientEntity> findClientById = clientRepository.findById(id);
         if (findClientById.isPresent()) {
             ClientEntity clientEntity = findClientById.get();
+            clientEntity.setId(clientDTO.getId());
             clientEntity.setName(clientDTO.getName());
-            clientEntity.setAddressEntity(EntityDtoMapper.mapAddressToEntity(clientDTO.getAddress()));
+            AddressEntity addressEntity = clientEntity.getAddressEntity();
+            if(addressEntity !=null){
+                addressEntity.setCity(clientDTO.getAddress().getCity());
+                addressEntity.setCountry(clientDTO.getAddress().getCountry());
+            }
             ClientEntity saveClient = clientRepository.save(clientEntity);
-            AddressEntity saveAddress = addressRepository.save(clientEntity.getAddressEntity());
+//            AddressEntity saveAddress = addressRepository.save(clientEntity.getAddressEntity());
 //            clientCache.saveClientResponseInCache(EntityDtoMapper.mapClientToDto(saveClient));
 //            clientCache.saveAddressResponseInCache(EntityDtoMapper.mapAddressToDto(saveAddress));
             return EntityDtoMapper.mapClientToDto(saveClient);

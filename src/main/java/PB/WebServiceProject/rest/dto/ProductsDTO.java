@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class ProductsDTO {
     @Schema(description = "id of existing product", example = "1")
     private Long id;
@@ -21,10 +20,9 @@ public class ProductsDTO {
     @NotNull(message = "product name can't be null")
     private String name;
     @Schema(description = "product price, value cant be negative", example = "999.99", required = true)
-    @NotBlank(message = "product price can't be blank")
     @Min(value = 0, message = "min 0")
     private Double price;
-    @Schema(description = "category of products", example = "Smartphone", required = true)
+
     private ProductCategoryDTO productCategoryDTO;
 
 }

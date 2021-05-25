@@ -12,14 +12,14 @@ import java.util.Set;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "productsCategory")
+@Table(name = "productcategory")
 public class ProductCategoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "category")
-    private String category;
+    @Column(name = "productcategory")
+    private String productcategory;
 
     @OneToMany(mappedBy = "productCategoryEntity")
     private Set<ProductsEntity> productsEntitySet;
