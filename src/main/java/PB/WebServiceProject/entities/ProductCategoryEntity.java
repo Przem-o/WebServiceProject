@@ -16,7 +16,7 @@ import java.util.Set;
 public class ProductCategoryEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+  //  @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "productcategory")
     private String productcategory;
