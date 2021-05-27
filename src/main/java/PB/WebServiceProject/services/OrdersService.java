@@ -1,72 +1,72 @@
-//package PB.WebServiceProject.services;
-//
-//import PB.WebServiceProject.repository.ClientRepository;
-//import PB.WebServiceProject.repository.ProductsRepository;
-//import lombok.RequiredArgsConstructor;
-//import org.springframework.stereotype.Service;
-//import task4.entities.ClientEntity;
-//import task4.entities.SmartphoneEntity;
-//import task4.repositories.ClientRepository;
-//import task4.repositories.SmartphoneRepository;
-//import task4.rest.dto.SmartphoneDTO;
-//import task4.util.EntityDtoMapper;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//import java.util.Optional;
-//import java.util.Set;
-//import java.util.stream.Collectors;
-//
-//@RequiredArgsConstructor
-//@Service
-//public class OrdersService {
-//
-//    private final ClientRepository clientRepository;
-//    private final ProductsRepository productsRepository;
-//
-////    public OrderService(ClientRepository clientRepository, SmartphoneRepository smartphoneRepository) {
-////        this.clientRepository = clientRepository;
-////        this.smartphoneRepository = smartphoneRepository;
-////    }
-//
-//    public List<SmartphoneDTO> findOrderedSmartphones(Long clientId){
+package PB.WebServiceProject.services;
+
+import PB.WebServiceProject.entities.*;
+import PB.WebServiceProject.repository.ClientRepository;
+import PB.WebServiceProject.repository.OrdersDetailsRepository;
+import PB.WebServiceProject.repository.OrdersRepository;
+import PB.WebServiceProject.repository.ProductsRepository;
+import PB.WebServiceProject.rest.dto.OrdersDTO;
+import PB.WebServiceProject.rest.dto.ProductsDTO;
+import PB.WebServiceProject.util.EntityDtoMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@RequiredArgsConstructor
+@Service
+public class OrdersService {
+
+    private final ClientRepository clientRepository;
+    private final ProductsRepository productsRepository;
+    private final OrdersDetailsRepository ordersDetailsRepository;
+    private final OrdersRepository ordersRepository;
+
+
+    public List<ProductsDTO> findOrderedProducts(){
+        List<ProductsEntity> allProducts = productsRepository.findAll();
+        if(allProducts.isEmpty()) {
+            return new ArrayList<>();
+        }
+        List<ProductsDTO> collect = allProducts.stream()
+                .map(EntityDtoMapper::mapProductsToDto)
+                .collect(Collectors.toList());
+        return collect;
+
+    }
+
+
+    public OrdersDTO addOrdersToUser(OrdersDTO ordersDTO){
+        OrderDetailsEntity orderDetailsEntity = ordersDetailsRepository.findById(ordersDTO.getClientDTO().getId()).get();
+        ClientEntity clientEntity = clientRepository.findById(ordersDTO.getClientId()).get();
+        OrdersEntity ordersEntity = EntityDtoMapper.mapOrdersToEntity(ordersDTO);
+        ordersEntity.setId(ordersDTO.getId());
+        ordersEntity.setDate(OffsetDateTime.parse(ordersDTO.getDate()));
+        ordersEntity.setPrice(ordersDTO.getPrice());
+        ordersEntity.setStatus(ordersDTO.getStatus());
+        ordersEntity.setClientEntity(clientEntity);
+        clientEntity.getOrdersEntitySet().add(ordersEntity);
+        orderDetailsEntity.setOrdersEntity(ordersEntity);
+        OrdersEntity save = ordersRepository.save(ordersEntity);
+        return EntityDtoMapper.mapOrdersToDto(save);
+
+    }
+//    public List<ProductsDTO> addProductsToOrderList(Long clientId, Long productId){
 //        Optional<ClientEntity> clientEntity = clientRepository.findById(clientId);
-//        if(clientEntity.isEmpty()) {
+//        if(clientEntity.isEmpty()){
 //            return new ArrayList<>();
 //        }
-//        Set<SmartphoneEntity> smartphoneEntities = clientEntity.get().getSmartphoneEntities();
-//        return smartphoneEntities.stream().map(EntityDtoMapper::mapToDto).collect(Collectors.toList());
-//    }
-//
-//    public List<SmartphoneDTO> addSmartphoneToOrderList(Long clientId, Long smartphoneId) {
-//        Optional<ClientEntity> clientEntity = clientRepository.findById(clientId);
-//        if(clientEntity.isEmpty()) {
+//        Optional<ProductsEntity> productsEntity = productsRepository.findById(productId);
+//        if(productsEntity.isEmpty()){
 //            return new ArrayList<>();
 //        }
-//        Optional<SmartphoneEntity> smartphoneEntity = smartphoneRepository.findById(smartphoneId);
-//        if(smartphoneEntity.isEmpty()) {
-//            return new ArrayList<>();
-//        }
-//        clientEntity.get().getSmartphoneEntities().add(smartphoneEntity.get());
-//        ClientEntity save = clientRepository.save(clientEntity.get());
-//        return save.getSmartphoneEntities().stream()
-//                .map(EntityDtoMapper::mapToDto)
-//                .collect(Collectors.toList());
+//        clientEntity.get().get
 //    }
-//
-//    public void deleteSmartphoneFromOrderList(Long clientId, Long smartphoneId) {
-//        Optional<ClientEntity> clientEntity = clientRepository.findById(clientId);
-//        if(clientEntity.isEmpty()) {
-//            return;
-//        }
-//        Optional<SmartphoneEntity> smartphone = clientEntity.get().getSmartphoneEntities().stream()
-//                .filter(smartphoneEntity -> smartphoneEntity.getId().equals(smartphoneId))
-//                .findFirst();
-//        if(smartphone.isEmpty()) {
-//            return;
-//        }
-//        clientEntity.get().getSmartphoneEntities().remove(smartphone.get());
-//        clientRepository.save(clientEntity.get());
-//    }
-//
-//}
+
+
+
+}

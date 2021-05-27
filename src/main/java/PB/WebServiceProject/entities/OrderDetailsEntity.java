@@ -6,7 +6,8 @@ import javax.persistence.*;
 import java.util.Set;
 
 
-@Data
+@Getter
+@Setter
 @Builder
 @ToString
 @NoArgsConstructor

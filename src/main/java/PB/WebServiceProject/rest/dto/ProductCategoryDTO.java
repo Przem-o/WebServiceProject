@@ -8,18 +8,18 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-@Data
-@Builder
-@ToString
+@Getter
+@Setter
+//@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class ProductCategoryDTO {
 
     @Id
     private Long id;
-    @Schema(description = "product category", example = "Smartphone", required = true)
+    @Schema(description = "product category", example = "Smartphones", required = true)
     @NotBlank(message = "product category can't be blank")
-    private String productCategory;
+    private String productcategory;
+
 
 }

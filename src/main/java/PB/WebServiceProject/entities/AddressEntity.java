@@ -3,7 +3,8 @@ package PB.WebServiceProject.entities;
 import lombok.*;
 
 import javax.persistence.*;
-@Data
+@Getter
+@Setter
 @Builder
 @ToString
 @NoArgsConstructor

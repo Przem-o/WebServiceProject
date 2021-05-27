@@ -5,9 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -16,7 +16,7 @@ import java.util.Set;
 public class ProductCategoryEntity {
 
     @Id
-  //  @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "productcategory")
     private String productcategory;

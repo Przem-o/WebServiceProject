@@ -18,7 +18,6 @@ public class ProductsController {
 
     private final ProductsService productsService;
 
-
     @Operation(description = "Get all products")
     @GetMapping("/productsFilters")
     public List<ProductsDTO> getProducts(@Parameter(description = "get products by name", example = "Nokia 3210")
@@ -72,19 +71,10 @@ public class ProductsController {
         return productsService.editProducts(id, productsDTO);
     }
 
-    @Operation(description = "set product to category of products")
-    @PostMapping("/product/{productId}/category/{categoryId}")
-    public ProductsDTO addProductsToCategory(@Parameter(description = "product id", example = "1")
-                                             @PathVariable(name = "productId") Long productId,
-                                             @Parameter(description = "category id", example = "2")
-                                             @PathVariable(name = "categoryId") Long categoryId) {
-        return productsService.addProductsToCategory(productId, categoryId);
-    }
-
     @Operation(description = "Add new product with category")
-    @PostMapping("/addProductsWithCategory")
-    public ProductsDTO addProductsWithCategory(@Parameter(description = "add new products with category", example = "Nokia 3310, Smartphone")
+    @PostMapping("/addProductsAndCategory")
+    public ProductsDTO addProductsWithCategory(@Parameter(description = "add new products and category", example = "Nokia 3310, Smartphone")
                                                @Valid @RequestBody ProductsDTO productsDTO) {
-        return productsService.addProductsWithCategory(productsDTO);
+        return productsService.addProductsAndCategory(productsDTO);
     }
 }

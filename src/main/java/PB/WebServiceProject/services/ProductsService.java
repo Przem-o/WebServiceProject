@@ -68,15 +68,15 @@ public class ProductsService {
         return productsDTO1;
     }
 
-    public ProductsDTO addProductsToCategory(Long productsId, Long productCategoryId) {
-        ProductsEntity productsEntity = productsRepository.findById(productsId).get();
-        ProductCategoryEntity productCategoryEntity = productCategoryRepository.findById(productCategoryId).get();
-        productsEntity.setProductCategoryEntity(productCategoryEntity);
-        productCategoryEntity.getProductsEntitySet().add(productsEntity); //dodawanie SETa z produktami do kategorii
-        ProductsEntity save = productsRepository.save(productsEntity);
-        ProductsDTO productsDTO = EntityDtoMapper.mapProductsToDto(save);
-        return productsDTO;
-    }
+//    public ProductsDTO addProductsToCategory(Long productsId, Long productCategoryId) {
+//        ProductsEntity productsEntity = productsRepository.findById(productsId).get();
+//        ProductCategoryEntity productCategoryEntity = productCategoryRepository.findById(productCategoryId).get();
+//        productsEntity.setProductCategoryEntity(productCategoryEntity);
+//        productCategoryEntity.getProductsEntitySet().add(productsEntity); //dodawanie SETa z produktami do kategorii
+//        ProductsEntity save = productsRepository.save(productsEntity);
+//        ProductsDTO productsDTO = EntityDtoMapper.mapProductsToDto(save);
+//        return productsDTO;
+//    }
 
     public void deleteProducts(Long id) {
         productsRepository.deleteById(id);
@@ -110,24 +110,27 @@ public class ProductsService {
                 .collect(Collectors.toList());
     }
 
-    public ProductsDTO addProductsWithCategory(ProductsDTO productsDTO) { // błąd 5000
+    public ProductsDTO addProductsAndCategory(ProductsDTO productsDTO) {
         ProductsEntity productsEntity = EntityDtoMapper.mapProductsToEntity(productsDTO);
         ProductCategoryEntity newProductCategoryEntity = EntityDtoMapper.mapProdCatToEntity(productsDTO.getProductCategoryDTO());       //tworzenie nowej kategorii newProductCategoryEntity
-        Optional<ProductCategoryEntity> productById = productCategoryRepository.findById(productsDTO.getProductCategoryDTO().getId());          // szukanie czy już taki productCategoryEntity istnieje
-        if (productById.isPresent()) {
-            newProductCategoryEntity = productById.get();
-        }                                                                                                           //jeśli istnieje to nadpisujemy nowy newProductCategoryEntity znalezionym
+        if(productsDTO.getProductCategoryDTO().getId() !=null) {
+            Optional<ProductCategoryEntity> productById = productCategoryRepository.findById(productsDTO.getProductCategoryDTO().getId());          // szukanie czy już taki productCategoryEntity istnieje
+            if (productById.isPresent()) {
+                newProductCategoryEntity = productById.get();
+            }
+        }//jeśli istnieje to nadpisujemy nowy newProductCategoryEntity znalezionym
         productsEntity.setProductCategoryEntity(newProductCategoryEntity);
         //newProductCategoryEntity.getProductsEntitySet().add(productsEntity);
         Set<ProductsEntity> productsEntityHashSet = new HashSet<>();
         productsEntityHashSet.add(productsEntity);
         newProductCategoryEntity.setProductsEntitySet(productsEntityHashSet);
-        ProductsEntity saveProducts = productsRepository.save(productsEntity);
         productCategoryRepository.save(newProductCategoryEntity);
-        ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(saveProducts);
-        productsDTO1.setProductCategoryDTO(productsDTO.getProductCategoryDTO());
+        ProductsEntity save = productsRepository.save(productsEntity);
+
+
 //        productCache.saveProductsInCache(productsDTO1);
-        return EntityDtoMapper.mapProductsToDto(saveProducts);
+        ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(save);
+        return productsDTO1;
 //     else{
 //
 //

@@ -1,27 +1,33 @@
-//package PB.WebServiceProject.rest;
-//
-//import io.swagger.v3.oas.annotations.Operation;
-//import io.swagger.v3.oas.annotations.Parameter;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.*;
-//import task4.rest.dto.SmartphoneDTO;
-//import task4.services.OrderService;
-//
-//import java.util.List;
-//
-//@RestController
+package PB.WebServiceProject.rest;
 
-//public class OrdersController {
-//
-//    private final OrderService orderService;
-//
-//    public OrdersController(OrderService orderService) {
-//        this.orderService = orderService;
-//    }
-//
+import PB.WebServiceProject.rest.dto.OrdersDTO;
+import PB.WebServiceProject.services.OrdersService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+
+@RestController
+@RequiredArgsConstructor
+public class OrdersController {
+
+    private OrdersService ordersService;
+
+
+
+    @PostMapping("/orders")
+    public OrdersDTO addOrders(@RequestBody OrdersDTO ordersDTO){
+        return ordersService.addOrdersToUser(ordersDTO);
+    }
+
+
+
+
 //    @Operation(description = "Get orders by client id")
 //    @GetMapping("/orders/{clientId}")
-//    public List<SmartphoneDTO> getOrderedSmartphones(@Parameter(description = "clientId")
+//    public List<SmartphoneDTO> getOrderedProducts(@Parameter(description = "clientId")
 //                                                        @PathVariable(name = "clientId") Long clientId) {
 //        return orderService.findOrderedSmartphones(clientId);
 //    }
@@ -42,4 +48,4 @@
 //        orderService.deleteSmartphoneFromOrderList(clientId, smartphoneId);
 //        return ResponseEntity.ok().build();
 //    }
-//}
+}

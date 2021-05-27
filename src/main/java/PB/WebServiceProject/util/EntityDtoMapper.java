@@ -43,7 +43,7 @@ public class EntityDtoMapper {
     public static ProductsDTO mapProductsToDto(ProductsEntity productsEntity) {
         ProductsDTO productsDTO = new ProductsDTO();
         BeanUtils.copyProperties(productsEntity, productsDTO);
-        if(productsEntity.getProductCategoryEntity()!=null){
+        if (productsEntity.getProductCategoryEntity() != null) {
             productsDTO.setProductCategoryDTO(EntityDtoMapper.mapProdCatToDto(productsEntity.getProductCategoryEntity()));
         }
         return productsDTO;
@@ -55,7 +55,8 @@ public class EntityDtoMapper {
         BeanUtils.copyProperties(productsDTO, productsEntity);
         return productsEntity;
     }
-        public static ProductCategoryDTO mapProdCatToDto(ProductCategoryEntity productCategoryEntity) {
+
+    public static ProductCategoryDTO mapProdCatToDto(ProductCategoryEntity productCategoryEntity) {
         ProductCategoryDTO productCategoryDTO = new ProductCategoryDTO();
         BeanUtils.copyProperties(productCategoryEntity, productCategoryDTO);
 //        if(productCategoryEntity.getProductsEntitySet() !=null){
@@ -65,48 +66,36 @@ public class EntityDtoMapper {
 //        }
         return productCategoryDTO;
     }
+
     public static ProductCategoryEntity mapProdCatToEntity(ProductCategoryDTO productCategoryDTO) {
         ProductCategoryEntity productCategoryEntity = new ProductCategoryEntity();
         BeanUtils.copyProperties(productCategoryDTO, productCategoryEntity);
         return productCategoryEntity;
     }
 
-//
-//    public static OrdersDTO mapToDto(OrdersEntity ordersEntity) {
-//        OrdersDTO ordersDTO = new OrdersDTO();
-//        BeanUtils.copyProperties(ordersEntity, ordersDTO);
-//        return ordersDTO;
-//    }
-//
-//    public static OrdersEntity mapToEntity(OrdersDTO ordersDTO) {
-//        OrdersEntity ordersEntity = new OrdersEntity();
-//        BeanUtils.copyProperties(ordersDTO, ordersEntity);
-//        return ordersEntity;
-//    }
-//
-//    public static OrderDetailsDTO mapToDto(OrderDetailsEntity orderDetailsEntity) {
-//        OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
-//        BeanUtils.copyProperties(orderDetailsEntity, orderDetailsDTO);
-//        return orderDetailsDTO;
-//    }
-//
-//    public static OrderDetailsEntity mapToEntity(OrderDetailsDTO orderDetailsDTO) {
-//        OrderDetailsEntity orderDetailsEntity = new OrderDetailsEntity();
-//        BeanUtils.copyProperties(orderDetailsDTO, orderDetailsEntity);
-//        return orderDetailsEntity;
-//    }
-//
-//    public static ProductCategoryDTO mapToDto(ProductCategoryEntity productCategoryEntity) {
-//        ProductCategoryDTO productCategoryDTO = new ProductCategoryDTO();
-//        BeanUtils.copyProperties(productCategoryEntity, productCategoryDTO);
-//        return productCategoryDTO;
-//    }
-//    public static ProductCategoryEntity mapToEntity(ProductCategoryDTO productCategoryDTO) {
-//        ProductCategoryEntity productCategoryEntity = new ProductCategoryEntity();
-//        BeanUtils.copyProperties(productCategoryDTO, productCategoryEntity);
-//        return productCategoryEntity;
-//    }
+    public static OrdersDTO mapOrdersToDto(OrdersEntity ordersEntity) {
+        OrdersDTO ordersDTO = new OrdersDTO();
+        BeanUtils.copyProperties(ordersEntity, ordersDTO);
+        if(ordersEntity.getOrderDetailsEntitySet() != null){
+            ordersDTO.setOrderDetailsEntitySet(mapOrderDetailsToDto(ordersEntity.getOrderDetailsEntitySet().stream()
+                    .map(EntityDtoMapper::mapOrderDetailsToDto)
+                    .collect(Collectors.toSet());
+        }
+        return ordersDTO;
 
+
+    }
+    public static OrdersEntity mapOrdersToEntity(OrdersDTO ordersDTO){
+        OrdersEntity ordersEntity = new OrdersEntity();
+        BeanUtils.copyProperties(ordersDTO, ordersEntity);
+        return ordersEntity;
+    }
+
+    public static OrderDetailsDTO mapOrderDetailsToDto(OrderDetailsEntity orderDetailsEntity){
+        OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
+        BeanUtils.copyProperties(orderDetailsEntity, orderDetailsDTO);
+        return orderDetailsDTO;
+    }
 }
 
 

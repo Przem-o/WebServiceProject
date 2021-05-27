@@ -4,9 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -27,6 +27,17 @@ public class ProductsEntity {
     @JoinColumn(name = "productcategory_id")
     private ProductCategoryEntity productCategoryEntity;
 
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -39,4 +50,4 @@ public class ProductsEntity {
 
 //    @OneToMany(mappedBy = "productsEntity")
 //    private Set<OrderDetailsEntity> orderDetailsEntitySet;An niemiał
-}
+

@@ -6,12 +6,12 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Data
-@Builder
+@Getter
+@Setter
+//@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class AddressDTO {
 
     @Schema(description = "client city", example = "Gdansk",required = true)

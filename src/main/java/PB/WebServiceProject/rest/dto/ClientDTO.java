@@ -7,12 +7,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-@Data
-@Builder
+@Getter
+@Setter
+//@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class ClientDTO {
 
 

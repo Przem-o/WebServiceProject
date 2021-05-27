@@ -5,11 +5,10 @@ import lombok.*;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
-@Data
-@Builder
-@ToString
+@Getter
+@Setter
+//@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductsDTO {
@@ -21,7 +20,6 @@ public class ProductsDTO {
     @Schema(description = "product price, value cant be negative", example = "999.99", required = true)
     @Min(value = 0, message = "min 0")
     private Double price;
-
     private ProductCategoryDTO productCategoryDTO;
 
 }

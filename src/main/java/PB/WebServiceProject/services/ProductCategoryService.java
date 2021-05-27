@@ -55,7 +55,7 @@ public class ProductCategoryService {
         if (byId.isPresent()) {
             ProductCategoryEntity productCategoryEntity = byId.get();
             productCategoryEntity.setId(productCategoryDTO.getId());
-            productCategoryEntity.setProductcategory(productCategoryDTO.getProductCategory());
+            productCategoryEntity.setProductcategory(productCategoryDTO.getProductcategory());
             ProductCategoryEntity save = productCategoryRepository.save(productCategoryEntity);
             return EntityDtoMapper.mapProdCatToDto(save);
         } else {

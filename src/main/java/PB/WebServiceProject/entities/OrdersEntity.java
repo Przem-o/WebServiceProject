@@ -7,9 +7,10 @@ import javax.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
-@Data
-@Builder
-@ToString
+@Getter
+@Setter
+//@Builder
+//@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 
