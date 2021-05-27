@@ -20,7 +20,7 @@ public class ClientDTO {
     private Long id;
     @Schema(description = "client name", example = "Jaro", required = true)
     @NotBlank(message = "name can't be blank")
-    @NotNull(message = "name can't be null")
+//    @NotNull(message = "name can't be null")
     private String name;
     @Schema(description = "client address", required = true)
 //    @NotNull(message = "client address can't be null")

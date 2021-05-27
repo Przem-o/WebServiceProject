@@ -20,7 +20,6 @@ public class ProductCategoryDTO {
     private Long id;
     @Schema(description = "product category", example = "Smartphone", required = true)
     @NotBlank(message = "product category can't be blank")
-    @NotNull(message = "product category can't be null")
     private String productCategory;
 
 }
