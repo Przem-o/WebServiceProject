@@ -2,8 +2,7 @@ package PB.WebServiceProject.rest;
 
 import PB.WebServiceProject.rest.dto.OrdersDTO;
 import PB.WebServiceProject.services.OrdersService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

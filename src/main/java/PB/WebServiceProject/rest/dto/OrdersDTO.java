@@ -6,17 +6,16 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
-import java.time.OffsetDateTime;
+
 import java.util.Set;
 
 @Getter
 @Setter
-@ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class OrdersDTO {
 
     @Schema(description = "id of existing order", example = "1")
@@ -30,7 +29,7 @@ public class OrdersDTO {
     private Status status;
     private ClientDTO clientDTO;
     private Long clientId;
-    private Set<OrderDetailsEntity> orderDetailsEntitySet;
+    private Set<OrderDetailsDTO> orderDetailsEntitySet;
 
 
 }

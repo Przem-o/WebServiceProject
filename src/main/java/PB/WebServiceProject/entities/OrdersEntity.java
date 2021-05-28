@@ -9,8 +9,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-//@Builder
-//@ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -22,7 +21,7 @@ public class OrdersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "date")
-    private OffsetDateTime date;
+    private String date;
     @Column(name = "price")
     private Double price;
     @Column(name = "status")

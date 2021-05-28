@@ -2,15 +2,13 @@ package PB.WebServiceProject.rest.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+
 import java.util.Set;
 
 @Getter
 @Setter
-//@Builder
-@ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientDTO {
@@ -26,10 +24,6 @@ public class ClientDTO {
 //    @NotNull(message = "client address can't be null")
 //    @NotBlank(message = "client address can't be blank") nie może być tych adnotacji przy polach dot.obiektów
     private AddressDTO address;
-
-
-//    @Schema(description = "client orders", example = "Jaro", required = true)
-//    @NotNull(message = "client orders can't be null")
 //    private Set<OrdersDTO> ordersDTOSet;
 
 }

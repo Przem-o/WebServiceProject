@@ -26,7 +26,6 @@ public class OrdersService {
     private final OrdersDetailsRepository ordersDetailsRepository;
     private final OrdersRepository ordersRepository;
 
-
     public List<ProductsDTO> findOrderedProducts(){
         List<ProductsEntity> allProducts = productsRepository.findAll();
         if(allProducts.isEmpty()) {
@@ -39,13 +38,13 @@ public class OrdersService {
 
     }
 
-
     public OrdersDTO addOrdersToUser(OrdersDTO ordersDTO){
         OrderDetailsEntity orderDetailsEntity = ordersDetailsRepository.findById(ordersDTO.getClientDTO().getId()).get();
         ClientEntity clientEntity = clientRepository.findById(ordersDTO.getClientId()).get();
         OrdersEntity ordersEntity = EntityDtoMapper.mapOrdersToEntity(ordersDTO);
         ordersEntity.setId(ordersDTO.getId());
-        ordersEntity.setDate(OffsetDateTime.parse(ordersDTO.getDate()));
+//        ordersEntity.setDate(OffsetDateTime.parse(ordersDTO.getDate()));
+        ordersEntity.setDate(ordersDTO.getDate());
         ordersEntity.setPrice(ordersDTO.getPrice());
         ordersEntity.setStatus(ordersDTO.getStatus());
         ordersEntity.setClientEntity(clientEntity);
@@ -66,7 +65,6 @@ public class OrdersService {
 //        }
 //        clientEntity.get().get
 //    }
-
 
 
 }

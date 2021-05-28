@@ -8,8 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-//@Builder
-@ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddressDTO {

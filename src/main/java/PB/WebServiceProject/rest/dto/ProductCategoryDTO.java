@@ -5,12 +5,10 @@ import lombok.*;
 
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Getter
 @Setter
-//@Builder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductCategoryDTO {

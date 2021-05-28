@@ -6,8 +6,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-//@Builder
-@ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDetailsDTO {
@@ -17,7 +16,7 @@ public class OrderDetailsDTO {
 //    @Schema(description = "required products id", example = "1", required = true)
 //    private Set<ProductsDTO> productsDTOS;
 //    @Schema(description = "required orders id", example = "1", required = true)
-    private OrdersDTO ordersDTO;
+    private Long ordersId;
 
     @Schema(description = "quantity of product ordered", example = "1", required = true)
     @NotNull(message = "quantity ordered can't be null")
