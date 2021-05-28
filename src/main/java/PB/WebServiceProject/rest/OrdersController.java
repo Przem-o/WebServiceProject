@@ -1,50 +1,56 @@
 package PB.WebServiceProject.rest;
 
 import PB.WebServiceProject.rest.dto.OrdersDTO;
+import PB.WebServiceProject.rest.dto.ProductsDTO;
 import PB.WebServiceProject.services.OrdersService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.List;
 
-@RestController
 @RequiredArgsConstructor
+@RestController
 public class OrdersController {
 
-    private OrdersService ordersService;
+    private final OrdersService ordersService;
 
+    @Operation(description = "Get all orders")
+    @GetMapping("/orders")
+    public List<OrdersDTO> getOrders(@Parameter(description = "get orders by id")
+                                     @RequestParam(name = "id", required = false) Long id,
+                                     @Parameter(description = "get orders by minPrice", example = "1")
+                                     @RequestParam(name = "minPrice", required = false) Integer minPrice,
+                                     @Parameter(description = "get orders by maxPrice", example = "10000")
+                                     @RequestParam(name = "maxPrice", required = false) Integer maxPrice) {
+        return ordersService.getOrders(id, minPrice, maxPrice);
 
+    }
 
-    @PostMapping("/orders")
-    public OrdersDTO addOrders(@RequestBody OrdersDTO ordersDTO){
-        return ordersService.addOrdersToUser(ordersDTO);
+    @PostMapping("/order")
+    public OrdersDTO addOrder(@Parameter(description = "add new order")
+                               @Valid @RequestBody OrdersDTO ordersDTO) {
+        return ordersService.addOrder(ordersDTO);
+    }
+
+    @Operation(description = "Get orders by client id")
+    @GetMapping("/orders/{clientId}")
+    public List<OrdersDTO> getClientOrders(@Parameter(description = "clientId")
+                                           @PathVariable(name = "clientId") Long clientId) {
+        return ordersService.findClientOrders(clientId);
+    }
+    @Operation(description = "Delete order by id")
+    @DeleteMapping("/order/{id}")
+    public ResponseEntity deleteOrder(@Parameter(description = "delete order by id")
+                                       @PathVariable(name = "id") Long id) {
+        ordersService.deleteOrder(id);
+        return ResponseEntity.ok().build();
     }
 
 
-
-
-//    @Operation(description = "Get orders by client id")
-//    @GetMapping("/orders/{clientId}")
-//    public List<SmartphoneDTO> getOrderedProducts(@Parameter(description = "clientId")
-//                                                        @PathVariable(name = "clientId") Long clientId) {
-//        return orderService.findOrderedSmartphones(clientId);
-//    }
-//    @Operation(description = "Add smartphone to orders by client id and smartphone id")
-//    @PostMapping("/orders/{clientId}/{smartphoneId}")
-//    public List<SmartphoneDTO> addSmartphoneToOrderList(@Parameter(description = "Id of client that orders smartphone")
-//                                                        @PathVariable(name = "clientId") Long clientId,
-//                                                        @Parameter(description = "Id of smartphone that orders client")
-//                                                   @PathVariable(name = "smartphoneId") Long smartphoneId){
-//        return orderService.addSmartphoneToOrderList(clientId, smartphoneId);
-//    }
-//    @Operation(description = "Delete smartphone from orders by client id and smartphone id")
-//    @DeleteMapping("/orders/{clientId}/{smartphoneId}")
-//    public ResponseEntity deleteSmartphoneFromOrderList(@Parameter(description = "Id of client")
-//                                                        @PathVariable(name = "clientId") Long clientId,
-//                                                        @Parameter(description = "Id of smartphone")
-//                                                        @PathVariable(name = "smartphoneId") Long smartphoneId){
-//        orderService.deleteSmartphoneFromOrderList(clientId, smartphoneId);
-//        return ResponseEntity.ok().build();
-//    }
 }
+

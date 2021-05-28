@@ -1,19 +1,14 @@
 package PB.WebServiceProject.services;
 import PB.WebServiceProject.entities.ProductCategoryEntity;
-
 import PB.WebServiceProject.repository.ProductCategoryRepository;
-import PB.WebServiceProject.repository.ProductsRepository;
 import PB.WebServiceProject.repository.cache.ProductCache;
 import PB.WebServiceProject.rest.dto.ProductCategoryDTO;
 
-import PB.WebServiceProject.rest.dto.ProductsDTO;
 import PB.WebServiceProject.util.EntityDtoMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,7 +50,7 @@ public class ProductCategoryService {
         if (byId.isPresent()) {
             ProductCategoryEntity productCategoryEntity = byId.get();
             productCategoryEntity.setId(productCategoryDTO.getId());
-            productCategoryEntity.setProductcategory(productCategoryDTO.getProductcategory());
+            productCategoryEntity.setProductCategory(productCategoryDTO.getProductCategory());
             ProductCategoryEntity save = productCategoryRepository.save(productCategoryEntity);
             return EntityDtoMapper.mapProdCatToDto(save);
         } else {
@@ -69,7 +64,7 @@ public class ProductCategoryService {
         if (StringUtils.isBlank(name)) {
             return productCategoryRepository.findAll();
         } else {
-            return productCategoryRepository.findByproductcategory(name);
+            return productCategoryRepository.findByproductCategory(name);
         }
     }
 }

@@ -13,9 +13,7 @@ public class OrderDetailsDTO {
 
     @Schema(description = "id of existing orderDetail", example = "1")
     private Long id;
-//    @Schema(description = "required products id", example = "1", required = true)
-//    private Set<ProductsDTO> productsDTOS;
-//    @Schema(description = "required orders id", example = "1", required = true)
+
     private Long ordersId;
 
     @Schema(description = "quantity of product ordered", example = "1", required = true)

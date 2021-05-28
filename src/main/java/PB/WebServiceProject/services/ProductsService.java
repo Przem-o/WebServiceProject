@@ -127,21 +127,10 @@ public class ProductsService {
         newProductCategoryEntity.setProductsEntitySet(productsEntityHashSet);
         productCategoryRepository.save(newProductCategoryEntity);
         ProductsEntity save = productsRepository.save(productsEntity);
-
-
 //        productCache.saveProductsInCache(productsDTO1);
         ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(save);
         return productsDTO1;
-//     else{
-//
-//
-//            ProductsEntity productsEntity1 = EntityDtoMapper.mapProductsToEntity(productsDTO);
-//            productsEntity1.setProductCategoryEntity(EntityDtoMapper.mapProdCatToEntity(productsDTO.getProductCategoryDTO()));
-//            ProductsEntity save = productsRepository.save(productsEntity1);
-//            ProductsDTO productsDTO2 = EntityDtoMapper.mapProductsToDto(save);
-//            //    productCache.saveProductsResponseInCache(productsDTO2);
-//            return productsDTO1;
-//        }
+
 
     }
 }

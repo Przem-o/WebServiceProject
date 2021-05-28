@@ -21,10 +21,9 @@ public class ProductsEntity {
     private String name;
     @Column(name = "price")
     private Double price;
-    //    @Column(name = "productCategory_id")
-//    private Long productCategoryId;
+
     @ManyToOne
-    @JoinColumn(name = "productcategory_id")
+    @JoinColumn(name = "productCategory_id")
     private ProductCategoryEntity productCategoryEntity;
 
 }

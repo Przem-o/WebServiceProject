@@ -76,14 +76,16 @@ public class EntityDtoMapper {
     public static OrdersDTO mapOrdersToDto(OrdersEntity ordersEntity) {
         OrdersDTO ordersDTO = new OrdersDTO();
         BeanUtils.copyProperties(ordersEntity, ordersDTO);
-//        if(ordersEntity.getClientEntity() != null){
-//
-//            ordersDTO.setOrderDetailsEntitySet(ordersEntity.getOrderDetailsEntitySet().stream()
-//                    .map(EntityDtoMapper::mapOrderDetailsToDto)
-//                    .collect(Collectors.toSet()));
-//        }
+//        ordersDTO.setId(ordersDTO.getId());
+//        ordersDTO.setDate(ordersDTO.getDate());
+//        ordersDTO.setPrice(ordersDTO.getPrice());
+//        ordersDTO.setStatus(ordersDTO.getStatus());
+        if(ordersEntity.getClientEntity() != null){
+            ordersDTO.setOrderDetailsEntitySet(ordersEntity.getOrderDetailsEntitySet().stream()
+                    .map(EntityDtoMapper::mapOrderDetailsToDto)
+                    .collect(Collectors.toSet()));
+        }
         return ordersDTO;
-
 
     }
     public static OrdersEntity mapOrdersToEntity(OrdersDTO ordersDTO){

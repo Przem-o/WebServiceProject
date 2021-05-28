@@ -27,7 +27,7 @@ public class OrdersDTO {
     private Double price;
     @Enumerated(EnumType.STRING)
     private Status status;
-    private ClientDTO clientDTO;
+    private ClientDTO clientEntity;
     private Long clientId;
     private Set<OrderDetailsDTO> orderDetailsEntitySet;
 
