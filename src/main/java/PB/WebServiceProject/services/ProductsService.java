@@ -37,7 +37,7 @@ public class ProductsService {
 //        }
         ProductsEntity productsEntity = productsRepository.findById(id).get();
         ProductsDTO productsDTO = EntityDtoMapper.mapProductsToDto(productsEntity);
-//         productCache.saveProductsResponseInCache(productsDTO);
+         productCache.saveProductsResponseInCache(productsDTO);
         return Optional.of(productsDTO);
     }
 
@@ -81,7 +81,7 @@ public class ProductsService {
 
     public void deleteProducts(Long id) {
         productsRepository.deleteById(id);
-        // productCache.deleteProductsResponseFromCache(id);
+         productCache.deleteProductsResponseFromCache(id);
     }
 
     public ProductsDTO editProducts(Long id, ProductsDTO productsDTO) {
@@ -119,16 +119,15 @@ public class ProductsService {
             if (productById.isPresent()) {
                 newProductCategoryEntity = productById.get();
             }
-        }//jeśli istnieje to nadpisujemy nowy newProductCategoryEntity znalezionym
+        }
         productsEntity.setProductCategoryEntity(newProductCategoryEntity);
-        //newProductCategoryEntity.getProductsEntitySet().add(productsEntity);
         Set<ProductsEntity> productsEntityHashSet = new HashSet<>();
         productsEntityHashSet.add(productsEntity);
         newProductCategoryEntity.setProductsEntitySet(productsEntityHashSet);
         productCategoryRepository.save(newProductCategoryEntity);
         ProductsEntity save = productsRepository.save(productsEntity);
-//        productCache.saveProductsInCache(productsDTO1);
         ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(save);
+        productCache.saveProductsResponseInCache(productsDTO1);
         return productsDTO1;
 
     }
