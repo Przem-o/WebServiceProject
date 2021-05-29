@@ -50,7 +50,7 @@ public class ProductCategoryService {
         if (byId.isPresent()) {
             ProductCategoryEntity productCategoryEntity = byId.get();
             productCategoryEntity.setId(productCategoryDTO.getId());
-            productCategoryEntity.setProductCategory(productCategoryDTO.getProductCategory());
+            productCategoryEntity.setProductcategory(productCategoryDTO.getProductcategory());
             ProductCategoryEntity save = productCategoryRepository.save(productCategoryEntity);
             return EntityDtoMapper.mapProdCatToDto(save);
         } else {
@@ -64,7 +64,7 @@ public class ProductCategoryService {
         if (StringUtils.isBlank(name)) {
             return productCategoryRepository.findAll();
         } else {
-            return productCategoryRepository.findByproductCategory(name);
+            return productCategoryRepository.findByproductcategory(name);
         }
     }
 }

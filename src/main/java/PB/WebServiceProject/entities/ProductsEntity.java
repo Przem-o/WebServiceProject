@@ -23,7 +23,7 @@ public class ProductsEntity {
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name = "productCategory_id")
+    @JoinColumn(name = "productcategory_id")
     private ProductCategoryEntity productCategoryEntity;
 
 }

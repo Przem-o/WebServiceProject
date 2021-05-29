@@ -18,8 +18,8 @@ public class ProductCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "productCategory")
-    private String productCategory;
+    @Column(name = "productcategory")
+    private String productcategory;
 
     @OneToMany(mappedBy = "productCategoryEntity")
     private Set<ProductsEntity> productsEntitySet;
