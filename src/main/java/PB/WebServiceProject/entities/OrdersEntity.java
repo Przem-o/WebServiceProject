@@ -20,8 +20,8 @@ public class OrdersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "date")
-    private String date;
+    @Column(name = "orderDate")
+    private String orderDate;
     @Column(name = "price")
     private Double price;
     @Column(name = "status")

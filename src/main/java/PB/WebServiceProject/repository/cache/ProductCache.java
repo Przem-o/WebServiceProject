@@ -1,6 +1,6 @@
 package PB.WebServiceProject.repository.cache;
 
-import PB.WebServiceProject.cacheConfig.CacheConfig;
+import PB.WebServiceProject.config.CacheConfig;
 import PB.WebServiceProject.rest.dto.ProductsDTO;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;

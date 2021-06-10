@@ -20,7 +20,7 @@ public class OrdersDTO {
 
     @Schema(description = "id of existing order", example = "1")
     private Long id;
-    private String date;
+    private String orderDate;
     @Schema(description = "order price", required = true)
     @NotNull
     @Min(0)
@@ -30,6 +30,5 @@ public class OrdersDTO {
     private ClientDTO clientEntity;
     private Long clientId;
     private Set<OrderDetailsDTO> orderDetailsEntitySet;
-
 
 }

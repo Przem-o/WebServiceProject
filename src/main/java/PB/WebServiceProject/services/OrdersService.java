@@ -65,7 +65,7 @@ public class OrdersService {
         OrdersEntity ordersEntity = EntityDtoMapper.mapOrdersToEntity(ordersDTO);
         ordersEntity.setId(ordersDTO.getId());
 //        ordersEntity.setDate(OffsetDateTime.parse(ordersDTO.getDate()));
-        ordersEntity.setDate(ordersDTO.getDate());
+        ordersEntity.setOrderDate(ordersDTO.getOrderDate());
         ordersEntity.setPrice(ordersDTO.getPrice());
         ordersEntity.setStatus(ordersDTO.getStatus());
         ordersEntity.setClientEntity(clientEntity);
