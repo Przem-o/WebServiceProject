@@ -66,14 +66,14 @@
             <column name="price" type="decimal(10,2)">
                 <constraints nullable="false" />
             </column>
-            <column name="productcategory_id" type="bigint"/>
+            <column name="productCategory_id" type="bigint"/>
         </createTable>
 
-        <createTable tableName="productcategory">
+        <createTable tableName="productCategory">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="productcategory" type="varchar(255)">
+            <column name="category" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
         </createTable>

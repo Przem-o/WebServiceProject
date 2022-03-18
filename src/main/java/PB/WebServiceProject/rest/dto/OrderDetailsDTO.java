@@ -13,7 +13,7 @@ public class OrderDetailsDTO {
 
     @Schema(description = "id of existing orderDetail", example = "1")
     private Long id;
-
+    private Long productsId;//*
     private Long ordersId;
 
     @Schema(description = "quantity of product ordered", example = "1", required = true)

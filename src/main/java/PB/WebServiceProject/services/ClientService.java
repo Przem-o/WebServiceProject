@@ -22,46 +22,14 @@ public class ClientService {
 
     private final ClientRepository clientRepository;
     private final AddressRepository addressRepository;
-     private final ClientCache clientCache;
-
-
-    public Optional<ClientDTO> getClientById(Long id) {
-//        Optional<ClientDTO> client = clientCache.getClientResponse(id);
-//        if (client.isPresent()) {
-//            return Optional.of(client.get());
-//        }
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException interruptedException) {
-//        }
-        ClientEntity clientEntity = clientRepository.findById(id).get();
-        ClientDTO clientDTO = EntityDtoMapper.mapClientToDto(clientEntity);
-        // clientCache.saveClientResponseInCache(clientDTO);
-        return Optional.of(clientDTO);
-    }
-
-    public List<ClientDTO> findClients(String name) {
-        return findClientsByName(name).stream()
-                .map(EntityDtoMapper::mapClientToDto)// zamienia jednego lub wszystkich clientEntity na clientDTO
-                .collect(Collectors.toList());
-    }
-
-    private List<ClientEntity> findClientsByName(String name) { //metoda pomocnicza do w/w
-        if (StringUtils.isBlank(name)) {
-            List<ClientEntity> allClients = clientRepository.findAll();
-            return allClients;
-        } else {
-            List<ClientEntity> clientByName = clientRepository.findByName(name);
-            return clientByName;
-        }
-    }
+    private final ClientCache clientCache;
 
     public ClientDTO addClient(ClientDTO clientDTO) {
-        ClientEntity clientEntity = EntityDtoMapper.mapClientToEntity(clientDTO);// wrzuca clientaDTO do metody entity i zapisuje jako Entity
-        AddressEntity addressEntity = EntityDtoMapper.mapAddressToEntity(clientDTO.getAddress()); // wrzuca adresDTO clienta do entity i zapisuje jako Entity
-        clientEntity.setAddressEntity(addressEntity);// ustawia dla clientaEntity adresEntity
-        addressEntity.setClientEntity(clientEntity);// ustawia dla adresuEntity clientaEntity
-        ClientEntity saveClient = clientRepository.save(clientEntity);// zapisanie w/w clientaEntity z adresem do bazy danych i przypisanie do zmiennej
+        ClientEntity clientEntity = EntityDtoMapper.mapClientToEntity(clientDTO);
+        AddressEntity addressEntity = EntityDtoMapper.mapAddressToEntity(clientDTO.getAddressDTO());
+        clientEntity.setAddressEntity(addressEntity);
+        addressEntity.setClientEntity(clientEntity);
+        ClientEntity saveClient = clientRepository.save(clientEntity);
         // ClientDTO clientDTO1 = EntityDtoMapper.mapClientToDto(saveClient);//zamiana mapowanie clientEntity na clientDto w celu zapisu w cachu i przypisanie do zmiennej
         // clientCache.saveClientResponseInCache(clientDTO1);// zapisanie w/w clientaDto do cacha, w cachu zapisujemy to co trafiło do bazy danych
         return EntityDtoMapper.mapClientToDto(saveClient);// zwraca ClientDTO i leci do -> ClientController
@@ -79,9 +47,9 @@ public class ClientService {
             clientEntity.setId(clientDTO.getId());
             clientEntity.setName(clientDTO.getName());
             AddressEntity addressEntity = clientEntity.getAddressEntity();
-            if(addressEntity !=null){
-                addressEntity.setCity(clientDTO.getAddress().getCity());
-                addressEntity.setCountry(clientDTO.getAddress().getCountry());
+            if (addressEntity != null) {
+                addressEntity.setCity(clientDTO.getAddressDTO().getCity());
+                addressEntity.setCountry(clientDTO.getAddressDTO().getCountry());
             }
             ClientEntity saveClient = clientRepository.save(clientEntity);
 //            AddressEntity saveAddress = addressRepository.save(clientEntity.getAddressEntity());
@@ -90,10 +58,44 @@ public class ClientService {
             return EntityDtoMapper.mapClientToDto(saveClient);
         } else {
             ClientEntity clientEntity1 = EntityDtoMapper.mapClientToEntity(clientDTO);
-            clientEntity1.setAddressEntity(EntityDtoMapper.mapAddressToEntity(clientDTO.getAddress()));
-            return EntityDtoMapper.mapClientToDto(clientEntity1);
+            clientEntity1.setAddressEntity(EntityDtoMapper.mapAddressToEntity(clientDTO.getAddressDTO()));
+            ClientDTO clientDTO1 = EntityDtoMapper.mapClientToDto(clientEntity1);
+            return clientDTO1;
         }
-
     }
-}
+
+        public Optional<ClientDTO> getClientById (Long id){
+//        Optional<ClientDTO> client = clientCache.getClientResponse(id);
+//        if (client.isPresent()) {
+//            return Optional.of(client.get());
+//        }
+//        try {
+//            Thread.sleep(5000); // symulacja oczekiwania 50 sekund na odpowedz żeby zobaczyc czy cache działa
+//        } catch (InterruptedException interruptedException) {
+//        }
+            ClientEntity clientEntity = clientRepository.findById(id).get();
+            ClientDTO clientDTO = EntityDtoMapper.mapClientToDto(clientEntity);
+            // clientCache.saveClientResponseInCache(clientDTO);
+            return Optional.of(clientDTO);
+        }
+    }
+
+
+//        private List<ClientEntity> findClient (String name){ //metoda pomocnicza do findClientsByName
+//            if (StringUtils.isBlank(name)) {
+//                List<ClientEntity> allClients = clientRepository.findAll();
+//                return allClients;
+//            } else {
+//                List<ClientEntity> clientByName = clientRepository.findByName(name);
+//                return clientByName;
+//            }
+//        }
+
+//
+//    public List<ClientDTO> findClientsByName(String name) {
+//        return findClient(name).stream()
+//                .map(EntityDtoMapper::mapClientToDto)// zamienia jednego lub wszystkich clientEntity na clientDTO
+//                .collect(Collectors.toList());
+//    }
+
 

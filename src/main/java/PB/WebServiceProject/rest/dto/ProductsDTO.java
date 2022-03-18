@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,5 +22,6 @@ public class ProductsDTO {
     @Min(value = 0, message = "min 0")
     private Double price;
     private ProductCategoryDTO productCategoryDTO;
+//    private Set<OrderDetailsDTO> orderDetailsDTOSet;
 
 }

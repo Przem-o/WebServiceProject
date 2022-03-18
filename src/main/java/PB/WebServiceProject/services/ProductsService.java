@@ -26,37 +26,6 @@ public class ProductsService {
     private final ProductCache productCache;
 
 
-    public Optional<ProductsDTO> findProductsById(Long id) {
-//        Optional<ProductsDTO> product = productCache.getProductResponse(id);
-//        if (product.isPresent()) {
-//            return Optional.of(product.get());
-//        }
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException interruptedException) {
-//        }
-        ProductsEntity productsEntity = productsRepository.findById(id).get();
-        ProductsDTO productsDTO = EntityDtoMapper.mapProductsToDto(productsEntity);
-         productCache.saveProductsResponseInCache(productsDTO);
-        return Optional.of(productsDTO);
-    }
-
-    public List<ProductsDTO> findProductsByName(String name) {
-        return findByName(name).stream()
-                .map(EntityDtoMapper::mapProductsToDto)
-                .collect(Collectors.toList());
-    }
-
-    private List<ProductsEntity> findByName(String name) {
-        if (StringUtils.isBlank(name)) {
-            List<ProductsEntity> allProducts = productsRepository.findAll();
-            return allProducts;
-        } else {
-            List<ProductsEntity> byNameProducts = productsRepository.findByName(name);
-            return byNameProducts;
-        }
-    }
-
     public ProductsDTO addProducts(ProductsDTO productsDTO) {
         ProductsEntity productsEntity = EntityDtoMapper.mapProductsToEntity(productsDTO);
 //        ProductCategoryEntity productCategoryEntity = new ProductCategoryEntity();
@@ -131,6 +100,36 @@ public class ProductsService {
         return productsDTO1;
 
     }
+//    public Optional<ProductsDTO> findProductsById(Long id) {
+////        Optional<ProductsDTO> product = productCache.getProductResponse(id);
+////        if (product.isPresent()) {
+////            return Optional.of(product.get());
+////        }
+////        try {
+////            Thread.sleep(5000);
+////        } catch (InterruptedException interruptedException) {
+////        }
+//        ProductsEntity productsEntity = productsRepository.findById(id).get();
+//        ProductsDTO productsDTO = EntityDtoMapper.mapProductsToDto(productsEntity);
+//        productCache.saveProductsResponseInCache(productsDTO);
+//        return Optional.of(productsDTO);
+//    }
+//
+//    public List<ProductsDTO> findProductsByName(String name) {
+//        return findByName(name).stream()
+//                .map(EntityDtoMapper::mapProductsToDto)
+//                .collect(Collectors.toList());
+//    }
+//
+//    private List<ProductsEntity> findByName(String name) {
+//        if (StringUtils.isBlank(name)) {
+//            List<ProductsEntity> allProducts = productsRepository.findAll();
+//            return allProducts;
+//        } else {
+//            List<ProductsEntity> byNameProducts = productsRepository.findByName(name);
+//            return byNameProducts;
+//        }
+//    }
 }
 
 

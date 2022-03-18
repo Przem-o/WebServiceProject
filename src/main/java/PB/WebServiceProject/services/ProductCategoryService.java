@@ -1,4 +1,5 @@
 package PB.WebServiceProject.services;
+
 import PB.WebServiceProject.entities.ProductCategoryEntity;
 import PB.WebServiceProject.repository.ProductCategoryRepository;
 import PB.WebServiceProject.repository.cache.ProductCache;
@@ -22,12 +23,6 @@ public class ProductCategoryService {
     private final ProductCache productCache;
 
 
-    public Optional<ProductCategoryDTO> findProductCategoryById(Long id) {
-        ProductCategoryEntity productCategoryEntity = productCategoryRepository.findById(id).get();
-        ProductCategoryDTO productCategoryDTO = EntityDtoMapper.mapProdCatToDto(productCategoryEntity);
-        return Optional.of(productCategoryDTO);
-    }
-
     public ProductCategoryDTO addCategory(ProductCategoryDTO productCategoryDTO) {
         ProductCategoryEntity productCategoryEntity = EntityDtoMapper.mapProdCatToEntity(productCategoryDTO);
         ProductCategoryEntity save = productCategoryRepository.save(productCategoryEntity);
@@ -35,13 +30,7 @@ public class ProductCategoryService {
         return productCategoryDTO1;
     }
 
-    public List<ProductCategoryDTO> findCategory(String name){
-        return findProductCategoryByName(name).stream()
-                .map(EntityDtoMapper::mapProdCatToDto)
-                .collect(Collectors.toList());
-    }
-
-    public void deleteCategory(Long id){
+    public void deleteCategory(Long id) {
         productCategoryRepository.deleteById(id);
     }
 
@@ -50,23 +39,28 @@ public class ProductCategoryService {
         if (byId.isPresent()) {
             ProductCategoryEntity productCategoryEntity = byId.get();
             productCategoryEntity.setId(productCategoryDTO.getId());
-            productCategoryEntity.setProductcategory(productCategoryDTO.getProductcategory());
+            productCategoryEntity.setProductCategory(productCategoryDTO.getCategory());
             ProductCategoryEntity save = productCategoryRepository.save(productCategoryEntity);
             return EntityDtoMapper.mapProdCatToDto(save);
         } else {
             ProductCategoryEntity productCategoryEntity = EntityDtoMapper.mapProdCatToEntity(productCategoryDTO);
             ProductCategoryEntity save = productCategoryRepository.save(productCategoryEntity);
             return EntityDtoMapper.mapProdCatToDto(save);
-       }
-    }
-
-    private List<ProductCategoryEntity> findProductCategoryByName(String name) {
-        if (StringUtils.isBlank(name)) {
-            return productCategoryRepository.findAll();
-        } else {
-            return productCategoryRepository.findByproductcategory(name);
         }
     }
+
+    //    private List<ProductCategoryEntity> findProductCategoryByName(String name) {
+//        if (StringUtils.isBlank(name)) {
+//            return productCategoryRepository.findAll();
+//        } else {
+//            return productCategoryRepository.findByProductCategory(name);
+//        }
+//    }
+//    public List<ProductCategoryDTO> findCategory(String name) {
+//        return findProductCategoryByName(name).stream()
+//                .map(EntityDtoMapper::mapProdCatToDto)
+//                .collect(Collectors.toList());
+//    }
 }
 
 

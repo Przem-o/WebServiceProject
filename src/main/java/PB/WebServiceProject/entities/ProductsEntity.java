@@ -3,6 +3,7 @@ package PB.WebServiceProject.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,8 +24,11 @@ public class ProductsEntity {
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name = "productcategory_id")
+    @JoinColumn(name = "productCategory_id")
     private ProductCategoryEntity productCategoryEntity;
+
+    @OneToMany(mappedBy = "productsEntity") //*
+    private Set<OrderDetailsEntity> orderDetailsEntitySet;
 
 }
 

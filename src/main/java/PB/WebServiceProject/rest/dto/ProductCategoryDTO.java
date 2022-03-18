@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,7 +18,8 @@ public class ProductCategoryDTO {
     private Long id;
     @Schema(description = "product category", example = "Smartphones", required = true)
     @NotBlank(message = "product category can't be blank")
-    private String productcategory;
+    private String category;
+    private Set<ProductsDTO> productsDTO; //*
 
 
 }

@@ -10,10 +10,10 @@ public class EntityDtoMapper {
 
     public static ClientDTO mapClientToDto(ClientEntity clientEntity) {
         ClientDTO clientDTO = new ClientDTO();
-//        ClientDTO clientDTO = ClientDTO.builder().build();
-        BeanUtils.copyProperties(clientEntity, clientDTO);
+//        ClientDTO clientDTO = ClientDTO.builder().build();// metoda spring data do tworzenia obiektów
+        BeanUtils.copyProperties(clientEntity, clientDTO);//metoda kopiuje tylko pola o tej samej nazwie i typie oprócz obiektów np Address
         if (clientEntity.getAddressEntity() != null) {
-            clientDTO.setAddress(EntityDtoMapper.mapAddressToDto(clientEntity.getAddressEntity()));
+            clientDTO.setAddressDTO(EntityDtoMapper.mapAddressToDto(clientEntity.getAddressEntity()));
         }
         return clientDTO;
     }
@@ -22,7 +22,7 @@ public class EntityDtoMapper {
         ClientEntity clientEntity = new ClientEntity();
 //        ClientEntity clientEntity = ClientEntity.builder().build();
         BeanUtils.copyProperties(clientDTO, clientEntity);
-        clientEntity.setAddressEntity(EntityDtoMapper.mapAddressToEntity(clientDTO.getAddress()));
+        clientEntity.setAddressEntity(EntityDtoMapper.mapAddressToEntity(clientDTO.getAddressDTO()));
         return clientEntity;
     }
 
@@ -53,17 +53,13 @@ public class EntityDtoMapper {
     public static ProductsEntity mapProductsToEntity(ProductsDTO productsDTO) {
         ProductsEntity productsEntity = new ProductsEntity();
         BeanUtils.copyProperties(productsDTO, productsEntity);
+        productsEntity.setProductCategoryEntity(EntityDtoMapper.mapProdCatToEntity(productsDTO.getProductCategoryDTO()));
         return productsEntity;
     }
 
     public static ProductCategoryDTO mapProdCatToDto(ProductCategoryEntity productCategoryEntity) {
         ProductCategoryDTO productCategoryDTO = new ProductCategoryDTO();
         BeanUtils.copyProperties(productCategoryEntity, productCategoryDTO);
-//        if(productCategoryEntity.getProductsEntitySet() !=null){
-//            productCategoryDTO.setProductsDTOSet(productCategoryEntity.getProductsEntitySet().stream()
-//                    .map(EntityDtoMapper::mapProductsToDto)
-//                    .collect(Collectors.toSet()));
-//        }
         return productCategoryDTO;
     }
 
@@ -98,6 +94,12 @@ public class EntityDtoMapper {
         OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
         BeanUtils.copyProperties(orderDetailsEntity, orderDetailsDTO);
         return orderDetailsDTO;
+    }
+
+    public static OrderDetailsEntity mapOrderDetailsToEntity(OrdersDTO ordersDTO){
+        OrderDetailsEntity orderDetailsEntity = new OrderDetailsEntity();
+        BeanUtils.copyProperties(ordersDTO, orderDetailsEntity);
+        return orderDetailsEntity;
     }
 }
 
