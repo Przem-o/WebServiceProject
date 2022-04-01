@@ -1,5 +1,7 @@
 package PB.WebServiceProject.rest;
 
+import PB.WebServiceProject.entities.AddressEntity;
+import PB.WebServiceProject.rest.dto.AddressDTO;
 import PB.WebServiceProject.rest.dto.ClientDTO;
 import PB.WebServiceProject.services.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,15 +43,27 @@ public class ClientController {
         return clientService.editClient(id, clientDTO);
     }
 
-    @Operation(description = "Get client by id")
-    @GetMapping("/client/{id}")
-    public ResponseEntity getClientById(@Parameter(description = "get client by id")
-                                        @PathVariable(name = "id") Long id) {
-        Optional<ClientDTO> getClientById = clientService.getClientById(id);
-        if (getClientById.isPresent()) {
-            return ResponseEntity.ok(getClientById.get());
-        }
-        return ResponseEntity.noContent().build();// http no content 204 // noContent().build() oznacza "brak zawarotści" że zrozummiał zapytanie ale nie ma takiego clienta
+//    @Operation(description = "Get client by id")
+//    @GetMapping("/client/{id}")
+//    public ResponseEntity getClientById(@Parameter(description = "get client by id")
+//                                        @PathVariable(name = "id") Long id) {
+//        Optional<ClientDTO> getClientById = clientService.getClientById(id);
+//        if (getClientById.isPresent()) {
+//            return ResponseEntity.ok(getClientById.get());
+//        }
+//        return ResponseEntity.noContent().build();// http no content 204 // noContent().build() oznacza "brak zawarotści" że zrozummiał zapytanie ale nie ma takiego clienta
+//    }
+
+    @Operation(description = "Get clients")
+    @GetMapping("/clients")
+    public List<ClientDTO> getClients(@Parameter(description = "get client by id")
+                                      @RequestParam(name = "id", required = false) Long id,
+                                      @Parameter(description = "get client by name")
+                                      @RequestParam(name = "name", required = false) String name,
+                                      @Parameter(description = "get client by address")
+                                      @RequestParam(name = "address", required = false) String address) {
+        return clientService.getClients(id, name, address);
+
     }
 }
 

@@ -2,9 +2,9 @@ package PB.WebServiceProject.rest.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 import java.util.Set;
 
 @Getter
@@ -22,8 +22,8 @@ public class ClientDTO {
     @NotNull(message = "name can't be null") //adnotacja mówi że nie można podać spacji i białych znaków
     private String name;
     @Schema(description = "client address", required = true)
-//    @NotNull(message = "client address can't be null")
-//    @NotBlank(message = "client address can't be blank") nie może być tych adnotacji przy polach dot.obiektów
+    @NotNull(message = "client address can't be null") // adnotacja dotyczy tylko obiektów i liczb
+//    @NotBlank(message = "client address can't be blank") nie może być tej adnotacji przy polach dot.obiektów - tylko String
     private AddressDTO addressDTO;
 //    private Set<OrdersDTO> ordersDTOSet;
 

@@ -5,6 +5,7 @@ import PB.WebServiceProject.entities.ClientEntity;
 import PB.WebServiceProject.repository.AddressRepository;
 import PB.WebServiceProject.repository.ClientRepository;
 import PB.WebServiceProject.repository.cache.ClientCache;
+import PB.WebServiceProject.rest.dto.AddressDTO;
 import PB.WebServiceProject.rest.dto.ClientDTO;
 
 import PB.WebServiceProject.util.EntityDtoMapper;
@@ -44,7 +45,7 @@ public class ClientService {
         Optional<ClientEntity> findClientById = clientRepository.findById(id);
         if (findClientById.isPresent()) {
             ClientEntity clientEntity = findClientById.get();
-            clientEntity.setId(clientDTO.getId());
+            clientEntity.setId(clientDTO.getId()); // clientowi w bazie danych ustawiam/edytuje id ktore podałem w www
             clientEntity.setName(clientDTO.getName());
             AddressEntity addressEntity = clientEntity.getAddressEntity();
             if (addressEntity != null) {
@@ -64,7 +65,7 @@ public class ClientService {
         }
     }
 
-        public Optional<ClientDTO> getClientById (Long id){
+    public Optional<ClientDTO> getClientById(Long id) {
 //        Optional<ClientDTO> client = clientCache.getClientResponse(id);
 //        if (client.isPresent()) {
 //            return Optional.of(client.get());
@@ -73,29 +74,20 @@ public class ClientService {
 //            Thread.sleep(5000); // symulacja oczekiwania 50 sekund na odpowedz żeby zobaczyc czy cache działa
 //        } catch (InterruptedException interruptedException) {
 //        }
-            ClientEntity clientEntity = clientRepository.findById(id).get();
-            ClientDTO clientDTO = EntityDtoMapper.mapClientToDto(clientEntity);
-            // clientCache.saveClientResponseInCache(clientDTO);
-            return Optional.of(clientDTO);
-        }
+        ClientEntity clientEntity = clientRepository.findById(id).get();
+        ClientDTO clientDTO = EntityDtoMapper.mapClientToDto(clientEntity);
+        // clientCache.saveClientResponseInCache(clientDTO);
+        return Optional.of(clientDTO);
     }
 
-
-//        private List<ClientEntity> findClient (String name){ //metoda pomocnicza do findClientsByName
-//            if (StringUtils.isBlank(name)) {
-//                List<ClientEntity> allClients = clientRepository.findAll();
-//                return allClients;
-//            } else {
-//                List<ClientEntity> clientByName = clientRepository.findByName(name);
-//                return clientByName;
-//            }
-//        }
-
-//
-//    public List<ClientDTO> findClientsByName(String name) {
-//        return findClient(name).stream()
-//                .map(EntityDtoMapper::mapClientToDto)// zamienia jednego lub wszystkich clientEntity na clientDTO
-//                .collect(Collectors.toList());
-//    }
+    public List<ClientDTO> getClients(Long id, String name, String address) {
+        return clientRepository.findAll().stream()
+                .filter(clientEntity -> id == null || clientEntity.getId().equals(id))
+                .filter(clientEntity -> name == null || clientEntity.getName().equalsIgnoreCase(name))
+                .filter(clientEntity -> address == null || clientEntity.getAddressEntity().getCity().equalsIgnoreCase(address))
+                .map(EntityDtoMapper::mapClientToDto)
+                .collect(Collectors.toList());
+    }
+}
 
 

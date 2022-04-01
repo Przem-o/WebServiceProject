@@ -1,9 +1,9 @@
 package PB.WebServiceProject.services;
 
 
-import PB.WebServiceProject.entities.ProductCategoryEntity;
+
 import PB.WebServiceProject.entities.ProductsEntity;
-import PB.WebServiceProject.repository.ProductCategoryRepository;
+
 import PB.WebServiceProject.repository.ProductsRepository;
 import PB.WebServiceProject.repository.cache.ProductCache;
 
@@ -22,8 +22,29 @@ import java.util.stream.Collectors;
 public class ProductsService {
 
     private final ProductsRepository productsRepository;
-    private final ProductCategoryRepository productCategoryRepository;
+ //   private final ProductCategoryRepository productCategoryRepository;
     private final ProductCache productCache;
+
+//    public ProductsDTO addProductsAndCategory(ProductsDTO productsDTO) { //nokia / RTV
+//        ProductsEntity productsEntity = EntityDtoMapper.mapProductsToEntity(productsDTO);
+//        ProductCategoryEntity productCategoryEntity = EntityDtoMapper.mapProdCatToEntity(productsDTO.getProductCategoryDTO());
+//        if (productsDTO.getProductCategoryDTO().getId() != null) { //jeśli wpisane w www id ProductCategory nie jest null
+//            Optional<ProductCategoryEntity> productCategoryById = productCategoryRepository.findById(productsDTO.getProductCategoryDTO().getId());//szukanie czy już taki productCategoryEntity istnieje w bazie
+//            if (productCategoryById.isPresent()) {
+//                productCategoryEntity = productCategoryById.get(); //jesli istnieje już w bazie taki productCategoryById to ten nowy wyżej stworzony w 30 lini productCategoryEntity nadpisz tym z bazy productCategoryById
+//            }
+//        } // konsultacje 10 cz1 46 min
+//        productsEntity.setProductCategoryEntity(productCategoryEntity); //jeśli productCategory podany w www jest null to ustaw produktowi kategorię podaną w DTO np.Smartphone
+//        Set<ProductsEntity> productsEntityHashSet = new HashSet<>();
+//        productsEntityHashSet.add(productsEntity);// do seta daję produkt nokia z kategorią Smartphone
+//        productCategoryEntity.setProductsEntitySet(productsEntityHashSet); // kategorii Smartphone ustawiam listę produktów
+//        productCategoryRepository.save(productCategoryEntity);
+//        ProductsEntity save = productsRepository.save(productsEntity);
+//        ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(save);
+//        // productCache.saveProductsResponseInCache(productsDTO1);
+//        return productsDTO1;
+//
+//    }
 
 
     public ProductsDTO addProducts(ProductsDTO productsDTO) {
@@ -50,13 +71,14 @@ public class ProductsService {
 
     public void deleteProducts(Long id) {
         productsRepository.deleteById(id);
-         productCache.deleteProductsResponseFromCache(id);
+//        productCache.deleteProductsResponseFromCache(id);
     }
 
     public ProductsDTO editProducts(Long id, ProductsDTO productsDTO) {
         Optional<ProductsEntity> productsById = productsRepository.findById(id);
         if (productsById.isPresent()) {
             ProductsEntity productsEntity = productsById.get();
+            productsEntity.setId(productsDTO.getId());
             productsEntity.setName(productsDTO.getName());
             productsEntity.setPrice(productsDTO.getPrice());
             ProductsEntity save = productsRepository.save(productsEntity);
@@ -73,33 +95,14 @@ public class ProductsService {
 
     public List<ProductsDTO> getProducts(String name, Integer minPrice, Integer maxPrice) {
         return productsRepository.findAll().stream()
-                .filter(productsEntity -> name == null || productsEntity.getName().equals(name))
+                .filter(productsEntity -> name == null || productsEntity.getName().equalsIgnoreCase(name))
                 .filter(productsEntity -> minPrice == null || productsEntity.getPrice() >= minPrice)
                 .filter(productsEntity -> maxPrice == null || productsEntity.getPrice() <= maxPrice)
                 .map(EntityDtoMapper::mapProductsToDto)
                 .collect(Collectors.toList());
     }
 
-    public ProductsDTO addProductsAndCategory(ProductsDTO productsDTO) {
-        ProductsEntity productsEntity = EntityDtoMapper.mapProductsToEntity(productsDTO);
-        ProductCategoryEntity newProductCategoryEntity = EntityDtoMapper.mapProdCatToEntity(productsDTO.getProductCategoryDTO());       //tworzenie nowej kategorii newProductCategoryEntity
-        if(productsDTO.getProductCategoryDTO().getId() !=null) {
-            Optional<ProductCategoryEntity> productById = productCategoryRepository.findById(productsDTO.getProductCategoryDTO().getId());          // szukanie czy już taki productCategoryEntity istnieje
-            if (productById.isPresent()) {
-                newProductCategoryEntity = productById.get();
-            }
-        }
-        productsEntity.setProductCategoryEntity(newProductCategoryEntity);
-        Set<ProductsEntity> productsEntityHashSet = new HashSet<>();
-        productsEntityHashSet.add(productsEntity);
-        newProductCategoryEntity.setProductsEntitySet(productsEntityHashSet);
-        productCategoryRepository.save(newProductCategoryEntity);
-        ProductsEntity save = productsRepository.save(productsEntity);
-        ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(save);
-        productCache.saveProductsResponseInCache(productsDTO1);
-        return productsDTO1;
 
-    }
 //    public Optional<ProductsDTO> findProductsById(Long id) {
 ////        Optional<ProductsDTO> product = productCache.getProductResponse(id);
 ////        if (product.isPresent()) {
