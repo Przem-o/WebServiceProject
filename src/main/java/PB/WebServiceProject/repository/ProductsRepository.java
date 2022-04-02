@@ -10,5 +10,5 @@ import java.util.List;
 public interface ProductsRepository extends JpaRepository<ProductsEntity, Long> {
 
 
-//   List<ProductsEntity> findByName(String name);
+   List<ProductsEntity> findProductsByName(String name);
 }

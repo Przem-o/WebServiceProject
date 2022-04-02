@@ -43,16 +43,6 @@ public class ClientController {
         return clientService.editClient(id, clientDTO);
     }
 
-//    @Operation(description = "Get client by id")
-//    @GetMapping("/client/{id}")
-//    public ResponseEntity getClientById(@Parameter(description = "get client by id")
-//                                        @PathVariable(name = "id") Long id) {
-//        Optional<ClientDTO> getClientById = clientService.getClientById(id);
-//        if (getClientById.isPresent()) {
-//            return ResponseEntity.ok(getClientById.get());
-//        }
-//        return ResponseEntity.noContent().build();// http no content 204 // noContent().build() oznacza "brak zawarotści" że zrozummiał zapytanie ale nie ma takiego clienta
-//    }
 
     @Operation(description = "Get clients")
     @GetMapping("/clients")
@@ -66,16 +56,18 @@ public class ClientController {
 
     }
 }
-
-//    @Operation(description = "Get all clients")
-//    @GetMapping("/clients")
-//    public List<ClientDTO> getClients(@Parameter(description = "get clients")
-//                                      @RequestParam(name = "name", required = false) String name) {
-//        return clientService.findClientsByName(name);
+//    @Operation(description = "Get client by id")
+//    @GetMapping("/client/{id}")
+//    public ResponseEntity getClientById(@Parameter(description = "get client by id")
+//                                        @PathVariable(name = "id") Long id) {
+//        Optional<ClientDTO> getClientById = clientService.getClientById(id);
+//        if (getClientById.isPresent()) {
+//            return ResponseEntity.ok(getClientById.get());
+//        }
+//        return ResponseEntity.noContent().build();// http no content 204 // noContent().build() oznacza "brak zawarotści" że zrozummiał zapytanie ale nie ma takiego clienta
 //    }
-//
-//
-//    @Operation(description = "Get all clients")
+
+//    @Operation(description = "Get client by name")
 //    @GetMapping("/clients")
 //    public List<ClientDTO> getClients(@Parameter(description = "get clients")
 //                                      @RequestParam(name = "name", required = false) String name) {

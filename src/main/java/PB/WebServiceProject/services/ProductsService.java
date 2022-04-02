@@ -1,7 +1,6 @@
 package PB.WebServiceProject.services;
 
 
-
 import PB.WebServiceProject.entities.ProductsEntity;
 
 import PB.WebServiceProject.repository.ProductsRepository;
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
 public class ProductsService {
 
     private final ProductsRepository productsRepository;
- //   private final ProductCategoryRepository productCategoryRepository;
+    //   private final ProductCategoryRepository productCategoryRepository;
     private final ProductCache productCache;
 
 //    public ProductsDTO addProductsAndCategory(ProductsDTO productsDTO) { //nokia / RTV
@@ -102,6 +101,21 @@ public class ProductsService {
                 .collect(Collectors.toList());
     }
 
+    public List<ProductsDTO> findProductsByName(String name) {
+        return findByName(name).stream()
+                .map(EntityDtoMapper::mapProductsToDto)
+                .collect(Collectors.toList());
+    }
+
+    private List<ProductsEntity> findByName(String name) { //metoda pomocnicza do w/w
+        if (StringUtils.isBlank(name)) {
+            List<ProductsEntity> allProducts = productsRepository.findAll();
+            return allProducts;
+        } else {
+            List<ProductsEntity> byNameProducts = productsRepository.findProductsByName(name);
+            return byNameProducts;
+        }
+    }
 
 //    public Optional<ProductsDTO> findProductsById(Long id) {
 ////        Optional<ProductsDTO> product = productCache.getProductResponse(id);
@@ -112,28 +126,23 @@ public class ProductsService {
 ////            Thread.sleep(5000);
 ////        } catch (InterruptedException interruptedException) {
 ////        }
+
+//
 //        ProductsEntity productsEntity = productsRepository.findById(id).get();
 //        ProductsDTO productsDTO = EntityDtoMapper.mapProductsToDto(productsEntity);
-//        productCache.saveProductsResponseInCache(productsDTO);
+////        productCache.saveProductsResponseInCache(productsDTO);
 //        return Optional.of(productsDTO);
 //    }
-//
-//    public List<ProductsDTO> findProductsByName(String name) {
-//        return findByName(name).stream()
-//                .map(EntityDtoMapper::mapProductsToDto)
-//                .collect(Collectors.toList());
-//    }
-//
-//    private List<ProductsEntity> findByName(String name) {
-//        if (StringUtils.isBlank(name)) {
-//            List<ProductsEntity> allProducts = productsRepository.findAll();
-//            return allProducts;
-//        } else {
-//            List<ProductsEntity> byNameProducts = productsRepository.findByName(name);
-//            return byNameProducts;
-//        }
-//    }
+
+    public List<ProductsDTO> findProductsById(Long id) {
+        return productsRepository.findAll().stream()
+                .filter(productsEntity -> productsEntity.getId().equals(id))
+                .map(EntityDtoMapper::mapProductsToDto)
+                .collect(Collectors.toList());
+    }
+
 }
+
 
 
 

@@ -58,19 +58,17 @@ public class ProductsController {
                                          @RequestParam(name = "maxPrice", required = false) Integer maxPrice) {
         return productsService.getProducts(name, minPrice, maxPrice);
     }
-//
-//
-//    @Operation(description = "Get all products")
-//    @GetMapping("/products")
-//    public List<ProductsDTO> findProductsByName(@Parameter(description = "find products by name", example = "Nokia 3210")
-//                                                @RequestParam(name = "name", required = false) String name) {
-//        return productsService.findProductsByName(name);
-//    }
-//
 
-//
-//
-//    @Operation(description = "find product by id")
+
+    @Operation(description = "Get products by name")
+    @GetMapping("/productsByName")
+    public List<ProductsDTO> findProductsByName(@Parameter(description = "find products by name", example = "Nokia3310")
+                                                @RequestParam(name = "name", required = false) String name) {
+        return productsService.findProductsByName(name);
+    }
+
+
+    //    @Operation(description = "Get product by id")
 //    @GetMapping("/product/{id}")
 //    public ResponseEntity findProductsById(@Parameter(description = "find product by id", example = "1")
 //                                           @PathVariable(name = "id") Long id) {
@@ -79,7 +77,13 @@ public class ProductsController {
 //            return ResponseEntity.ok(productsById.get());
 //
 //        }
-//        return ResponseEntity.noContent().build();
+//        return ResponseEntity.noContent().build(); //
 //    }
-//
+    @Operation(description = "Get product by id")
+    @GetMapping("/product/{id}")
+    public List<ProductsDTO> findProductsById(@Parameter(description = "find product by id", example = "1")
+                                           @PathVariable(name = "id") Long id) {
+        return productsService.findProductsById(id);
+
+    }
 }
