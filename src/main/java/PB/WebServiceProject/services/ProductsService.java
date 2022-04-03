@@ -1,6 +1,7 @@
 package PB.WebServiceProject.services;
 
 
+import PB.WebServiceProject.entities.ProductCategoryEntity;
 import PB.WebServiceProject.entities.ProductsEntity;
 
 import PB.WebServiceProject.repository.ProductsRepository;
@@ -126,14 +127,14 @@ public class ProductsService {
 ////            Thread.sleep(5000);
 ////        } catch (InterruptedException interruptedException) {
 ////        }
-
+//
 //
 //        ProductsEntity productsEntity = productsRepository.findById(id).get();
 //        ProductsDTO productsDTO = EntityDtoMapper.mapProductsToDto(productsEntity);
 ////        productCache.saveProductsResponseInCache(productsDTO);
 //        return Optional.of(productsDTO);
 //    }
-
+//
     public List<ProductsDTO> findProductsById(Long id) {
         return productsRepository.findAll().stream()
                 .filter(productsEntity -> productsEntity.getId().equals(id))

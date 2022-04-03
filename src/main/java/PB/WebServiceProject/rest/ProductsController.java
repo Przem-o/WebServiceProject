@@ -68,7 +68,7 @@ public class ProductsController {
     }
 
 
-    //    @Operation(description = "Get product by id")
+//    @Operation(description = "Get product by id")
 //    @GetMapping("/product/{id}")
 //    public ResponseEntity findProductsById(@Parameter(description = "find product by id", example = "1")
 //                                           @PathVariable(name = "id") Long id) {

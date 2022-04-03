@@ -66,10 +66,10 @@
             <column name="price" type="decimal(10,2)">
                 <constraints nullable="false" />
             </column>
-            <column name="productCategory_id" type="bigint"/>
+            <column name="productcategory_id" type="bigint"/>
         </createTable>
 
-        <createTable tableName="productCategory">
+        <createTable tableName="productcategory">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>

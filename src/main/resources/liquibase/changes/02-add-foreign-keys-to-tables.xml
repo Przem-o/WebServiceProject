@@ -35,7 +35,7 @@
         <addForeignKeyConstraint baseTableName="products"
                                  baseColumnNames="productCategory_id"
                                  constraintName="fk_products_productCategory_id"
-                                 referencedTableName="productCategory"
+                                 referencedTableName="productcategory"
                                  referencedColumnNames="id"/>
 
     </changeSet>

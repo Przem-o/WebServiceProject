@@ -22,15 +22,10 @@ public class ProductsDTO {
     @Schema(description = "product price, value cant be negative", example = "999.99", required = true)
     @Min(value = 0, message = "min 0")
     private Double price;
-//    @NotNull(message = "product category can't be null")
-//    private ProductCategoryDTO productCategoryDTO;
+    @NotNull(message = "product category can't be null")
+    private ProductCategoryDTO productCategoryDTO;
 //    private Set<OrderDetailsDTO> orderDetailsDTOSet;
 
-//    public ProductCategoryDTO getProductCategoryDTO() {
-//        return productCategoryDTO;
-//    }
 
-//    public void setProductCategoryDTO(ProductCategoryDTO productCategoryDTO) {
-//        this.productCategoryDTO = productCategoryDTO;
     }
 

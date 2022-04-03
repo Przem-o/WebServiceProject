@@ -57,17 +57,17 @@ public class EntityDtoMapper {
         return productsEntity;
     }
 
-//    public static ProductCategoryDTO mapProdCatToDto(ProductCategoryEntity productCategoryEntity) {
-//        ProductCategoryDTO productCategoryDTO = new ProductCategoryDTO();
-//        BeanUtils.copyProperties(productCategoryEntity, productCategoryDTO);
-//        return productCategoryDTO;
-//    }
-//
-//    public static ProductCategoryEntity mapProdCatToEntity(ProductCategoryDTO productCategoryDTO) {
-//        ProductCategoryEntity productCategoryEntity = new ProductCategoryEntity();
-//        BeanUtils.copyProperties(productCategoryDTO, productCategoryEntity);
-//        return productCategoryEntity;
-//    }
+    public static ProductCategoryDTO mapProdCatToDto(ProductCategoryEntity productCategoryEntity) {
+        ProductCategoryDTO productCategoryDTO = new ProductCategoryDTO();
+        BeanUtils.copyProperties(productCategoryEntity, productCategoryDTO);
+        return productCategoryDTO;
+    }
+
+    public static ProductCategoryEntity mapProdCatToEntity(ProductCategoryDTO productCategoryDTO) {
+        ProductCategoryEntity productCategoryEntity = new ProductCategoryEntity();
+        BeanUtils.copyProperties(productCategoryDTO, productCategoryEntity);
+        return productCategoryEntity;
+    }
 //
 //    public static OrdersDTO mapOrdersToDto(OrdersEntity ordersEntity) {
 //        OrdersDTO ordersDTO = new OrdersDTO();

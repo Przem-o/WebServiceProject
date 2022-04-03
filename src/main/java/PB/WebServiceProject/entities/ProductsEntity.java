@@ -23,9 +23,9 @@ public class ProductsEntity {
     @Column(name = "price")
     private Double price;
 
-//    @ManyToOne
-//    @JoinColumn(name = "productCategory_id")
-//    private ProductCategoryEntity productCategoryEntity;
+    @ManyToOne
+    @JoinColumn(name = "productcategory_id")
+    private ProductCategoryEntity productCategoryEntity;
 
 //    @OneToMany(mappedBy = "productsEntity") //*
 //    private Set<OrderDetailsEntity> orderDetailsEntitySet;
