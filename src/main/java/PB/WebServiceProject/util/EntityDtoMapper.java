@@ -43,9 +43,9 @@ public class EntityDtoMapper {
     public static ProductsDTO mapProductsToDto(ProductsEntity productsEntity) {
         ProductsDTO productsDTO = new ProductsDTO();
         BeanUtils.copyProperties(productsEntity, productsDTO);
-//        if (productsEntity.getProductCategoryEntity() != null) {
-//            productsDTO.setProductCategoryDTO(EntityDtoMapper.mapProdCatToDto(productsEntity.getProductCategoryEntity()));
-//        }
+        if (productsEntity.getProductCategoryEntity() != null) {
+            productsDTO.setProductCategoryDTO(EntityDtoMapper.mapProdCatToDto(productsEntity.getProductCategoryEntity()));
+        }
         return productsDTO;
 
     }
@@ -53,7 +53,7 @@ public class EntityDtoMapper {
     public static ProductsEntity mapProductsToEntity(ProductsDTO productsDTO) {
         ProductsEntity productsEntity = new ProductsEntity();
         BeanUtils.copyProperties(productsDTO, productsEntity);
-//        productsEntity.setProductCategoryEntity(EntityDtoMapper.mapProdCatToEntity(productsDTO.getProductCategoryDTO()));
+        productsEntity.setProductCategoryEntity(EntityDtoMapper.mapProdCatToEntity(productsDTO.getProductCategoryDTO()));
         return productsEntity;
     }
 

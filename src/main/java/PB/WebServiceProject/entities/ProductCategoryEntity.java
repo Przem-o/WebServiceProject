@@ -23,4 +23,12 @@ public class ProductCategoryEntity {
 
     @OneToMany(mappedBy = "productCategoryEntity")
     private Set<ProductsEntity> productsEntitySet;
+
+//    public Set<ProductsEntity> getProductsEntitySet() {
+//        return productsEntitySet;
+//    }
+//
+//    public void setProductsEntitySet(Set<ProductsEntity> productsEntitySet) {
+//        this.productsEntitySet = productsEntitySet;
+//    }
 }

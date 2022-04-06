@@ -53,7 +53,7 @@ public class ProductCategoryController {
 //        return ResponseEntity.noContent().build();
 //    }
 
-    @Operation(description = "Get all category")
+    @Operation(description = "Get category by name")
     @GetMapping("/categories")
     public List<ProductCategoryDTO> findCategoryByName(@Parameter(description = "find category by name", example = "RTV")
                                                        @RequestParam(name = "name", required = false) String name) {

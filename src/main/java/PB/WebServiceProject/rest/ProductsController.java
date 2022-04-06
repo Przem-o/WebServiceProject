@@ -18,18 +18,18 @@ public class ProductsController {
 
     private final ProductsService productsService;
 
-    //    @Operation(description = "Add new product with category")
-//    @PostMapping("/addProductsAndCategory")
-//    public ProductsDTO addProductsWithCategory(@Parameter(description = "add new products and category", example = "Nokia 3310, Smartphone")
-//                                               @Valid @RequestBody ProductsDTO productsDTO) {
-//        return productsService.addProductsAndCategory(productsDTO);
-//    }
-    @Operation(description = "Add new product")
-    @PostMapping("/product")
-    public ProductsDTO addProduct(@Parameter(description = "Add new product", example = "Nokia 3210")
-                                  @Valid @RequestBody ProductsDTO productsDTO) {
-        return productsService.addProducts(productsDTO);
+        @Operation(description = "Add new product with category")
+    @PostMapping("/addProductsAndCategory")
+    public ProductsDTO addProductsWithCategory(@Parameter(description = "add new products and category", example = "Nokia 3310, Smartphone")
+                                               @Valid @RequestBody ProductsDTO productsDTO) {
+        return productsService.addProductsAndCategory(productsDTO);
     }
+//    @Operation(description = "Add new product")
+//    @PostMapping("/product")
+//    public ProductsDTO addProduct(@Parameter(description = "Add new product", example = "Nokia 3210")
+//                                  @Valid @RequestBody ProductsDTO productsDTO) {
+//        return productsService.addProducts(productsDTO);
+//    }
 
 
     @Operation(description = "Delete product by id")

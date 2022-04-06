@@ -4,6 +4,7 @@ package PB.WebServiceProject.services;
 import PB.WebServiceProject.entities.ProductCategoryEntity;
 import PB.WebServiceProject.entities.ProductsEntity;
 
+import PB.WebServiceProject.repository.ProductCategoryRepository;
 import PB.WebServiceProject.repository.ProductsRepository;
 import PB.WebServiceProject.repository.cache.ProductCache;
 
@@ -22,42 +23,42 @@ import java.util.stream.Collectors;
 public class ProductsService {
 
     private final ProductsRepository productsRepository;
-    //   private final ProductCategoryRepository productCategoryRepository;
+    private final ProductCategoryRepository productCategoryRepository;
     private final ProductCache productCache;
 
-//    public ProductsDTO addProductsAndCategory(ProductsDTO productsDTO) { //nokia / RTV
-//        ProductsEntity productsEntity = EntityDtoMapper.mapProductsToEntity(productsDTO);
-//        ProductCategoryEntity productCategoryEntity = EntityDtoMapper.mapProdCatToEntity(productsDTO.getProductCategoryDTO());
-//        if (productsDTO.getProductCategoryDTO().getId() != null) { //jeśli wpisane w www id ProductCategory nie jest null
-//            Optional<ProductCategoryEntity> productCategoryById = productCategoryRepository.findById(productsDTO.getProductCategoryDTO().getId());//szukanie czy już taki productCategoryEntity istnieje w bazie
-//            if (productCategoryById.isPresent()) {
-//                productCategoryEntity = productCategoryById.get(); //jesli istnieje już w bazie taki productCategoryById to ten nowy wyżej stworzony w 30 lini productCategoryEntity nadpisz tym z bazy productCategoryById
-//            }
-//        } // konsultacje 10 cz1 46 min
-//        productsEntity.setProductCategoryEntity(productCategoryEntity); //jeśli productCategory podany w www jest null to ustaw produktowi kategorię podaną w DTO np.Smartphone
-//        Set<ProductsEntity> productsEntityHashSet = new HashSet<>();
-//        productsEntityHashSet.add(productsEntity);// do seta daję produkt nokia z kategorią Smartphone
-//        productCategoryEntity.setProductsEntitySet(productsEntityHashSet); // kategorii Smartphone ustawiam listę produktów
-//        productCategoryRepository.save(productCategoryEntity);
-//        ProductsEntity save = productsRepository.save(productsEntity);
-//        ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(save);
-//        // productCache.saveProductsResponseInCache(productsDTO1);
-//        return productsDTO1;
-//
-//    }
-
-
-    public ProductsDTO addProducts(ProductsDTO productsDTO) {
+    public ProductsDTO addProductsAndCategory(ProductsDTO productsDTO) { //nokia / RTV
         ProductsEntity productsEntity = EntityDtoMapper.mapProductsToEntity(productsDTO);
-//        ProductCategoryEntity productCategoryEntity = new ProductCategoryEntity();
-//        productCategoryEntity.setId(productsDTO.getId());
-//        productsEntity.setName(productsDTO.getName());
-//        productsEntity.setPrice(productsDTO.getPrice());
+        ProductCategoryEntity productCategoryEntity = EntityDtoMapper.mapProdCatToEntity(productsDTO.getProductCategoryDTO());
+        if (productsDTO.getProductCategoryDTO().getId() != null) { //jeśli wpisane w www id ProductCategory nie jest null
+            Optional<ProductCategoryEntity> productCategoryById = productCategoryRepository.findById(productsDTO.getProductCategoryDTO().getId());//szukanie czy już taki productCategoryEntity podany w www istnieje w bazie
+            if (productCategoryById.isPresent()) {
+                productCategoryEntity = productCategoryById.get(); //jesli istnieje już w bazie taki productCategoryById to ten nowy wyżej stworzony w 30 lini productCategoryEntity nadpisz tym z bazy productCategoryById
+            }
+        } // konsultacje 10 cz1 46 min
+        productsEntity.setProductCategoryEntity(productCategoryEntity); //jeśli productCategory podany w www jest null to ustaw produktowi kategorię podaną w DTO np.Smartphone
+        Set<ProductsEntity> productsEntityHashSet = new HashSet<>();
+        productsEntityHashSet.add(productsEntity);// do seta daję produkt nokia z kategorią Smartphone, bo klasa productCategoryEntity ma pole z setami produktow wiec trzeba new Hashset
+        productCategoryEntity.setProductsEntitySet(productsEntityHashSet); // kategorii Smartphone ustawiam set produktów
+        productCategoryRepository.save(productCategoryEntity);
         ProductsEntity save = productsRepository.save(productsEntity);
-//        ProductCategoryEntity save1 = productCategoryRepository.save(productCategoryEntity);
         ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(save);
+        // productCache.saveProductsResponseInCache(productsDTO1);
         return productsDTO1;
+
     }
+
+
+//    public ProductsDTO addProducts(ProductsDTO productsDTO) {
+//        ProductsEntity productsEntity = EntityDtoMapper.mapProductsToEntity(productsDTO);
+////        ProductCategoryEntity productCategoryEntity = new ProductCategoryEntity();
+////        productCategoryEntity.setId(productsDTO.getId());
+////        productsEntity.setName(productsDTO.getName());
+////        productsEntity.setPrice(productsDTO.getPrice());
+//        ProductsEntity save = productsRepository.save(productsEntity);
+////        ProductCategoryEntity save1 = productCategoryRepository.save(productCategoryEntity);
+//        ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(save);
+//        return productsDTO1;
+//    }
 
 //    public ProductsDTO addProductsToCategory(Long productsId, Long productCategoryId) {
 //        ProductsEntity productsEntity = productsRepository.findById(productsId).get();
