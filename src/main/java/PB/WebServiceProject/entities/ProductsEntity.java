@@ -24,11 +24,11 @@ public class ProductsEntity {
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name = "productcategory_id")
+    @JoinColumn(name = "category_id")
     private ProductCategoryEntity productCategoryEntity;
 
-//    @OneToMany(mappedBy = "productsEntity") //*
-//    private Set<OrderDetailsEntity> orderDetailsEntitySet;
+    @OneToMany(mappedBy = "productsEntity") //*
+    private Set<OrderDetailsEntity> orderDetailsEntitySet;
 
 }
 

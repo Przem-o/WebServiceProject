@@ -24,12 +24,12 @@ public class ProductsController {
                                                @Valid @RequestBody ProductsDTO productsDTO) {
         return productsService.addProductsAndCategory(productsDTO);
     }
-//    @Operation(description = "Add new product")
-//    @PostMapping("/product")
-//    public ProductsDTO addProduct(@Parameter(description = "Add new product", example = "Nokia 3210")
-//                                  @Valid @RequestBody ProductsDTO productsDTO) {
-//        return productsService.addProducts(productsDTO);
-//    }
+    @Operation(description = "Add new product")
+    @PostMapping("/product")
+    public ProductsDTO addProduct(@Parameter(description = "Add new product", example = "Nokia 3210")
+                                  @Valid @RequestBody ProductsDTO productsDTO) {
+        return productsService.addProducts(productsDTO);
+    }
 
 
     @Operation(description = "Delete product by id")

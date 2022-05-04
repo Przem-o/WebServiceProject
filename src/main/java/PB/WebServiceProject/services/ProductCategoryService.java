@@ -38,8 +38,8 @@ public class ProductCategoryService {
         Optional<ProductCategoryEntity> byId = productCategoryRepository.findById(id);
         if (byId.isPresent()) {
             ProductCategoryEntity productCategoryEntity = byId.get();
-            productCategoryEntity.setId(productCategoryDTO.getId());
-            productCategoryEntity.setCategory(productCategoryDTO.getCategory());
+            productCategoryEntity.setId(productCategoryDTO.getId());//przydatne do zmiany id danego producCategory
+            productCategoryEntity.setProductCategory(productCategoryDTO.getProductCategory());
             ProductCategoryEntity save = productCategoryRepository.save(productCategoryEntity);
             return EntityDtoMapper.mapProdCatToDto(save);
         } else {
@@ -59,7 +59,7 @@ public class ProductCategoryService {
         if (StringUtils.isBlank(name)) {
             return productCategoryRepository.findAll();
         } else {
-            return productCategoryRepository.findProductsByCategory(name);
+            return productCategoryRepository.findProductsByproductCategory(name);
         }
     }
 }

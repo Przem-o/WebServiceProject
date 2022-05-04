@@ -35,7 +35,7 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="orderDate" type="varchar(255)"/>
+            <column name="date" type="varchar(255)"/>
             <column name="price" type="decimal(10,2)">
                 <constraints nullable="false"/>
             </column>
@@ -45,13 +45,13 @@
             <column name="client_id" type="bigint"/>
         </createTable>
 
-        <createTable tableName="orderDetails">
+        <createTable tableName="orderdetails">
             <column name="id" type="bigint" autoIncrement="true">
             <constraints primaryKey="true"/>
         </column>
             <column name="products_id" type="bigint"/>
             <column name="orders_id" type="bigint"/>
-            <column name="quantityOrdered" type="bigint">
+            <column name="quantity" type="bigint">
                 <constraints nullable="false" />
             </column>
         </createTable>
@@ -66,10 +66,10 @@
             <column name="price" type="decimal(10,2)">
                 <constraints nullable="false" />
             </column>
-            <column name="productcategory_id" type="bigint"/>
+            <column name="category_id" type="bigint"/>
         </createTable>
 
-        <createTable tableName="productcategory">
+        <createTable tableName="category">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>

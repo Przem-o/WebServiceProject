@@ -25,7 +25,7 @@ public class ClientDTO {
     @NotNull(message = "client address can't be null") // adnotacja dotyczy tylko obiektów i liczb
 //    @NotBlank(message = "client address can't be blank") nie może być tej adnotacji przy polach dot.obiektów - tylko String
     private AddressDTO addressDTO;
-//    private Set<OrdersDTO> ordersDTOSet;
+
 
 }
 

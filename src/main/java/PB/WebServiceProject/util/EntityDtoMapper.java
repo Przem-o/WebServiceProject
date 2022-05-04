@@ -12,7 +12,7 @@ public class EntityDtoMapper {
         ClientDTO clientDTO = new ClientDTO();
 //        ClientDTO clientDTO = ClientDTO.builder().build();// metoda spring data do tworzenia obiektów
         BeanUtils.copyProperties(clientEntity, clientDTO);//metoda kopiuje tylko pola o tej samej nazwie i typie oprócz obiektów np Address i dotyczy tylko relacji oneToOne
-        if (clientEntity.getAddressEntity() != null) {
+        if (clientEntity.getAddressEntity() != null) { // jeśli nie jest nullem to go przepisz/wstaw
             clientDTO.setAddressDTO(EntityDtoMapper.mapAddressToDto(clientEntity.getAddressEntity()));
         }
         return clientDTO;
@@ -53,7 +53,9 @@ public class EntityDtoMapper {
     public static ProductsEntity mapProductsToEntity(ProductsDTO productsDTO) {
         ProductsEntity productsEntity = new ProductsEntity();
         BeanUtils.copyProperties(productsDTO, productsEntity);
-        productsEntity.setProductCategoryEntity(EntityDtoMapper.mapProdCatToEntity(productsDTO.getProductCategoryDTO()));
+        if (productsEntity.getProductCategoryEntity() != null) {
+            productsEntity.setProductCategoryEntity(EntityDtoMapper.mapProdCatToEntity(productsDTO.getProductCategoryDTO()));
+        }
         return productsEntity;
     }
 
@@ -68,39 +70,48 @@ public class EntityDtoMapper {
         BeanUtils.copyProperties(productCategoryDTO, productCategoryEntity);
         return productCategoryEntity;
     }
-//
-//    public static OrdersDTO mapOrdersToDto(OrdersEntity ordersEntity) {
-//        OrdersDTO ordersDTO = new OrdersDTO();
+
+    public static OrdersDTO mapOrdersToDto(OrdersEntity ordersEntity) {
+        OrdersDTO ordersDTO = new OrdersDTO();
 //        BeanUtils.copyProperties(ordersEntity, ordersDTO);
-////        ordersDTO.setId(ordersDTO.getId());
-////        ordersDTO.setDate(ordersDTO.getDate());
-////        ordersDTO.setPrice(ordersDTO.getPrice());
-////        ordersDTO.setStatus(ordersDTO.getStatus());
-//        if(ordersEntity.getClientEntity() != null){
-//            ordersDTO.setOrderDetailsEntitySet(ordersEntity.getOrderDetailsEntitySet().stream()
+        ordersDTO.setId(ordersEntity.getId());
+        ordersDTO.setDate(ordersEntity.getDate());
+        ordersDTO.setPrice(ordersEntity.getPrice());
+        ordersDTO.setStatus(ordersEntity.getStatus());
+//        ordersDTO.setClientId(ordersEntity.getClientEntity().getId());
+//        if (ordersEntity.getClientEntity() != null) {
+//            ordersDTO.setOrderDetailsDTOSet(ordersEntity.getOrderDetailsEntitySet().stream()
 //                    .map(EntityDtoMapper::mapOrderDetailsToDto)
 //                    .collect(Collectors.toSet()));
 //        }
-//        return ordersDTO;
-//
-//    }
-//    public static OrdersEntity mapOrdersToEntity(OrdersDTO ordersDTO){
-//        OrdersEntity ordersEntity = new OrdersEntity();
+        return ordersDTO;
+
+    }
+
+    public static OrdersEntity mapOrdersToEntity(OrdersDTO ordersDTO) {
+        OrdersEntity ordersEntity = new OrdersEntity();
 //        BeanUtils.copyProperties(ordersDTO, ordersEntity);
-//        return ordersEntity;
-//    }
-//
-//    public static OrderDetailsDTO mapOrderDetailsToDto(OrderDetailsEntity orderDetailsEntity){
-//        OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
-//        BeanUtils.copyProperties(orderDetailsEntity, orderDetailsDTO);
-//        return orderDetailsDTO;
-//    }
-//
-//    public static OrderDetailsEntity mapOrderDetailsToEntity(OrdersDTO ordersDTO){
-//        OrderDetailsEntity orderDetailsEntity = new OrderDetailsEntity();
-//        BeanUtils.copyProperties(ordersDTO, orderDetailsEntity);
-//        return orderDetailsEntity;
-//    }
+        ordersEntity.setId(ordersDTO.getId());
+        ordersEntity.setDate(ordersDTO.getDate());
+        ordersEntity.setPrice(ordersDTO.getPrice());
+        ordersEntity.setStatus(ordersDTO.getStatus());
+        return ordersEntity;
+    }
+
+    public static OrderDetailsDTO mapOrderDetailsToDto(OrderDetailsEntity orderDetailsEntity) {
+        OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
+        BeanUtils.copyProperties(orderDetailsEntity, orderDetailsDTO);
+        if (orderDetailsEntity.getProductsEntity() != null) {
+            orderDetailsDTO.setProductsDTO(EntityDtoMapper.mapProductsToDto(orderDetailsEntity.getProductsEntity()));
+        }
+        return orderDetailsDTO;
+    }
+
+    public static OrderDetailsEntity mapOrderDetailsToEntity(OrderDetailsDTO orderDetailsDTO) {
+        OrderDetailsEntity orderDetailsEntity = new OrderDetailsEntity();
+        BeanUtils.copyProperties(orderDetailsDTO, orderDetailsEntity);
+        return orderDetailsEntity;
+    }
 }
 
 

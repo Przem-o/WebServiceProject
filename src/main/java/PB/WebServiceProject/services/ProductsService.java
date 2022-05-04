@@ -48,17 +48,17 @@ public class ProductsService {
     }
 
 
-//    public ProductsDTO addProducts(ProductsDTO productsDTO) {
-//        ProductsEntity productsEntity = EntityDtoMapper.mapProductsToEntity(productsDTO);
-////        ProductCategoryEntity productCategoryEntity = new ProductCategoryEntity();
-////        productCategoryEntity.setId(productsDTO.getId());
-////        productsEntity.setName(productsDTO.getName());
-////        productsEntity.setPrice(productsDTO.getPrice());
-//        ProductsEntity save = productsRepository.save(productsEntity);
-////        ProductCategoryEntity save1 = productCategoryRepository.save(productCategoryEntity);
-//        ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(save);
-//        return productsDTO1;
-//    }
+    public ProductsDTO addProducts(ProductsDTO productsDTO) {
+        ProductsEntity productsEntity = EntityDtoMapper.mapProductsToEntity(productsDTO);
+//        ProductCategoryEntity productCategoryEntity = new ProductCategoryEntity();
+//        productCategoryEntity.setId(productsDTO.getId());
+//        productsEntity.setName(productsDTO.getName());
+//        productsEntity.setPrice(productsDTO.getPrice());
+        ProductsEntity save = productsRepository.save(productsEntity);
+//        ProductCategoryEntity save1 = productCategoryRepository.save(productCategoryEntity);
+        ProductsDTO productsDTO1 = EntityDtoMapper.mapProductsToDto(save);
+        return productsDTO1;
+    }
 
 //    public ProductsDTO addProductsToCategory(Long productsId, Long productCategoryId) {
 //        ProductsEntity productsEntity = productsRepository.findById(productsId).get();

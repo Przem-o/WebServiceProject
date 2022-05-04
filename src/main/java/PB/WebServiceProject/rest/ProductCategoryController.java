@@ -19,14 +19,14 @@ public class ProductCategoryController {
     private final ProductCategoryService productCategoryService;
 
     @Operation(description = "Add new category")
-    @PostMapping("/category")
+    @PostMapping("/productCategory")
     public ProductCategoryDTO addCategory(@Parameter(description = "add new category", example = "RTV")
                                           @Valid @RequestBody ProductCategoryDTO productCategoryDTO) {
         return productCategoryService.addCategory(productCategoryDTO);
     }
 
     @Operation(description = "Edit category by id")
-    @PutMapping("/category/{id}")
+    @PutMapping("/productCategory/{id}")
     public ProductCategoryDTO editCategory(@Parameter(description = "select category id", example = "1")
                                            @PathVariable(name = "id") Long id,
                                            @Valid @RequestBody ProductCategoryDTO productCategoryDTO) {
@@ -34,7 +34,7 @@ public class ProductCategoryController {
     }
 
     @Operation(description = "Delete category by id")
-    @DeleteMapping("/category/{id}")
+    @DeleteMapping("/productCategory/{id}")
     public ResponseEntity deleteCategory(@Parameter(description = "select category id", example = "1")
                                          @PathVariable(name = "id") Long id) {
         productCategoryService.deleteCategory(id);

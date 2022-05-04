@@ -25,7 +25,7 @@ public class ClientEntity {
     @PrimaryKeyJoinColumn // adnotacja tylko przy OneToOne
     private AddressEntity addressEntity;
 
-//    @OneToMany(mappedBy = "clientEntity")
-//    private Set<OrdersEntity> ordersEntitySet;
+    @OneToMany(mappedBy = "clientEntity")
+    private Set<OrdersEntity> ordersEntitySet;
 
 }
