@@ -27,7 +27,7 @@ public class OrdersService {
     private final OrdersDetailsRepository ordersDetailsRepository;
     private final OrdersRepository ordersRepository;
 
-    public OrdersDTO addOrder(OrdersDTO ordersDTO, Long clientId) {
+    public OrdersDTO addOrder(Long clientId, OrdersDTO ordersDTO) {
         OrdersEntity ordersEntity = EntityDtoMapper.mapOrdersToEntity(ordersDTO);
         Optional<ClientEntity> client = clientRepository.findById(clientId);
         ordersEntity.setDate(ordersDTO.getDate());
@@ -85,7 +85,7 @@ public class OrdersService {
     }
 
 
-    public void deleteOrder(Long orderId){
+    public void deleteOrder(Long orderId) {
         ordersRepository.deleteById(orderId);
     }
 
@@ -101,7 +101,7 @@ public class OrdersService {
         return collect;
     }
 
-//
+    //
 //    public OrdersDTO addClientToOrders(OrdersDTO ordersDTO) {
 //        OrderDetailsEntity orderDetailsEntity = ordersDetailsRepository.findById(ordersDTO.getClientDTO().getId());
 //        ClientEntity clientEntity = clientRepository.findById(ordersDTO.getClientDTO().getId());
@@ -130,4 +130,21 @@ public class OrdersService {
 //        return collect;
 //
 //    }
+    public OrdersDTO editOrder(Long orderId, OrdersDTO ordersDTO) {
+        Optional<OrdersEntity> ordersEntity = ordersRepository.findById(orderId);
+        if (ordersEntity.isPresent()) {
+            ordersEntity.get().setDate(ordersDTO.getDate());
+            ordersEntity.get().setPrice(ordersDTO.getPrice());
+            ordersEntity.get().setStatus(ordersDTO.getStatus());
+            OrdersEntity save = ordersRepository.save(ordersEntity.get());
+            OrdersDTO ordersDTO1 = EntityDtoMapper.mapOrdersToDto(save);
+            return ordersDTO1;
+        } else {
+            OrdersEntity ordersEntity1 = EntityDtoMapper.mapOrdersToEntity(ordersDTO);
+            OrdersEntity save = ordersRepository.save(ordersEntity1);
+            OrdersDTO ordersDTO1 = EntityDtoMapper.mapOrdersToDto(save);
+            return ordersDTO1;
+        }
+
+    }
 }

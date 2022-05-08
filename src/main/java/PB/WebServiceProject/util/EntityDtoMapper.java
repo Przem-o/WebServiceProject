@@ -78,7 +78,6 @@ public class EntityDtoMapper {
         ordersDTO.setDate(ordersEntity.getDate());
         ordersDTO.setPrice(ordersEntity.getPrice());
         ordersDTO.setStatus(ordersEntity.getStatus());
-//        ordersDTO.setClientId(ordersEntity.getClientEntity().getId());
 //        if (ordersEntity.getClientEntity() != null) {
 //            ordersDTO.setOrderDetailsDTOSet(ordersEntity.getOrderDetailsEntitySet().stream()
 //                    .map(EntityDtoMapper::mapOrderDetailsToDto)

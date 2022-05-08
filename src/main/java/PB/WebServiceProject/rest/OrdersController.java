@@ -37,9 +37,9 @@ public class OrdersController {
     @PostMapping("/order/{clientId}")
     public OrdersDTO addOrder(@Parameter(description = "add new order")
                               @Valid @RequestBody OrdersDTO ordersDTO,
-                              @Parameter(description = "client id")
+                              @Parameter(description = "set client id")
                               @PathVariable(name = "clientId") Long clientId) {
-        return ordersService.addOrder(ordersDTO, clientId);
+        return ordersService.addOrder(clientId, ordersDTO);
     }
 
 //    @Operation(description = "Add order")
@@ -71,11 +71,18 @@ public class OrdersController {
 
     @Operation(description = "Get orders by client id")
     @GetMapping("/orders/{clientId}")
-    public List<OrdersDTO> getClientOrders(@Parameter(description = "clientId")
+    public List<OrdersDTO> getClientOrders(@Parameter(description = "get orders by client id")
                                            @PathVariable(name = "clientId") Long clientId) {
         return ordersService.findClientOrders(clientId);
     }
 
+    @Operation(description = "Edit order")
+    @PutMapping("/orders/{orderId}")
+    public OrdersDTO editOrder(@Parameter(description = "ordersId", example = "1")
+                               @PathVariable(name = "orderId") Long orderId,
+                               @Valid @RequestBody OrdersDTO ordersDTO) {
+        return ordersService.editOrder(orderId, ordersDTO);
+    }
 
 }
 

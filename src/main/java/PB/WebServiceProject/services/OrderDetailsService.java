@@ -42,14 +42,17 @@ public class OrderDetailsService {
 //
 //    }
 
-//    public OrderDetailsDTO addOrderDetails(OrderDetailsDTO orderDetailsDTO) {
-//        OrderDetailsEntity orderDetailsEntity = EntityDtoMapper.mapOrderDetailsToEntity(orderDetailsDTO);
-//        Optional<OrdersEntity> ordersEntity = ordersRepository.findById(orderDetailsDTO.getOrdersDTO().getId());
-//        Optional<ProductsEntity> productsEntity = productsRepository.findById(orderDetailsDTO.getProductsDTO().getId());
-//        orderDetailsEntity.setOrdersEntity(ordersEntity.get());
-//        orderDetailsEntity.setProductsEntity(productsEntity.get());
-//        OrderDetailsEntity save = ordersDetailsRepository.save(orderDetailsEntity);
-//        return EntityDtoMapper.mapOrderDetailsToDto(save);
+    public OrderDetailsDTO addOrderDetails(Long productId, Long ordersId, OrderDetailsDTO orderDetailsDTO) {
+        OrderDetailsEntity orderDetailsEntity = EntityDtoMapper.mapOrderDetailsToEntity(orderDetailsDTO);
+        Optional<OrdersEntity> ordersEntity = ordersRepository.findById(ordersId);
+        Optional<ProductsEntity> productsEntity = productsRepository.findById(productId);
+        orderDetailsEntity.setOrdersEntity(ordersEntity.get());
+        orderDetailsEntity.setProductsEntity(productsEntity.get());
+        OrderDetailsEntity save = ordersDetailsRepository.save(orderDetailsEntity);
+        return EntityDtoMapper.mapOrderDetailsToDto(save);
+
+    }
+//    public OrderDetailsDTO addProductAndOrdersToOrderDetails(Long productId, Long ordersId, OrderDetailsDTO orderDetailsDTO){
 //
 //    }
 
