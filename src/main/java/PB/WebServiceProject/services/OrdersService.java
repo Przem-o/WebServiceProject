@@ -54,12 +54,12 @@ public class OrdersService {
 //                .map(EntityDtoMapper::mapOrdersToDto)
 //                .collect(Collectors.toList());
 //}
-
-//    public OrdersDTO addOrders(OrderDetailsDTO orderDetailsDTO, Long clientId, Long productId){
-//        OrdersEntity ordersEntity = EntityDtoMapper.mapOrdersToEntity(orderDetailsDTO.getOrdersDTO());
-//        OrderDetailsEntity orderDetailsEntity = EntityDtoMapper.mapOrderDetailsToEntity(orderDetailsDTO);
+//
+//    public OrdersDTO addOrderedProductByClient(Long clientId, Long productId, OrderDetailsDTO orderDetailsDTO){
 //        Optional<ClientEntity> clientEntity = clientRepository.findById(clientId);
 //        Optional<ProductsEntity> productsEntity = productsRepository.findById(productId);
+//        OrderDetailsEntity orderDetailsEntity = EntityDtoMapper.mapOrderDetailsToEntity(orderDetailsDTO);
+//        OrdersEntity ordersEntity = EntityDtoMapper.mapOrdersToEntity(orderDetailsDTO.ge);
 //
 //        ordersEntity.setClientEntity(clientEntity.get());
 //
@@ -140,7 +140,7 @@ public class OrdersService {
             OrdersDTO ordersDTO1 = EntityDtoMapper.mapOrdersToDto(save);
             return ordersDTO1;
         } else {
-            OrdersEntity ordersEntity1 = EntityDtoMapper.mapOrdersToEntity(ordersDTO);
+            OrdersEntity ordersEntity1 = EntityDtoMapper.mapOrdersToEntity(ordersDTO);// zmienić to - jesli nie ma zamowienie to je dodaje
             OrdersEntity save = ordersRepository.save(ordersEntity1);
             OrdersDTO ordersDTO1 = EntityDtoMapper.mapOrdersToDto(save);
             return ordersDTO1;

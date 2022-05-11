@@ -75,8 +75,8 @@ public class ProductsService {
 //        productCache.deleteProductsResponseFromCache(id);
     }
 
-    public ProductsDTO editProducts(Long id, ProductsDTO productsDTO) {
-        Optional<ProductsEntity> productsById = productsRepository.findById(id);
+    public ProductsDTO editProducts(Long productId, ProductsDTO productsDTO) {
+        Optional<ProductsEntity> productsById = productsRepository.findById(productId);
         if (productsById.isPresent()) {
             ProductsEntity productsEntity = productsById.get();
             productsEntity.setId(productsDTO.getId());

@@ -74,9 +74,10 @@ public class OrderDetailsService {
         return orderDetailsEntitySet.stream().map(EntityDtoMapper::mapOrderDetailsToDto).collect(Collectors.toList());
 
     }
-    public List<OrderDetailsDTO> getOrderedProducts(Long ordersId){
+
+    public List<OrderDetailsDTO> getOrderedProducts(Long ordersId) {
         Optional<OrdersEntity> ordersEntity = ordersRepository.findById(ordersId);
-        if (ordersEntity.isEmpty()){
+        if (ordersEntity.isEmpty()) {
             return new ArrayList<>();
         }
         Set<OrderDetailsEntity> orderDetailsEntitySet = ordersEntity.get().getOrderDetailsEntitySet();
@@ -86,9 +87,36 @@ public class OrderDetailsService {
 
     }
 
-
     public void deleteOrderDetails(Long id) {
         ordersDetailsRepository.deleteById(id);
     }
 
+    //    public OrderDetailsDTO editOrderDetails(Long orderDetailsId, OrderDetailsDTO orderDetailsDTO){
+//        Optional<OrderDetailsEntity> orderDetailsEntity = ordersDetailsRepository.findById(orderDetailsId);
+//        Optional<OrderDetailsEntity> orderDetailsEntity1 = ordersDetailsRepository.findById(orderDetailsDTO.getProductsDTO().getId());
+////        if(orderDetailsEntity.isPresent()){
+//        orderDetailsEntity.get().setId(orderDetailsDTO.getId());
+//        orderDetailsEntity.get().setQuantity(orderDetailsDTO.getQuantity());
+//        orderDetailsEntity.get().setProductsEntity(EntityDtoMapper.mapProductsToEntity(orderDetailsDTO.getProductsDTO()));
+////            orderDetailsEntity.get().setOrdersEntity(EntityDtoMapper.mapOrdersToEntity(orderDetailsDTO.get);
+//            OrderDetailsEntity save = ordersDetailsRepository.save(orderDetailsEntity.get());
+//            OrderDetailsDTO orderDetailsDTO1 = EntityDtoMapper.mapOrderDetailsToDto(save);
+//            return orderDetailsDTO1;
+//
+//    }
+    public OrderDetailsDTO editOrderedProduct(Long orderId, OrderDetailsDTO orderDetailsDTO) {
+        Optional<OrdersEntity> ordersEntity = ordersRepository.findById(orderId);
+        if (ordersEntity.isPresent()) {
+            ordersEntity.get();
+            OrderDetailsEntity orderDetailsEntity = EntityDtoMapper.mapOrderDetailsToEntity(orderDetailsDTO);
+//            orderDetailsEntity.setId(orderDetailsDTO.getId());
+            orderDetailsEntity.setQuantity(orderDetailsDTO.getQuantity());
+            orderDetailsEntity.setProductsEntity(EntityDtoMapper.mapProductsToEntity(orderDetailsDTO.getProductsDTO()));
+            orderDetailsEntity.setOrdersEntity(ordersEntity.get());
+            OrderDetailsEntity save = ordersDetailsRepository.save(orderDetailsEntity);
+            OrderDetailsDTO orderDetailsDTO1 = EntityDtoMapper.mapOrderDetailsToDto(save);
+            return orderDetailsDTO1;
+        }
+        throw new NoSuchElementException("id doesn't exist ");
+    }
 }

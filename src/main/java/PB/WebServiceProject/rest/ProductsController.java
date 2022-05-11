@@ -41,20 +41,20 @@ public class ProductsController {
     }
 
     @Operation(description = "Edit product by id")
-    @PutMapping("/product/{id}")
-    public ProductsDTO editProduct(@Parameter(description = "edit product by id", example = "1")
-                                   @PathVariable(name = "id") Long id,
+    @PutMapping("/product/{productId}")
+    public ProductsDTO editProduct(@Parameter(description = "set product id", example = "1")
+                                   @PathVariable(name = "productId") Long productId,
                                    @Valid @RequestBody ProductsDTO productsDTO) {
-        return productsService.editProducts(id, productsDTO);
+        return productsService.editProducts(productId, productsDTO);
     }
 
     @Operation(description = "Get products")
     @GetMapping("/products")
-    public List<ProductsDTO> getProducts(@Parameter(description = "get products by name", example = "Nokia3210")
+    public List<ProductsDTO> getProducts(@Parameter(description = "set products name", example = "Nokia3210")
                                          @RequestParam(name = "name", required = false) String name,
-                                         @Parameter(description = "get products by minPrice", example = "1")
+                                         @Parameter(description = "set products minPrice", example = "1")
                                          @RequestParam(name = "minPrice", required = false) Integer minPrice,
-                                         @Parameter(description = "get products by maxPrice", example = "10000")
+                                         @Parameter(description = "set products by maxPrice", example = "10000")
                                          @RequestParam(name = "maxPrice", required = false) Integer maxPrice) {
         return productsService.getProducts(name, minPrice, maxPrice);
     }

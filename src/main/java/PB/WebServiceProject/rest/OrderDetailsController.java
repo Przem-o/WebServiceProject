@@ -1,6 +1,7 @@
 package PB.WebServiceProject.rest;
 
 import PB.WebServiceProject.rest.dto.OrderDetailsDTO;
+import PB.WebServiceProject.rest.dto.OrdersDTO;
 import PB.WebServiceProject.rest.dto.ProductsDTO;
 import PB.WebServiceProject.services.OrderDetailsService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,6 +51,22 @@ public class OrderDetailsController {
                                                 @PathVariable(name = "orderId") Long orderId) {
         return ordersDetailsService.getOrderedProducts(orderId);
     }
+//    @Operation(description = "Edit orderDetails")
+//    @PutMapping("/orderDetails/{orderDetailsId}")
+//    public OrderDetailsDTO editOrder(@Parameter(description = "orderDetailId", example = "1")
+//                               @PathVariable(name = "orderDetailsId") Long orderDetailsId,
+//                               @Valid @RequestBody OrderDetailsDTO orderDetailsDTO) {
+//        return ordersDetailsService.editOrderDetails(orderDetailsId, orderDetailsDTO);
+//    }
+
+    @Operation(description = "Edit orderDetails")
+    @PutMapping("/orderDetails/{orderId}")
+    public OrderDetailsDTO editOrder(@Parameter(description = "orderId", example = "1")
+                                     @PathVariable(name = "orderId") Long orderId,
+                                     @Valid @RequestBody OrderDetailsDTO orderDetailsDTO) {
+        return ordersDetailsService.editOrderedProduct(orderId, orderDetailsDTO);
+    }
+
 
 }
 
