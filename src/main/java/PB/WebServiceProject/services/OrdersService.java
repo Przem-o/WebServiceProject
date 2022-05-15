@@ -53,7 +53,7 @@ public class OrdersService {
         orderDetailsEntity.setProductsEntity(productsEntity.get());
         orderDetailsEntity.setQuantity(ordersDTO.getOrderDetailsDTO().getQuantity());
         OrderDetailsEntity orderDetailsEntitySaved = ordersDetailsRepository.save(orderDetailsEntity);
-        EntityDtoMapper.mapOrderDetailsToDto(orderDetailsEntity);
+        EntityDtoMapper.mapOrderDetailsToDto(orderDetailsEntitySaved);
         OrdersDTO ordersDTO1 = EntityDtoMapper.mapOrdersToDto(ordersEntitySaved);
         return ordersDTO1;
     }
