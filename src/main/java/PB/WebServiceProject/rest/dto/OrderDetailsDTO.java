@@ -21,7 +21,7 @@ public class OrderDetailsDTO {
 //    private Long ordersId;
 //    private OrdersDTO ordersDTO;
     private ProductsDTO productsDTO;
-//    private OrdersDTO ordersDTO;
+    private OrdersDTO ordersDTO;
 
 }
 

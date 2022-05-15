@@ -42,6 +42,17 @@ public class OrdersController {
         return ordersService.addOrder(clientId, ordersDTO);
     }
 
+    @Operation(description = "Add order")
+    @PostMapping("/order/{clientId}/{productId}")
+    public OrdersDTO addOrderWithOrderDetails(@Parameter(description = "set client id")
+                                              @PathVariable(name = "clientId") Long clientId,
+                                              @Parameter(description = "set product id")
+                                              @PathVariable(name = "productId") Long productId,
+                                              @Parameter(description = "add new order")
+                                                  @Valid @RequestBody OrdersDTO ordersDTO) {
+        return ordersService.addOrderWithOrderDetails(clientId, productId, ordersDTO);
+    }
+
 //    @Operation(description = "Add order")
 //    @PostMapping("/order/{clientId}")
 //    public List<OrdersDTO> addProductToOrderList(@Parameter(description = "client id")

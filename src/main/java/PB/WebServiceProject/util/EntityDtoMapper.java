@@ -74,7 +74,7 @@ public class EntityDtoMapper {
     public static OrdersDTO mapOrdersToDto(OrdersEntity ordersEntity) {
         OrdersDTO ordersDTO = new OrdersDTO();
 //        BeanUtils.copyProperties(ordersEntity, ordersDTO);
-        ordersDTO.setId(ordersEntity.getId());
+//        ordersDTO.setId(ordersEntity.getId());
         ordersDTO.setDate(ordersEntity.getDate());
         ordersDTO.setPrice(ordersEntity.getPrice());
         ordersDTO.setStatus(ordersEntity.getStatus());
@@ -90,7 +90,7 @@ public class EntityDtoMapper {
     public static OrdersEntity mapOrdersToEntity(OrdersDTO ordersDTO) {
         OrdersEntity ordersEntity = new OrdersEntity();
 //        BeanUtils.copyProperties(ordersDTO, ordersEntity);
-        ordersEntity.setId(ordersDTO.getId());
+//        ordersEntity.setId(ordersDTO.getId());
         ordersEntity.setDate(ordersDTO.getDate());
         ordersEntity.setPrice(ordersDTO.getPrice());
         ordersEntity.setStatus(ordersDTO.getStatus());
@@ -99,7 +99,9 @@ public class EntityDtoMapper {
 
     public static OrderDetailsDTO mapOrderDetailsToDto(OrderDetailsEntity orderDetailsEntity) {
         OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
-        BeanUtils.copyProperties(orderDetailsEntity, orderDetailsDTO);
+//        BeanUtils.copyProperties(orderDetailsEntity, orderDetailsDTO);
+        orderDetailsDTO.setProductsDTO(EntityDtoMapper.mapProductsToDto(orderDetailsEntity.getProductsEntity()));
+        orderDetailsDTO.setOrdersDTO(EntityDtoMapper.mapOrdersToDto(orderDetailsEntity.getOrdersEntity()));
         if (orderDetailsEntity.getProductsEntity() != null) {
             orderDetailsDTO.setProductsDTO(EntityDtoMapper.mapProductsToDto(orderDetailsEntity.getProductsEntity()));
         }

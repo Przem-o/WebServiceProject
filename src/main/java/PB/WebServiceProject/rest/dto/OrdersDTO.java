@@ -28,6 +28,7 @@ public class OrdersDTO {
     private Status status;
 //    private Long clientId;
 //    private ClientDTO clientDTO;
-    private Set<OrderDetailsDTO> orderDetailsDTOSet;
+    private OrderDetailsDTO orderDetailsDTO;
+
 
 }

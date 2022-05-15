@@ -38,6 +38,26 @@ public class OrdersService {
         OrdersDTO ordersDTO1 = EntityDtoMapper.mapOrdersToDto(save);
         return ordersDTO1;
     }
+
+    public OrdersDTO addOrderWithOrderDetails(Long clientId, Long productId, OrdersDTO ordersDTO) {
+        OrdersEntity ordersEntity = EntityDtoMapper.mapOrdersToEntity(ordersDTO);
+        Optional<ClientEntity> client = clientRepository.findById(clientId);
+        ordersEntity.setDate(ordersDTO.getDate());
+        ordersEntity.setPrice(ordersDTO.getPrice());
+        ordersEntity.setStatus(ordersDTO.getStatus());
+        ordersEntity.setClientEntity(client.get());
+        OrdersEntity ordersEntitySaved = ordersRepository.save(ordersEntity);
+        OrderDetailsEntity orderDetailsEntity = EntityDtoMapper.mapOrderDetailsToEntity(ordersDTO.getOrderDetailsDTO());
+        Optional<ProductsEntity> productsEntity = productsRepository.findById(productId);
+        orderDetailsEntity.setOrdersEntity(ordersEntity);
+        orderDetailsEntity.setProductsEntity(productsEntity.get());
+        orderDetailsEntity.setQuantity(ordersDTO.getOrderDetailsDTO().getQuantity());
+        OrderDetailsEntity orderDetailsEntitySaved = ordersDetailsRepository.save(orderDetailsEntity);
+        EntityDtoMapper.mapOrderDetailsToDto(orderDetailsEntity);
+        OrdersDTO ordersDTO1 = EntityDtoMapper.mapOrdersToDto(ordersEntitySaved);
+        return ordersDTO1;
+    }
+
 //    public List<OrdersDTO> addOrders(Long clientId,  OrdersDTO ordersDTO){
 //        Optional<ClientEntity> clientEntity = clientRepository.findById(clientId);
 //        if(clientEntity.isEmpty()){
