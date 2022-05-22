@@ -50,7 +50,7 @@ public class ClientController {
                                       @RequestParam(name = "id", required = false) Long id,
                                       @Parameter(description = "get client by name")
                                       @RequestParam(name = "name", required = false) String name,
-                                      @Parameter(description = "get client by address")
+                                      @Parameter(description = "get client by address type city")
                                       @RequestParam(name = "address", required = false) String address) {
         return clientService.getClients(id, name, address);
 

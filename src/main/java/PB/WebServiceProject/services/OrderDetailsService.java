@@ -81,7 +81,8 @@ public class OrderDetailsService {
             return new ArrayList<>();
         }
         Set<OrderDetailsEntity> orderDetailsEntitySet = ordersEntity.get().getOrderDetailsEntitySet();
-        return orderDetailsEntitySet.stream()
+        return orderDetailsEntitySet
+                .stream()
                 .map(EntityDtoMapper::mapOrderDetailsToDto)
                 .collect(Collectors.toList());
 

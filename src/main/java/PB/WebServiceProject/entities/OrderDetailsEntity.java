@@ -20,7 +20,7 @@ public class OrderDetailsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "quantity")
-    private Long quantity;
+    private Integer quantity;
 
     @ManyToOne
     @JoinColumn(name = "orders_id")

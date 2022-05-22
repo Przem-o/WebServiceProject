@@ -17,8 +17,8 @@ public class ClientDTO {
 
     @Schema(description = "id of existing client", example = "1")
     private Long id;
-    @Schema(description = "client name", example = "Jaro", required = true)
-    @NotBlank(message = "name can't be blank") // dotyczy tylko stringów
+    @Schema(description = "client name", example = "Jack Daniels", required = true)
+    @NotBlank(message = "name can't be blank") // dotyczy tylko stringów spacje i białe znaki zamiast wartości
     @NotNull(message = "name can't be null") //adnotacja mówi że nie można podać spacji i białych znaków
     private String name;
     @Schema(description = "client address", required = true)

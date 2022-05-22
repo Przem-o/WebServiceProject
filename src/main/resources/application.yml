@@ -8,10 +8,10 @@ spring:
     change-log: "classpath:/liquibase/liquibase-changeLog.xml"
   jpa:
     database-platform: "org.hibernate.dialect.MySQL8Dialect"
-#server:
-#  error:
-#    include-message: always
-#    include-binding-errors: always
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
 #cache:
 #  client:
 #    ttl: 30

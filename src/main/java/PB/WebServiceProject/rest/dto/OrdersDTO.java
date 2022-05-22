@@ -8,6 +8,7 @@ import javax.validation.constraints.Min;
 
 import javax.validation.constraints.NotNull;
 
+import java.time.OffsetDateTime;
 import java.util.Set;
 
 @Getter
@@ -19,16 +20,16 @@ public class OrdersDTO {
 
     @Schema(description = "id of existing order", example = "1")
     private Long id;
-    private String date;
-    @Schema(description = "order price", required = true)
+    private OffsetDateTime date;
+    @Schema(description = "total price of the order", required = true)
     @NotNull
-    @Min(0)
     private Double price;
     @Enumerated(EnumType.STRING)
     private Status status;
-//    private Long clientId;
-//    private ClientDTO clientDTO;
-    private OrderDetailsDTO orderDetailsDTO;
+
+//    private OrderDetailsDTO orderDetailsDTO;
+    private ClientDTO clientDTO;
+    private Set<OrderDetailsDTO> orderDetailsDTOSet;
 
 
 }

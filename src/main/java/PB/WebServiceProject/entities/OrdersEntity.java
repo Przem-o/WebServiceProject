@@ -21,7 +21,7 @@ public class OrdersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "date")
-    private String date;
+    private OffsetDateTime date;
     @Column(name = "price")
     private Double price;
     @Column(name = "status")

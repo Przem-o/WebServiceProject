@@ -12,16 +12,14 @@ import java.util.Set;
 @AllArgsConstructor
 public class OrderDetailsDTO {
 
-    @Schema(description = "id of existing orderDetail", example = "1")
-    private Long id;
+//    @Schema(description = "id of existing orderDetail", example = "1")
+//    private Long id;
     @Schema(description = "quantity of ordered products", example = "1", required = true)
-    @NotNull(message = "quantity ordered can't be null")
-    private Long quantity;
-//    private Long productId;
-//    private Long ordersId;
-//    private OrdersDTO ordersDTO;
-    private ProductsDTO productsDTO;
-    private OrdersDTO ordersDTO;
+    @NotNull(message = "quantity of ordered product can't be null")
+    private Integer quantity;
+
+    private ProductsDTO productsDTO; // wg patryka tylko to
+   // private OrdersDTO ordersDTO; //anat ma tylko to
 
 }
 

@@ -4,6 +4,7 @@ import PB.WebServiceProject.entities.*;
 import PB.WebServiceProject.rest.dto.*;
 import org.springframework.beans.BeanUtils;
 
+import java.time.OffsetDateTime;
 import java.util.stream.Collectors;
 
 public class EntityDtoMapper {
@@ -73,13 +74,15 @@ public class EntityDtoMapper {
 
     public static OrdersDTO mapOrdersToDto(OrdersEntity ordersEntity) {
         OrdersDTO ordersDTO = new OrdersDTO();
-//        BeanUtils.copyProperties(ordersEntity, ordersDTO);
+        BeanUtils.copyProperties(ordersEntity, ordersDTO);
 //        ordersDTO.setId(ordersEntity.getId());
-        ordersDTO.setDate(ordersEntity.getDate());
-        ordersDTO.setPrice(ordersEntity.getPrice());
-        ordersDTO.setStatus(ordersEntity.getStatus());
+//        ordersDTO.setDate(ordersEntity.getDate());
+//        ordersEntity.setDate(ordersDTO.getDate());
+//        ordersDTO.setPrice(ordersEntity.getPrice());
+//        ordersDTO.setStatus(ordersEntity.getStatus());
 //        if (ordersEntity.getClientEntity() != null) {
-//            ordersDTO.setOrderDetailsDTOSet(ordersEntity.getOrderDetailsEntitySet().stream()
+//            ordersDTO.setOrderDetailsDTOSet(ordersEntity.getOrderDetailsEntitySet()
+//                    .stream()
 //                    .map(EntityDtoMapper::mapOrderDetailsToDto)
 //                    .collect(Collectors.toSet()));
 //        }
@@ -89,22 +92,23 @@ public class EntityDtoMapper {
 
     public static OrdersEntity mapOrdersToEntity(OrdersDTO ordersDTO) {
         OrdersEntity ordersEntity = new OrdersEntity();
-//        BeanUtils.copyProperties(ordersDTO, ordersEntity);
+        BeanUtils.copyProperties(ordersDTO, ordersEntity);
 //        ordersEntity.setId(ordersDTO.getId());
-        ordersEntity.setDate(ordersDTO.getDate());
-        ordersEntity.setPrice(ordersDTO.getPrice());
-        ordersEntity.setStatus(ordersDTO.getStatus());
+//        ordersEntity.setDate(ordersDTO.getDate());
+//        ordersEntity.setDate(OffsetDateTime.now());
+//        ordersEntity.setPrice(ordersDTO.getPrice());
+//        ordersEntity.setStatus(ordersDTO.getStatus());
         return ordersEntity;
     }
 
     public static OrderDetailsDTO mapOrderDetailsToDto(OrderDetailsEntity orderDetailsEntity) {
         OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
 //        BeanUtils.copyProperties(orderDetailsEntity, orderDetailsDTO);
-        orderDetailsDTO.setProductsDTO(EntityDtoMapper.mapProductsToDto(orderDetailsEntity.getProductsEntity()));
-        orderDetailsDTO.setOrdersDTO(EntityDtoMapper.mapOrdersToDto(orderDetailsEntity.getOrdersEntity()));
-        if (orderDetailsEntity.getProductsEntity() != null) {
-            orderDetailsDTO.setProductsDTO(EntityDtoMapper.mapProductsToDto(orderDetailsEntity.getProductsEntity()));
-        }
+//        orderDetailsDTO.setProductsDTO(EntityDtoMapper.mapProductsToDto(orderDetailsEntity.getProductsEntity()));
+//        orderDetailsDTO.setOrdersDTO(EntityDtoMapper.mapOrdersToDto(orderDetailsEntity.getOrdersEntity()));
+//        if (orderDetailsEntity.getProductsEntity() != null) {
+//            orderDetailsDTO.setProductsDTO(EntityDtoMapper.mapProductsToDto(orderDetailsEntity.getProductsEntity()));
+//        }
         return orderDetailsDTO;
     }
 

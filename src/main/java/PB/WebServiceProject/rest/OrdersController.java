@@ -33,25 +33,25 @@ public class OrdersController {
 
     }
 
-    @Operation(description = "Add order")
-    @PostMapping("/order/{clientId}")
-    public OrdersDTO addOrder(@Parameter(description = "add new order")
-                              @Valid @RequestBody OrdersDTO ordersDTO,
-                              @Parameter(description = "set client id")
-                              @PathVariable(name = "clientId") Long clientId) {
-        return ordersService.addOrder(clientId, ordersDTO);
-    }
+//    @Operation(description = "Add order")
+//    @PostMapping("/order/{clientId}")
+//    public OrdersDTO addOrder(@Parameter(description = "add new order")
+//                              @Valid @RequestBody OrdersDTO ordersDTO,
+//                              @Parameter(description = "set client id")
+//                              @PathVariable(name = "clientId") Long clientId) {
+//        return ordersService.addOrder(clientId, ordersDTO);
+//    }
 
-    @Operation(description = "Add order")
-    @PostMapping("/order/{clientId}/{productId}")
-    public OrdersDTO addOrderWithOrderDetails(@Parameter(description = "set client id")
-                                              @PathVariable(name = "clientId") Long clientId,
-                                              @Parameter(description = "set product id")
-                                              @PathVariable(name = "productId") Long productId,
-                                              @Parameter(description = "add new order")
-                                                  @Valid @RequestBody OrdersDTO ordersDTO) {
-        return ordersService.addOrderWithOrderDetails(clientId, productId, ordersDTO);
-    }
+//    @Operation(description = "Add order")
+//    @PostMapping("/order/{clientId}/{productId}")
+//    public OrdersDTO addOrderWithOrderDetails(@Parameter(description = "set client id")
+//                                              @PathVariable(name = "clientId") Long clientId,
+//                                              @Parameter(description = "set product id")
+//                                              @PathVariable(name = "productId") Long productId,
+//                                              @Parameter(description = "add new order")
+//                                                  @Valid @RequestBody OrdersDTO ordersDTO) {
+//        return ordersService.addOrderWithOrderDetails(clientId, productId, ordersDTO);
+//    }
 
 //    @Operation(description = "Add order")
 //    @PostMapping("/order/{clientId}")
@@ -62,15 +62,16 @@ public class OrdersController {
 //        return ordersService.addOrders(clientId, ordersDTO);
 //    }
 
-//    @PostMapping("orders/{clientId}/{ProductId}")
-//    public OrdersDTO addOrders(@Parameter(description = "add new order")
-//                               @Valid @RequestBody OrderDetailsDTO orderDetailsDTO,
-//                               @Parameter(description = "type Client_id")
-//                               @RequestParam(name = "id", required = false) Long clientId,
-//                               @Parameter(description = "type Product_id")
-//                               @RequestParam(name = "id", required = false) Long productId) {
-//         return ordersService.addOrders(orderDetailsDTO, clientId, productId);
-//    }
+    @PostMapping("/order/{clientId}/{productId}")
+    public OrdersDTO addOrderWithOrderDetails(@Parameter(description = "set client id")
+                                              @PathVariable(name = "clientId") Long clientId,
+                                              @Parameter(description = "set product id")
+                                              @PathVariable(name = "productId") Long productId,
+                                              @Parameter(description = "add new order")
+                                                  @Valid @RequestBody OrderDetailsDTO orderDetailsDTO,
+                                              @Valid @RequestBody OrdersDTO ordersDTO) {
+        return ordersService.addOrderedProductByClient(clientId, productId, ordersDTO, orderDetailsDTO);
+    }
 
     @Operation(description = "Delete order by id")
     @DeleteMapping("/order/{orderId}")
