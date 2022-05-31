@@ -68,25 +68,38 @@ public class OrderDetailsService {
         if (ordersEntity.isEmpty()) {
             return new ArrayList<>();
         }
-        Set<OrderDetailsEntity> orderDetailsEntitySet = ordersEntity.get().getOrderDetailsEntitySet();
+        List<OrderDetailsEntity> orderDetailsEntitySet = ordersEntity.get().getOrderDetailsEntitySet();
 
 
         return orderDetailsEntitySet.stream().map(EntityDtoMapper::mapOrderDetailsToDto).collect(Collectors.toList());
 
     }
 
-    public List<OrderDetailsDTO> getOrderedProducts(Long ordersId) {
+    public List<OrderDetailsDTO> getOrderedProducts(Long ordersId) { // poprawna metoda
         Optional<OrdersEntity> ordersEntity = ordersRepository.findById(ordersId);
         if (ordersEntity.isEmpty()) {
             return new ArrayList<>();
         }
-        Set<OrderDetailsEntity> orderDetailsEntitySet = ordersEntity.get().getOrderDetailsEntitySet();
+        List<OrderDetailsEntity> orderDetailsEntitySet = ordersEntity.get().getOrderDetailsEntitySet();
         return orderDetailsEntitySet
                 .stream()
                 .map(EntityDtoMapper::mapOrderDetailsToDto)
                 .collect(Collectors.toList());
 
     }
+//    public List<OrderDetailsDTO> getOrderedProductsFromOrderDetails(Long ordersId) {
+//        Optional<OrderDetailsEntity> orderDetailsEntity = ordersDetailsRepository.findById(ordersId);
+//        if (orderDetailsEntity.isEmpty()) {
+//            return new ArrayList<>();
+//        }
+//
+//        Set<OrderDetailsEntity> orderDetailsEntitySet = orderDetailsEntity.get().getOrdersEntity().getOrderDetailsEntitySet();
+//        return orderDetailsEntitySet
+//                .stream()
+//                .map(EntityDtoMapper::mapOrderDetailsToDto)
+//                .collect(Collectors.toList());
+//
+//    }
 
     public void deleteOrderDetails(Long id) {
         ordersDetailsRepository.deleteById(id);

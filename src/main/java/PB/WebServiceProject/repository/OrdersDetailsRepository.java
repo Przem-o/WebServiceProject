@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface OrdersDetailsRepository extends JpaRepository<OrderDetailsEntity, Long> {
 
+    List<OrderDetailsEntity> findAllByOrdersEntityId(Long id);
+    List<OrderDetailsEntity> findAllByQuantity(Integer quantity);
 }

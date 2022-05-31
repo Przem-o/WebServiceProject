@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -33,6 +34,6 @@ public class OrdersEntity {
     private ClientEntity clientEntity;
 
     @OneToMany(mappedBy = "ordersEntity")
-    private Set<OrderDetailsEntity> orderDetailsEntitySet;
+    private List<OrderDetailsEntity> orderDetailsEntitySet;
 
 }

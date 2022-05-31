@@ -9,6 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -28,8 +29,8 @@ public class OrdersDTO {
     private Status status;
 
 //    private OrderDetailsDTO orderDetailsDTO;
-    private ClientDTO clientDTO;
-    private Set<OrderDetailsDTO> orderDetailsDTOSet;
+//    private ClientDTO clientDTO;
+    private List<OrderDetailsDTO> orderDetailsDTOSet;
 
 
 }

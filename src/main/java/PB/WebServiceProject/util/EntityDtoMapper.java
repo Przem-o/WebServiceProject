@@ -103,12 +103,12 @@ public class EntityDtoMapper {
 
     public static OrderDetailsDTO mapOrderDetailsToDto(OrderDetailsEntity orderDetailsEntity) {
         OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
-//        BeanUtils.copyProperties(orderDetailsEntity, orderDetailsDTO);
+        BeanUtils.copyProperties(orderDetailsEntity, orderDetailsDTO);
 //        orderDetailsDTO.setProductsDTO(EntityDtoMapper.mapProductsToDto(orderDetailsEntity.getProductsEntity()));
 //        orderDetailsDTO.setOrdersDTO(EntityDtoMapper.mapOrdersToDto(orderDetailsEntity.getOrdersEntity()));
-//        if (orderDetailsEntity.getProductsEntity() != null) {
-//            orderDetailsDTO.setProductsDTO(EntityDtoMapper.mapProductsToDto(orderDetailsEntity.getProductsEntity()));
-//        }
+        if (orderDetailsEntity.getProductsEntity() != null) {
+            orderDetailsDTO.setProductsDTO(EntityDtoMapper.mapProductsToDto(orderDetailsEntity.getProductsEntity()));
+        }
         return orderDetailsDTO;
     }
 

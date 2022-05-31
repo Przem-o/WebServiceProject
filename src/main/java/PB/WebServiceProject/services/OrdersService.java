@@ -1,13 +1,15 @@
 package PB.WebServiceProject.services;
 
-import PB.WebServiceProject.entities.*;
+import PB.WebServiceProject.entities.ClientEntity;
+import PB.WebServiceProject.entities.OrderDetailsEntity;
+import PB.WebServiceProject.entities.OrdersEntity;
+import PB.WebServiceProject.entities.ProductsEntity;
 import PB.WebServiceProject.repository.ClientRepository;
 import PB.WebServiceProject.repository.OrdersDetailsRepository;
 import PB.WebServiceProject.repository.OrdersRepository;
 import PB.WebServiceProject.repository.ProductsRepository;
 import PB.WebServiceProject.rest.dto.OrderDetailsDTO;
-import PB.WebServiceProject.rest.dto.OrdersDTO;;
-import PB.WebServiceProject.rest.dto.ProductsDTO;
+import PB.WebServiceProject.rest.dto.OrdersDTO;
 import PB.WebServiceProject.rest.dto.Status;
 import PB.WebServiceProject.util.EntityDtoMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,9 @@ import org.springframework.stereotype.Service;
 import java.time.OffsetDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @Service
@@ -25,6 +30,7 @@ public class OrdersService {
     private final ProductsRepository productsRepository;
     private final OrdersDetailsRepository ordersDetailsRepository;
     private final OrdersRepository ordersRepository;
+    private final OrderDetailsService orderDetailsService;
 
 //    public OrdersDTO addOrder(Long clientId, OrdersDTO ordersDTO) {
 //        OrdersEntity ordersEntity = EntityDtoMapper.mapOrdersToEntity(ordersDTO);
@@ -59,7 +65,7 @@ public class OrdersService {
 //    }
 
 
-//    public List<OrdersDTO> addOrders(Long clientId,  OrdersDTO ordersDTO){
+    //    public List<OrdersDTO> addOrders(Long clientId,  OrdersDTO ordersDTO){
 //        Optional<ClientEntity> clientEntity = clientRepository.findById(clientId);
 //        if(clientEntity.isEmpty()){
 //            return new ArrayList<>();
@@ -76,45 +82,69 @@ public class OrdersService {
 //                .collect(Collectors.toList());
 //}
 //
-    public OrdersDTO addOrderedProductByClient(Long clientId, Long productId, OrdersDTO ordersDTO, OrderDetailsDTO orderDetailsDTO){
+    public OrdersDTO addOrderedProductByClient(Long clientId, Long productId, OrderDetailsDTO orderDetailsDTO) {
         Optional<ClientEntity> clientEntity = clientRepository.findById(clientId);
         Optional<ProductsEntity> productsEntity = productsRepository.findById(productId);
         OrderDetailsEntity orderDetailsEntity = EntityDtoMapper.mapOrderDetailsToEntity(orderDetailsDTO);
-        OrdersEntity ordersEntity = EntityDtoMapper.mapOrdersToEntity(ordersDTO);
-
-//        Set<OrderDetailsEntity> orderDetailsEntitySet = new HashSet<>();
-//        orderDetailsEntitySet.add(orderDetailsEntity);
-//        ordersEntity.setOrderDetailsEntitySet(orderDetailsEntitySet);
-        ordersEntity.setClientEntity(clientEntity.get());
-        ordersEntity.setId(ordersDTO.getId());
+        OrdersEntity ordersEntity = EntityDtoMapper.mapOrdersToEntity(orderDetailsDTO.getOrdersDTO());
+        ordersEntity.setId(orderDetailsDTO.getOrdersDTO().getId());
         ordersEntity.setDate(OffsetDateTime.now());
         ordersEntity.setStatus(Status.ORDERED);
-//        ordersEntity.setPrice(orderDetailsEntity.getQuantity() * orderDetailsEntity.getProductsEntity().getPrice());
+        ordersEntity.setClientEntity(clientEntity.get());
         ordersEntity.setPrice(0.0);
-
         orderDetailsEntity.setProductsEntity(productsEntity.get());
         orderDetailsEntity.setQuantity(orderDetailsDTO.getQuantity());
-        orderDetailsEntity.setOrdersEntity(EntityDtoMapper.mapOrdersToEntity(ordersDTO));
-
-        ordersEntity.setPrice(orderDetailsEntity.getQuantity() * orderDetailsEntity.getProductsEntity().getPrice());
-
+        orderDetailsEntity.setOrdersEntity(ordersEntity);
         ordersDetailsRepository.save(orderDetailsEntity);
-
-//        ordersEntity.setOrderDetailsEntitySet(orderDetailsEntitySet);
+        Double orderPrices = updateOrderPrice(orderDetailsEntity.getOrdersEntity().getId());
+        ordersEntity.setPrice(orderPrices);
         OrdersEntity save = ordersRepository.save(ordersEntity);
-
         OrdersDTO ordersDTO1 = EntityDtoMapper.mapOrdersToDto(save);
         return ordersDTO1;
     }
-    public int sumOfQuantity(Set<OrderDetailsEntity> orderDetailsEntitySet) {
-        return orderDetailsEntitySet.stream()
-                .mapToInt(OrderDetailsEntity::getQuantity)
-                .sum();
+
+
+//    public Double calcProductAndQuantity(Long productId, Integer quantity) {
+//        Double productPrice = productsRepository.findById(productId).get().getPrice();
+//        return productPrice * quantity;
+//    }
+
+    public Double updateOrderPrice(Long orderId) {
+        List<OrderDetailsEntity> allByOrdersEntityId = ordersDetailsRepository.findAllByOrdersEntityId(orderId);
+        double sum = 0;
+        for (int i = 0; i < allByOrdersEntityId.size(); i++) {
+            Double unitPriceOfProduct = allByOrdersEntityId.get(i).getProductsEntity().getPrice();
+            Integer quantity = allByOrdersEntityId.get(i).getQuantity();
+            double x = unitPriceOfProduct * quantity;
+            sum = sum + x;
+        }
+        return sum;
     }
-//   public double calculatePrice (Long ordersId) {
-//       double sum = 0;
-//       ordersDetailsRepository.
-//       for (double i = 0; i <; i++) {
+//    public Double orderPrice(Long ordersId){
+//        DoubleStream doubleStream = ordersDetailsRepository.findAllByOrdersEntityId(ordersId).stream()
+//                .map(OrderDetailsEntity::getProductsEntity)
+//                .mapToDouble(ProductsEntity::getPrice)
+//                .
+//
+////        DoubleStream doubleStream1 = ordersDetailsRepository.findAllByQuantity(quantity).stream().mapToDouble(OrderDetailsEntity::getQuantity);
+////        return doubleStream * quantity;
+//        return doubleStream;
+//
+//    }
+
+
+//    public int sumOfQuantity(Long orderId) {
+//        Optional<OrderDetailsEntity> byId = ordersDetailsRepository.findById(orderId);
+//         byId.stream()
+//                 .map(OrderDetailsEntity::getQuantity)
+//                 .
+//    }
+//   public double calculatePrice (Long productId, Set<OrderDetailsEntity> orderDetailsEntitySet) {
+//       Optional<ProductsEntity> byId = productsRepository.findById(productId);
+//       for (int i = 0; i < orderDetailsEntitySet.size() ; i++) {
+//           IntStream intStream = orderDetailsEntitySet.stream().mapToInt(OrderDetailsEntity::getQuantity);
+//           orderDetailsEntitySet.stream().
+//
 //
 //
 //       }

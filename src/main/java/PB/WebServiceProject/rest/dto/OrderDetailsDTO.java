@@ -19,7 +19,7 @@ public class OrderDetailsDTO {
     private Integer quantity;
 
     private ProductsDTO productsDTO; // wg patryka tylko to
-   // private OrdersDTO ordersDTO; //anat ma tylko to
+    private OrdersDTO ordersDTO; //anat ma tylko to
 
 }
 
