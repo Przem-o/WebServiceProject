@@ -68,7 +68,8 @@ public class OrdersController {
                                               @Parameter(description = "set product id")
                                               @PathVariable(name = "productId") Long productId,
                                               @Parameter(description = "add new order")
-                                                  @Valid @RequestBody OrderDetailsDTO orderDetailsDTO                                             ) {
+                                              @Valid @RequestBody OrderDetailsDTO orderDetailsDTO) {
+
         return ordersService.addOrderedProductByClient(clientId, productId, orderDetailsDTO);
     }
 
@@ -96,4 +97,5 @@ public class OrdersController {
     }
 
 }
+
 
