@@ -68,7 +68,7 @@ public class OrderDetailsService {
         if (ordersEntity.isEmpty()) {
             return new ArrayList<>();
         }
-        List<OrderDetailsEntity> orderDetailsEntitySet = ordersEntity.get().getOrderDetailsEntitySet();
+        List<OrderDetailsEntity> orderDetailsEntitySet = ordersEntity.get().getOrderDetailsEntityList();
 
 
         return orderDetailsEntitySet.stream().map(EntityDtoMapper::mapOrderDetailsToDto).collect(Collectors.toList());
@@ -80,7 +80,7 @@ public class OrderDetailsService {
         if (ordersEntity.isEmpty()) {
             return new ArrayList<>();
         }
-        List<OrderDetailsEntity> orderDetailsEntitySet = ordersEntity.get().getOrderDetailsEntitySet();
+        List<OrderDetailsEntity> orderDetailsEntitySet = ordersEntity.get().getOrderDetailsEntityList();
         return orderDetailsEntitySet
                 .stream()
                 .map(EntityDtoMapper::mapOrderDetailsToDto)

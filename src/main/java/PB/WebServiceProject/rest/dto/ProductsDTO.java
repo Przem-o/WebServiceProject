@@ -17,7 +17,6 @@ public class ProductsDTO {
 
     @Schema(description = "id of existing product, auto generated", example = "1")
     private Long id;
-
     @Schema(description = "product name", example = "Nokia3310", required = true)
     @NotBlank(message = "product name can't be blank")
     @NotNull(message = "product name can't be null")

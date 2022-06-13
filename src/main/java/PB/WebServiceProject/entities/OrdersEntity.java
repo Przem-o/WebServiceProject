@@ -34,6 +34,6 @@ public class OrdersEntity {
     private ClientEntity clientEntity;
 
     @OneToMany(mappedBy = "ordersEntity")
-    private List<OrderDetailsEntity> orderDetailsEntitySet;
+    private List<OrderDetailsEntity> orderDetailsEntityList;
 
 }

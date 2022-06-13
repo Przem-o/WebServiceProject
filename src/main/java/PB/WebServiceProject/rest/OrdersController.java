@@ -23,7 +23,7 @@ public class OrdersController {
 
     @Operation(description = "Get all orders")
     @GetMapping("/orders")
-    public List<OrdersDTO> getOrders(@Parameter(description = "get orders by id")
+    public List<OrdersDTO> getOrders(@Parameter(description = "get order by id")
                                      @RequestParam(name = "id", required = false) Long id,
                                      @Parameter(description = "get orders by minPrice", example = "1")
                                      @RequestParam(name = "minPrice", required = false) Integer minPrice,
@@ -33,45 +33,18 @@ public class OrdersController {
 
     }
 
-//    @Operation(description = "Add order")
-//    @PostMapping("/order/{clientId}")
-//    public OrdersDTO addOrder(@Parameter(description = "add new order")
-//                              @Valid @RequestBody OrdersDTO ordersDTO,
-//                              @Parameter(description = "set client id")
-//                              @PathVariable(name = "clientId") Long clientId) {
-//        return ordersService.addOrder(clientId, ordersDTO);
-//    }
-
-//    @Operation(description = "Add order")
-//    @PostMapping("/order/{clientId}/{productId}")
-//    public OrdersDTO addOrderWithOrderDetails(@Parameter(description = "set client id")
-//                                              @PathVariable(name = "clientId") Long clientId,
-//                                              @Parameter(description = "set product id")
-//                                              @PathVariable(name = "productId") Long productId,
-//                                              @Parameter(description = "add new order")
-//                                                  @Valid @RequestBody OrdersDTO ordersDTO) {
-//        return ordersService.addOrderWithOrderDetails(clientId, productId, ordersDTO);
-//    }
-
-//    @Operation(description = "Add order")
-//    @PostMapping("/order/{clientId}")
-//    public List<OrdersDTO> addProductToOrderList(@Parameter(description = "client id")
-//                                                 @PathVariable(name = "clientId") Long clientId,
-//                                                 @Parameter(description = "add new order")
-//                                                 @Valid @RequestBody OrdersDTO ordersDTO) {
-//        return ordersService.addOrders(clientId, ordersDTO);
-//    }
 
     @PostMapping("/order/{clientId}/{productId}")
-    public OrdersDTO addOrderWithOrderDetails(@Parameter(description = "set client id")
+    public OrderDetailsDTO addOrderWithOrderDetails(@Parameter(description = "set client id")
                                               @PathVariable(name = "clientId") Long clientId,
                                               @Parameter(description = "set product id")
                                               @PathVariable(name = "productId") Long productId,
                                               @Parameter(description = "add new order")
                                               @Valid @RequestBody OrderDetailsDTO orderDetailsDTO) {
 
-        return ordersService.addOrderedProductByClient(clientId, productId, orderDetailsDTO);
+        return ordersService.addOrderedProductByClient(clientId, productId,orderDetailsDTO);
     }
+
 
     @Operation(description = "Delete order by id")
     @DeleteMapping("/order/{orderId}")

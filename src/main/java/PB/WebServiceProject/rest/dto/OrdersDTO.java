@@ -19,6 +19,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class OrdersDTO {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "id of existing order", example = "1")
     private Long id;
     private OffsetDateTime date;
@@ -28,8 +30,6 @@ public class OrdersDTO {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-//    private OrderDetailsDTO orderDetailsDTO;
-//    private ClientDTO clientDTO;
     private List<OrderDetailsDTO> orderDetailsDTOSet;
 
 

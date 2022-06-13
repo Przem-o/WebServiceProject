@@ -29,7 +29,8 @@ public class ProductsService {
     public ProductsDTO addProductsAndCategory(ProductsDTO productsDTO) { //nokia / RTV
         ProductsEntity productsEntity = EntityDtoMapper.mapProductsToEntity(productsDTO);
         ProductCategoryEntity productCategoryEntity = EntityDtoMapper.mapProdCatToEntity(productsDTO.getProductCategoryDTO());
-        if (productsDTO.getProductCategoryDTO().getId() != null) { //jeśli wpisane w www id ProductCategory nie jest null
+        Long productCategoryDTOId = productsDTO.getProductCategoryDTO().getId();
+        if (productCategoryDTOId != null) { //jeśli wpisane w www id ProductCategory nie jest null
             Optional<ProductCategoryEntity> productCategoryById = productCategoryRepository.findById(productsDTO.getProductCategoryDTO().getId());//szukanie czy już taki productCategoryEntity podany w www istnieje w bazie
             if (productCategoryById.isPresent()) {
                 productCategoryEntity = productCategoryById.get(); //jesli istnieje już w bazie taki productCategoryById to ten nowy wyżej stworzony w 30 lini productCategoryEntity nadpisz tym z bazy productCategoryById
